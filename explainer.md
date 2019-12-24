@@ -93,12 +93,19 @@ const result = window.crypto.subtle.deriveBits(
 ### Export and import of keys
 
 ```js
-// Use the SPKI format in this example.
-const spki_public_key =
-  await window.crypto.subtle.exportKey('spki', ed25519_key.publicKey);
+// An example using the raw format.
+const raw_public_key =
+  await window.crypto.subtle.exportKey('raw', ed25519_key.publicKey);
 // The key import parameter has only the name property:
 //   name, a string that should be set to 'Ed25519' or 'X25519'
 const key_import_param = {name: 'Ed25519'};
+const result = window.subtle.importKey(
+  'raw', raw_public_key, key_import_param, true /* extractable*/, []);
+
+// An example using the SPKI format.
+const spki_public_key =
+  await window.crypto.subtle.exportKey('spki', x25519_key.publicKey);
+const key_import_param = {name: 'X25519'};
 const result = window.subtle.importKey(
   'spki', spki_public_key, key_import_param, true /* extractable*/, []);
 ```
