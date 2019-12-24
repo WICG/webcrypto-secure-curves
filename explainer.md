@@ -80,14 +80,14 @@ window.crypto.subtle.sign(alg, ed25519_key.privateKey, data).then(signature =>
 ### Key agreement with X25519
 ```js
 const private_x25519_key = x25519_key.privateKey;
-// Received the peer public key |peer_public_ed25519_key|.
+// Received the peer public key |peer_public_x25519_key|.
 //
 // The key derivation parameters:
 //   name, a string that should be set to 'X25519'.
 //   public, a CryptoKey object representing the public key of the peer. 
 const key_derive_params = {name: 'X25519', public: peer_public_x25519_key};
 const result = window.crypto.subtle.deriveBits(
-  key_derive_params, private_x25519_key, 256);
+  key_derive_params, private_x25519_key, 256 /* number of bits to derive */);
 ```
 
 ### Export and import of keys
