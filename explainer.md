@@ -18,7 +18,7 @@ agreement algorithm X25519.
 ### Ed25519
 
 The following operations are supported with the recognized algorithm name
-"ED25519":
+"Ed25519":
 
 1. generateKey
 2. sign
@@ -65,7 +65,7 @@ postMessage.
 ```js
 // Use a string of the recognized algorithm name.
 const ed25519_key = await window.crypto.subtle.generateKey(
-  'ED25519', true /* extractable */, ['sign', 'verify']);
+  'Ed25519', true /* extractable */, ['sign', 'verify']);
 // Or use a dictionary with only the name property.
 const x25519_key = await window.crypto.subtle.generateKey(
   {name: 'X25519'}, true /* extractable */, ['deriveKey', 'deriveBits']);
@@ -76,8 +76,8 @@ const x25519_key = await window.crypto.subtle.generateKey(
 ```js
 // |data| is to be signed.
 // The digital signature parameter has only the name property:
-//   name, a string that should be set to 'ED25519'.
-const alg = {name: 'ED25519'};
+//   name, a string that should be set to 'Ed25519'.
+const alg = {name: 'Ed25519'};
 window.crypto.subtle.sign(alg, ed25519_key.privateKey, data).then(signature =>
   window.crypto.subtle.verify(alg, ed25519_key.publicKey, signature, data))
 ```
@@ -102,7 +102,7 @@ const result = window.crypto.subtle.deriveBits(
 const raw_public_key =
   await window.crypto.subtle.exportKey('raw', x25519_key.publicKey);
 // The key import parameter has only the name property:
-//   name, a string that should be set to 'ED25519' or 'X25519'
+//   name, a string that should be set to 'Ed25519' or 'X25519'
 const key_import_param = {name: 'X25519'};
 const result = window.subtle.importKey('raw', raw_public_key, key_import_param,
   true /* extractable */, [deriveKey', 'deriveBits]);
@@ -118,7 +118,7 @@ const result = window.subtle.importKey('spki', spki_public_key, key_import_param
 // An example using the JWK format.
 const jwk_private_key =
   await window.crypto.subtle.exportKey('jwk', ed25519_key.privateKey);
-const key_import_param = {name: 'ED25519'};
+const key_import_param = {name: 'Ed25519'};
 const result = window.subtle.importKey(
   'jwk', jwk_private_key, key_import_param, true /* extractable*/, ['sign']);
 ```
