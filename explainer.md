@@ -1,24 +1,24 @@
-# Curve25519 in WebCrypto
+# Secure Curves in WebCrypto
 
 ## Problem Statement
 
-Today web developers are getting around the unavailability of
-[Curve25519][rfc7748] in browser by either including an implementation of its
+Today web developers are getting around the unavailability of [Curve25519 and
+Curve448][rfc7748] in the browser by either including an implementation of its
 operations in JavaScript or compiling a native one into WebAssembly. Aside from
 wasting bandwidth shipping algorithms that are already included in browsers that
 support TLS 1.3, this practice also has security implications, e.g. side-channel
 attacks as studied by [Daniel Genkin et al][key-extraction].
 
-## Support Curve25519 in the Web Cryptography API
+## Support Curve25519 and Curve448 in the Web Cryptography API
 
-We solve the above problem by adding support for Curve25519 algorithms in the
-Web Cryptography API, namely the signature algorithm Ed25519 and the key
-agreement algorithm X25519.
+We solve the above problem by adding support for Curve25519 and Curve448
+algorithms in the Web Cryptography API, namely the signature algorithms
+Ed25519 and Ed448, and the key agreement algorithms X25519 and X448.
 
-### Ed25519
+### Ed25519 and Ed448
 
-The following operations are supported with the recognized algorithm name
-"Ed25519":
+The following operations are supported with the recognized algorithm names
+"Ed25519" and "Ed448":
 
 1. generateKey
 2. sign
@@ -26,10 +26,10 @@ The following operations are supported with the recognized algorithm name
 4. importKey
 5. exportKey
 
-### X25519
+### X25519 and X448
 
-The following operations are supported with the recognized algorithm name
-"X25519":
+The following operations are supported with the recognized algorithm names
+"X25519" and "X448":
 
 1. generateKey
 2. deriveKey
@@ -38,9 +38,9 @@ The following operations are supported with the recognized algorithm name
 5. exportKey
 
 For key serialization and deserialization, the supported formats include the raw
-format for X25519 public keys as an array of raw bytes, as well as the SPKI, the
-PKCS#8, and the JWK formats for the public or/and the private X25519 or Ed25519
-keys.
+format for X25519 and X448 public keys as an array of raw bytes, as well as the
+SPKI, the PKCS#8, and the JWK formats for the public and/or the private X25519,
+X448, Ed25519 or Ed448 keys.
 
 ## Alternatives Considered and Security Implications
 
@@ -61,7 +61,6 @@ postMessage.
 
 ### Key generation
 
-
 ```js
 // Use a string of the recognized algorithm name.
 const ed25519_key = await window.crypto.subtle.generateKey(
@@ -71,24 +70,25 @@ const x25519_key = await window.crypto.subtle.generateKey(
   {name: 'X25519'}, true /* extractable */, ['deriveKey', 'deriveBits']);
 ```
 
-### Digital signature with Ed25519
+### Digital signature with Ed25519 or Ed448
 
 ```js
 // |data| is to be signed.
 // The digital signature parameter has only the name property:
-//   name, a string that should be set to 'Ed25519'.
+//   name, a string that should be set to 'Ed25519' or 'Ed448'.
 const alg = {name: 'Ed25519'};
 window.crypto.subtle.sign(alg, ed25519_key.privateKey, data).then(signature =>
   window.crypto.subtle.verify(alg, ed25519_key.publicKey, signature, data))
 ```
 
-### Key agreement with X25519
+### Key agreement with X25519 or X448
+
 ```js
 const private_x25519_key = x25519_key.privateKey;
 // Received the peer public key |peer_public_x25519_key|.
 //
 // The key derivation parameters:
-//   name, a string that should be set to 'X25519'.
+//   name, a string that should be set to 'X25519' or 'X448'.
 //   public, a CryptoKey object representing the public key of the peer. 
 const key_derive_params = {name: 'X25519', public: peer_public_x25519_key};
 const result = window.crypto.subtle.deriveBits(
@@ -102,7 +102,7 @@ const result = window.crypto.subtle.deriveBits(
 const raw_public_key =
   await window.crypto.subtle.exportKey('raw', x25519_key.publicKey);
 // The key import parameter has only the name property:
-//   name, a string that should be set to 'Ed25519' or 'X25519'
+//   name, a string that should be set to 'Ed25519', 'Ed448', 'X25519' or 'X448'
 const key_import_param = {name: 'X25519'};
 const result = window.subtle.importKey('raw', raw_public_key, key_import_param,
   true /* extractable */, ['deriveKey', 'deriveBits']);
