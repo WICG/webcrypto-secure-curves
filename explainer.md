@@ -105,7 +105,7 @@ const raw_public_key =
 //   name, a string that should be set to 'Ed25519' or 'X25519'
 const key_import_param = {name: 'X25519'};
 const result = window.subtle.importKey('raw', raw_public_key, key_import_param,
-  true /* extractable */, [deriveKey', 'deriveBits]);
+  true /* extractable */, ['deriveKey', 'deriveBits']);
 
 // An example using the SPKI format. An example for the PKCS#8 format would be
 // similar.
@@ -113,14 +113,14 @@ const spki_public_key =
   await window.crypto.subtle.exportKey('spki', x25519_key.publicKey);
 const key_import_param = {name: 'X25519'};
 const result = window.subtle.importKey('spki', spki_public_key, key_import_param,
-  true /* extractable */, [deriveKey', 'deriveBits]);
+  true /* extractable */, ['deriveKey', 'deriveBits']);
 
 // An example using the JWK format.
 const jwk_private_key =
   await window.crypto.subtle.exportKey('jwk', ed25519_key.privateKey);
 const key_import_param = {name: 'Ed25519'};
 const result = window.subtle.importKey(
-  'jwk', jwk_private_key, key_import_param, true /* extractable*/, ['sign']);
+  'jwk', jwk_private_key, key_import_param, true /* extractable */, ['sign']);
 ```
 
 ## Reference
