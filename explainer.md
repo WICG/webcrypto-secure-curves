@@ -2,18 +2,57 @@
 
 ## Problem Statement
 
-Today web developers are getting around the unavailability of [Curve25519 and
-Curve448][rfc7748] in the browser by either including an implementation of its
-operations in JavaScript or compiling a native one into WebAssembly. Aside from
-wasting bandwidth shipping algorithms that are already included in browsers that
-support TLS 1.3, this practice also has security implications, e.g. side-channel
-attacks as studied by [Daniel Genkin et al][key-extraction].
+The Web Cryptography API currently only specifies the [NIST P-256, P-384, and
+P-521 curves][nist-186-4], and does not specify any ["safe curves"][safecurves].
+Among the safe curves, Curve25519 and Curve448 have gained the most traction,
+and have been specified for use in TLS 1.3, for example. They have also been
+[recommended][rfc7748] by the Crypto Forum Research Group (CFRG) of the Internet
+Research Task Force (IRTF), and are [expected to be approved by
+NIST][nist-186-5].
+
+In addition, Node.js [has implemented][node-webcrypto] a nonstandard extension
+to Web Crypto, adding Curve25519 and Curve448 under a vendor-prefixed name.
+We would like to avoid other implementations doing the same, and encourage
+intercompatibility going forward by providing a standard specification.
+
+Today, web developers are getting around the unavailability of Curve25519 and
+Curve448 in the browser either by using less secure curves, or by including an
+implementation of Curve25519 and/or Curve448 in JavaScript or WebAssembly. In
+addition to wasting bandwidth shipping algorithms that are already included in
+browsers that implement TLS 1.3, this practice also has security implications,
+e.g. side-channel attacks as studied by [Daniel Genkin et al][key-extraction].
 
 ## Support Curve25519 and Curve448 in the Web Cryptography API
 
 We solve the above problem by adding support for Curve25519 and Curve448
 algorithms in the Web Cryptography API, namely the signature algorithms
-Ed25519 and Ed448, and the key agreement algorithms X25519 and X448.
+[Ed25519 and Ed448][rfc8032], and the key agreement algorithms
+[X25519 and X448][rfc7748].
+
+## Alternatives Considered and Security Implications
+
+Shipping cryptographic algorithms in JavaScript or WebAssembly, including
+Curve25519 or Curve448, has been an alternative solution to using
+implementations provided by the browser. In addition to the vulnerability to
+side-channel attacks as noted in the problem statement, these alternatives are
+also potentially more susceptible to attacks like cross-site scripting, as the
+private key material must be available to JavaScript. An implementation in
+WebCrypto can solve this issue through the availability of non-extractable key
+handles (though applications should note that as a general security
+consideration in WebCrypto, a persistent oracle can be allowed if CryptoKey
+objects are shared between origins such as through the use of postMessage).
+
+Once the [constant-time proposal for WebAssembly][ct-wasm] is accepted and
+implemented, it will become possible to implement Curve25519 and/or Curve448 in
+WebAssembly while protecting against timing attacks. However, this still
+requires the private key material to be accessible to script, potentially
+exposing it to cross-site scripting and other attacks. In addition, the ready
+availability of Web Crypto, compared to a WebAssembly library, may encourage
+developers to continue to use the curves available in Web Crypto only. To
+encourage the use of modern and secure curves like Curve25519 and Curve448, we
+believe it would be good to implement them in Web Crypto.
+
+## Supported algorithms
 
 ### Ed25519 and Ed448
 
@@ -41,21 +80,6 @@ For key serialization and deserialization, the supported formats include the raw
 format for X25519 and X448 public keys as an array of raw bytes, as well as the
 SPKI, the PKCS#8, and the JWK formats for the public and/or the private X25519,
 X448, Ed25519 or Ed448 keys.
-
-## Alternatives Considered and Security Implications
-
-Shipping cryptographic algorithms in JavaScript or WebAssembly, including
-Curve25519, has been alternative solutions to using equivalents provided by the
-browser. In addition to the vulnerability to side-channel attacks as noted in
-the problem statement, these alternatives are also susceptible to attacks like
-cross-site scripting as key materials are typically represented in plaintext in
-the portable code. A native implementation of cryptographic algorithms by the
-browser provides a safe and standardized solution against known side-channel
-attacks, with the availability of non-extractable key handles, namely the
-CryptoKey object in WebCrypto. Applications should still note that as a
-general security consideration in WebCrypto, a persistent oracle can be allowed
-if CryptoKey objects are shared between origins such as through the use of
-postMessage. 
 
 ## Code Examples
 
@@ -89,7 +113,7 @@ const private_x25519_key = x25519_key.privateKey;
 //
 // The key derivation parameters:
 //   name, a string that should be set to 'X25519' or 'X448'.
-//   public, a CryptoKey object representing the public key of the peer. 
+//   public, a CryptoKey object representing the public key of the peer.
 const key_derive_params = {name: 'X25519', public: peer_public_x25519_key};
 const result = window.crypto.subtle.deriveBits(
   key_derive_params, private_x25519_key, 256 /* number of bits to derive */);
@@ -123,12 +147,23 @@ const result = window.subtle.importKey(
   'jwk', jwk_private_key, key_import_param, true /* extractable */, ['sign']);
 ```
 
-## Reference
+## References
 
 1. [RFC 7748, Elliptic Curves for Security][rfc7748]
-2. [Daniel Genkin et al, Drive-By Key-Extraction Cache Attacks from Portable
-Code][key-extraction].
+2. [RFC 8032, Edwards-Curve Digital Signature Algorithm (EdDSA)][rfc8032]
+3. [FIPS 186-4: Digital Signature Standard (DSS)][nist-186-4]
+4. [FIPS 186-5 (Draft): Digital Signature Standard (DSS)][nist-186-5]
+5. [Daniel J. Bernstein and Tanja Lange, SafeCurves: choosing safe curves for elliptic-curve cryptography][safecurves]
+6. [Daniel Genkin et al, Drive-By Key-Extraction Cache Attacks from Portable Code][key-extraction].
+7. [Node.js Web Crypto API][node-webcrypto]
+8. [Constant-time Proposal for WebAssembly][ct-wasm]
 
 
 [rfc7748]: https://tools.ietf.org/html/rfc7748
+[rfc8032]: https://datatracker.ietf.org/doc/html/rfc8032
+[nist-186-4]: https://csrc.nist.gov/publications/detail/fips/186/4/final
+[nist-186-5]: https://csrc.nist.gov/publications/detail/fips/186/5/draft
+[safecurves]: https://safecurves.cr.yp.to/
 [key-extraction]: https://www.cs.tau.ac.il/~tromer/drivebycache/
+[node-webcrypto]: https://nodejs.org/api/webcrypto.html
+[ct-wasm]: https://github.com/WebAssembly/constant-time
