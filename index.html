@@ -21,6 +21,7 @@
     "shortName": "webcrypto-secure-curves",
     "specStatus": "CG-DRAFT",
     "wg": "WICG",
+    "xref": ["WebIDL", "WebCryptoAPI"],
   };
   </script>
 </head>
@@ -28,7 +29,8 @@
 <body>
   <section id="abstract">
     <p>
-      This specification does neat stuff.
+      This specification defines a number of algorithms for the [[[WebCryptoAPI]]],
+      namely X25519 and X448 [[RFC7748]], and Ed25519 and Ed448 [[RFC8032]].
     </p>
   </section>
   <section id="sotd">
@@ -39,28 +41,3445 @@
   <section id="introduction">
     <h2>Introduction</h2>
     <p>
-      See <a href="https://github.com/w3c/respec/wiki/User's-Guide">ReSpec's
-      user guide</a> for how to get started!
+      This specification defines a number of algorithms for the [[[WebCryptoAPI]]].
     </p>
   </section>
-  <section data-dfn-for="Foo">
-    <h2>Start your spec!</h2>
-    <pre class="idl">
-    interface Foo {
-      attribute Bar bar;
-      void doTheFoo();
-    };
-    </pre>
+  <section id="specification-conventions">
+    <h2>Specification Conventions</h3>
     <p>
-      See <a href="https://github.com/w3c/respec/wiki/WebIDL-Guide">ReSpec's
-      WebIDL guide</a> for how to write [[!WebIDL-2]] interfaces!
+      This specification follows the conventions laid out in Section 18.3 of [[WebCryptoAPI]].
+      None of the algorithms defined here are required to be implemented, but if a conforming
+      User Agent implements an algorithm, it MUST implement all of the supported operations
+      specified in this document, and must perform the steps to define an algorithm specified in
+      section 18.4.3 of [[WebCryptoAPI]] for each of the supported operations.
     </p>
-    <p>
-      The <dfn>doTheFoo</dfn> method.
-    </p>
-    <p>
-      The <dfn>bar</dfn> attribute.
-    </p>
+  </section>
+
+  <section id="x25519">
+    <h3>X25519</h3>
+    <section id="x25519-description" class="informative">
+      <h4>Description</h4>
+      <p>
+        The <code>"X25519"</code> algorithm identifier is used to perform
+        key agreement using the X25519 algorithm specified in
+        [[RFC7748]].
+      </p>
+    </section>
+    <section id="x25519-registration">
+      <h4>Registration</h4>
+      <p>
+        The [= recognized algorithm name =] for
+        this algorithm is <code>"X25519"</code>.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th><a href="#supported-operations">Operation</a></th>
+            <th><a href="#algorithm-specific-params">Parameters</a></th>
+            <th><a href="#algorithm-result">Result</a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>deriveBits</td>
+            <td>{{EcdhKeyDeriveParams}}</td>
+            <td>[= octet string =]</td>
+          </tr>
+          <tr>
+            <td>generateKey</td>
+            <td>None</td>
+            <td>{{CryptoKeyPair}}</td>
+          </tr>
+          <tr>
+            <td>importKey</td>
+            <td>None</td>
+            <td>{{CryptoKey}}</td>
+          </tr>
+          <tr>
+            <td>exportKey</td>
+            <td>None</td>
+            <td>object</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="x25519-operations">
+      <h4>Operations</h4>
+      <dl>
+        <dt>Derive Bits</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>
+                If the {{CryptoKey/[[type]]}} internal slot of
+                <var>key</var> is not {{KeyType/"private"}}, then [= exception/throw =] an {{InvalidAccessError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>publicKey</var> be the
+                {{EcdhKeyDeriveParams/public}} member of
+                <var>normalizedAlgorithm</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the {{CryptoKey/[[type]]}} internal slot of
+                <var>publicKey</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the {{KeyAlgorithm/name}} attribute of
+                the {{CryptoKey/[[algorithm]]}} internal slot of
+                <var>publicKey</var> is not equal to the {{KeyAlgorithm/name}} property of the {{CryptoKey/[[algorithm]]}} internal slot of
+                <var>key</var>, then [= exception/throw =] an {{InvalidAccessError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>secret</var> be the result of performing the X25519 function specified in
+                [[RFC7748]] Section 5 with <var>key</var> as the X25519 private key <var>k</var>
+                and the X25519 public key represented by the {{CryptoKey/[[handle]]}}
+                internal slot of <var>publicKey</var> as the X25519 public key <var>u</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If <var>secret</var> is the all-zero value,
+                then [= exception/throw =] a {{OperationError}}.
+                This check must be performed in constant-time, as per [[RFC7748]] Section 6.1.
+              </p>
+            </li>
+            <li>
+              <dl class="switch">
+                <dt>If <var>length</var> is null:</dt>
+                <dd>Return <var>secret</var></dd>
+                <dt>Otherwise:</dt>
+                <dd>
+                  <dl class="switch">
+                    <dt>
+                      If the length of <var>secret</var> in bits is less than
+                      <var>length</var>:
+                    </dt>
+                    <dd>
+                      [= exception/throw =] an
+                      {{OperationError}}.
+                    </dd>
+                    <dt>Otherwise:</dt>
+                    <dd>
+                      Return an [= octet string containing =] the first <var>length</var> bits of <var>secret</var>.
+                    </dd>
+                  </dl>
+                </dd>
+              </dl>
+            </li>
+          </ol>
+        </dd>
+        <dt>Generate Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>
+                If <var>usages</var> contains an entry which is not
+                <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                then [= exception/throw =] a
+                {{SyntaxError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Generate an X25519 key pair, with the private key being 32 random bytes,
+                and the public key being <code>X25519(a, 9)</code>,
+                as defined in [[RFC7748]], section 6.1.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>algorithm</var> be a new {{KeyAlgorithm}} object.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{KeyAlgorithm/name}} attribute of
+                <var>algorithm</var> to <code>"X25519"</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>publicKey</var> be a new {{CryptoKey}} associated with the
+                [= relevant global object =]
+                of <code>this</code> [[HTML]], and
+                representing the public key of the generated key pair.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[type]]}} internal slot of
+                <var>publicKey</var> to <code>"public"</code>
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[algorithm]]}} internal
+                slot of <var>publicKey</var> to <var>algorithm</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[extractable]]}} internal
+                slot of <var>publicKey</var> to true.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[usages]]}} internal slot of
+                <var>publicKey</var> to be the empty list.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>privateKey</var> be a new {{CryptoKey}} associated with the
+                [= relevant global object =]
+                of <code>this</code> [[HTML]], and
+                representing the private key of the generated key pair.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[type]]}} internal slot of
+                <var>privateKey</var> to {{KeyType/"private"}}
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[algorithm]]}} internal
+                slot of <var>privateKey</var> to <var>algorithm</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[extractable]]}} internal
+                slot of <var>privateKey</var> to <var>extractable</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[usages]]}} internal slot of
+                <var>privateKey</var> to be the
+                [= usage intersection =] of
+                <var>usages</var> and <code>[ "deriveKey", "deriveBits" ]</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>result</var> be a new {{CryptoKeyPair}}
+                dictionary.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKeyPair/publicKey}} attribute
+                of <var>result</var> to be <var>publicKey</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKeyPair/privateKey}} attribute
+                of <var>result</var> to be <var>privateKey</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Return the result of converting <var>result</var> to an ECMAScript Object, as
+                defined by [[WebIDL]].
+              </p>
+            </li>
+          </ol>
+        </dd>
+
+        <dt>Import Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>Let <var>keyData</var> be the key data to be imported.</p>
+            </li>
+            <li>
+              <dl class="switch">
+                <dt>If <var>format</var> is {{KeyFormat/"spki"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> is not empty
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>spki</var> be the result of running the
+                        [= parse a subjectPublicKeyInfo =]
+                        algorithm over <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurred while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>algorithm</code> object identifier field of the
+                        <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
+                        not equal to the <code>id-X25519</code>
+                        object identifier defined in [[RFC8410]],
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>parameters</code> field of the <code>algorithm</code>
+                        AlgorithmIdentifier field of <var>spki</var> is present,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>publicKey</var> be the X25519 public key identified by
+                        the <code>subjectPublicKey</code> field of <var>spki</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        that represents <var>publicKey</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to <code>"public"</code>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"X25519"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"pkcs8"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> contains an entry which is not
+                        <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>privateKeyInfo</var> be the result of running the
+                        [= parse a privateKeyInfo =]
+                        algorithm over <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurs while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>algorithm</code> object identifier field of the
+                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
+                        <var>privateKeyInfo</var> is not equal to the
+                        <code>id-X25519</code> object identifier defined in [[RFC8410]],
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>parameters</code> field of the
+                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
+                        of <var>privateKeyInfo</var> is present,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>curvePrivateKey</var> be the result of performing the [= parse an ASN.1 structure =]
+                        algorithm, with <var>data</var> as the <code>privateKey</code> field
+                        of <var>privateKeyInfo</var>, <var>structure</var> as the ASN.1
+                        <code>CurvePrivateKey</code> structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurred while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        that represents the X25519 private key identified by <var>curvePrivateKey</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to {{KeyType/"private"}}
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"X25519"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"jwk"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <dl class="switch">
+                        <dt>If <var>keyData</var> is a {{JsonWebKey}} dictionary:</dt>
+                        <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
+                        <dt>Otherwise:</dt>
+                        <dd><p>[= exception/Throw =] a {{DataError}}.</p></dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/d}} field is present and if <var>usages</var>
+                        contains an entry which is not
+                        <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/d}} field is not present and if <var>usages</var> is not
+                        empty
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/kty}} field of <var>jwk</var> is not
+                        <code>"OKP"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/crv}} field of <var>jwk</var> is not
+                        <code>"X25519"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If <var>usages</var> is non-empty and the {{JsonWebKey/use}} field of <var>jwk</var> is present
+                        and is not equal to <code>"enc"</code> then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/key_ops}} field of <var>jwk</var> is present, and
+                        is invalid according to the requirements of JSON Web
+                        Key [[JWK]], or it does not contain all of the specified <var>usages</var>
+                        values,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/ext}} field of <var>jwk</var> is present and
+                        has the value false and <var>extractable</var> is true,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <dl class="switch">
+                        <dt>If the {{JsonWebKey/d}} field is present:</dt>
+                        <dd>
+                          <ol>
+                            <li>
+                              <p>
+                                If <var>jwk</var> does not meet the requirements of Section 2
+                                of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let <var>key</var> be a new {{CryptoKey}} object that represents the
+                                X25519 private key identified by interpreting
+                                <var>jwk</var> according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Set the {{CryptoKey/[[type]]}}
+                                internal slot of <var>Key</var> to {{KeyType/"private"}}.
+                              </p>
+                            </li>
+                          </ol>
+                        </dd>
+                        <dt>Otherwise:</dt>
+                        <dd>
+                          <ol>
+                            <li>
+                              <p>
+                                If <var>jwk</var> does not meet the requirements of Section 2
+                                of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let <var>key</var> be a new {{CryptoKey}} object that represents the
+                                X25519 public key identified by interpreting
+                                <var>jwk</var> according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Set the {{CryptoKey/[[type]]}}
+                                internal slot of <var>Key</var> to {{KeyType/"public"}}.
+                              </p>
+                            </li>
+                          </ol>
+                        </dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new instance of a {{KeyAlgorithm}} object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"X25519"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"raw"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> contains a value which is not
+                        <code>"verify"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}} object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"X25519"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        representing the key data provided in <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to <code>"public"</code>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>Otherwise:</dt>
+                <dd>
+                  <p>
+                    [= exception/throw =] a
+                    {{NotSupportedError}}.
+                  </p>
+                </dd>
+              </dl>
+            </li>
+            <li>
+              <p>
+                Return <var>key</var>
+              </p>
+            </li>
+          </ol>
+        </dd>
+
+        <dt>Export Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>
+                Let <var>key</var> be the {{CryptoKey}} to be
+                exported.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the underlying cryptographic key material represented by the {{CryptoKey/[[handle]]}} internal slot of <var>key</var>
+                cannot be accessed, then [= exception/throw =] an {{OperationError}}.
+              </p>
+            </li>
+            <li>
+              <dl class="switch">
+                <dt>If <var>format</var> is {{KeyFormat/"spki"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an instance of the <code>subjectPublicKeyInfo</code>
+                        ASN.1 structure defined in [[RFC5280]]
+                        with the following properties:
+                      </p>
+                      <ul>
+                        <li>
+                          <p>
+                            Set the <var>algorithm</var> field to an
+                            <code>AlgorithmIdentifier</code> ASN.1 type with the following
+                            properties:
+                          </p>
+                          <ul>
+                            <li>
+                              <p>
+                                Set the <var>algorithm</var> object identifier to the
+                                <code>id-X25519</code> OID defined in [[RFC8410]].
+                              </p>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>subjectPublicKey</var> field to <var>keyData</var>.
+                          </p>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"pkcs8"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not {{KeyType/"private"}}, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an instance of the <code>privateKeyInfo</code>
+                        ASN.1 structure defined in [[RFC5208]]
+                        with the following properties:
+                      </p>
+                      <ul>
+                        <li>
+                          <p>
+                            Set the <var>version</var> field to <code>0</code>.
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>privateKeyAlgorithm</var> field to a
+                            <code>PrivateKeyAlgorithmIdentifier</code> ASN.1 type with the
+                            following properties:
+                          </p>
+                          <ul>
+                            <li>
+                              <p>
+                                Set the <var>algorithm</var> object identifier to the
+                                <code>id-X25519</code> OID defined in [[RFC8410]].
+                              </p>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>privateKey</var> field to the result of DER-encoding
+                            a <code>CurvePrivateKey</code> ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
+                            X25519 private key represented by the {{CryptoKey/[[handle]]}} internal slot of
+                            <var>key</var>
+                          </p>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"jwk"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        Let <var>jwk</var> be a new {{JsonWebKey}}
+                        dictionary.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>kty</code> attribute of <var>jwk</var> to
+                        <code>"OKP"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>crv</code> attribute of <var>jwk</var> to
+                        <code>"X25519"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{JsonWebKey/x}} attribute of <var>jwk</var> according to the
+                        definition in Section 2 of [[RFC8037]].
+                      </p>
+                    </li>
+                    <li>
+                      <dl class="switch">
+                        <dt>
+                          If the {{CryptoKey/[[type]]}} internal slot
+                          of <var>key</var> is {{KeyType/"private"}}
+                        </dt>
+                        <dd>
+                          Set the {{JsonWebKey/d}} attribute of <var>jwk</var> according to the
+                          definition in Section 2 of [[RFC8037]].
+                        </dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>ext</code> attribute of <var>jwk</var> to the {{CryptoKey/[[extractable]]}} internal slot
+                        of <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be the result of converting <var>jwk</var>
+                        to an ECMAScript Object, as defined by [[WebIDL]].
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>
+                  If <var>format</var> is {{KeyFormat/"raw"}}:
+                </dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an [= octet string =] representing the X25519
+                        public key represented by the {{CryptoKey/[[handle]]}} internal slot of
+                        <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>Otherwise:</dt>
+                <dd>
+                  <p>
+                    [= exception/throw =] a
+                    {{NotSupportedError}}.
+                  </p>
+                </dd>
+              </dl>
+            </li>
+            <li>
+              <p>
+                Return <var>result</var>.
+              </p>
+            </li>
+          </ol>
+        </dd>
+      </dl>
+    </section>
+  </section>
+
+  <section id="x448">
+    <h3>X448</h3>
+    <section id="x448-description" class="informative">
+      <h4>Description</h4>
+      <p>
+        The <code>"X448"</code> algorithm identifier is used to perform
+        key agreement using the X448 algorithm specified in
+        [[RFC7748]].
+      </p>
+    </section>
+    <section id="x448-registration">
+      <h4>Registration</h4>
+      <p>
+        The [= recognized algorithm name =] for
+        this algorithm is <code>"X448"</code>.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th><a href="#supported-operations">Operation</a></th>
+            <th><a href="#algorithm-specific-params">Parameters</a></th>
+            <th><a href="#algorithm-result">Result</a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>deriveBits</td>
+            <td>{{EcdhKeyDeriveParams}}</td>
+            <td>[= octet string =]</td>
+          </tr>
+          <tr>
+            <td>generateKey</td>
+            <td>None</td>
+            <td>{{CryptoKeyPair}}</td>
+          </tr>
+          <tr>
+            <td>importKey</td>
+            <td>None</td>
+            <td>{{CryptoKey}}</td>
+          </tr>
+          <tr>
+            <td>exportKey</td>
+            <td>None</td>
+            <td>object</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="x448-operations">
+      <h4>Operations</h4>
+      <dl>
+        <dt>Derive Bits</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>
+                If the {{CryptoKey/[[type]]}} internal slot of
+                <var>key</var> is not {{KeyType/"private"}}, then [= exception/throw =] an {{InvalidAccessError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>publicKey</var> be the
+                {{EcdhKeyDeriveParams/public}} member of
+                <var>normalizedAlgorithm</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the {{CryptoKey/[[type]]}} internal slot of
+                <var>publicKey</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the {{KeyAlgorithm/name}} attribute of
+                the {{CryptoKey/[[algorithm]]}} internal slot of
+                <var>publicKey</var> is not equal to the {{KeyAlgorithm/name}} property of the {{CryptoKey/[[algorithm]]}} internal slot of
+                <var>key</var>, then [= exception/throw =] an {{InvalidAccessError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>secret</var> be the result of performing the X448 function specified in
+                [[RFC7748]] Section 5 with <var>key</var> as the X448 private key <var>k</var>
+                and the X448 public key represented by the {{CryptoKey/[[handle]]}}
+                internal slot of <var>publicKey</var> as the X448 public key <var>u</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If <var>secret</var> is the all-zero value,
+                then [= exception/throw =] a {{OperationError}}.
+                This check must be performed in constant-time, as per [[RFC7748]] Section 6.2.
+              </p>
+            </li>
+            <li>
+              <dl class="switch">
+                <dt>If <var>length</var> is null:</dt>
+                <dd>Return <var>secret</var></dd>
+                <dt>Otherwise:</dt>
+                <dd>
+                  <dl class="switch">
+                    <dt>
+                      If the length of <var>secret</var> in bits is less than
+                      <var>length</var>:
+                    </dt>
+                    <dd>
+                      [= exception/throw =] an
+                      {{OperationError}}.
+                    </dd>
+                    <dt>Otherwise:</dt>
+                    <dd>
+                      Return an [= octet string containing =] the first <var>length</var> bits of <var>secret</var>.
+                    </dd>
+                  </dl>
+                </dd>
+              </dl>
+            </li>
+          </ol>
+        </dd>
+        <dt>Generate Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>
+                If <var>usages</var> contains an entry which is not
+                <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                then [= exception/throw =] a
+                {{SyntaxError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Generate an X448 key pair, with the private key being 56 random bytes,
+                and the public key being <code>X448(a, 5)</code>,
+                as defined in [[RFC7748]], section 6.2.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>algorithm</var> be a new {{KeyAlgorithm}} object.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{KeyAlgorithm/name}} attribute of
+                <var>algorithm</var> to <code>"X448"</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>publicKey</var> be a new {{CryptoKey}} associated with the
+                [= relevant global object =]
+                of <code>this</code> [[HTML]], and
+                representing the public key of the generated key pair.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[type]]}} internal slot of
+                <var>publicKey</var> to <code>"public"</code>
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[algorithm]]}} internal
+                slot of <var>publicKey</var> to <var>algorithm</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[extractable]]}} internal
+                slot of <var>publicKey</var> to true.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[usages]]}} internal slot of
+                <var>publicKey</var> to be the empty list.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>privateKey</var> be a new {{CryptoKey}} associated with the
+                [= relevant global object =]
+                of <code>this</code> [[HTML]], and
+                representing the private key of the generated key pair.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[type]]}} internal slot of
+                <var>privateKey</var> to {{KeyType/"private"}}
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[algorithm]]}} internal
+                slot of <var>privateKey</var> to <var>algorithm</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[extractable]]}} internal
+                slot of <var>privateKey</var> to <var>extractable</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[usages]]}} internal slot of
+                <var>privateKey</var> to be the
+                [= usage intersection =] of
+                <var>usages</var> and <code>[ "deriveKey", "deriveBits" ]</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>result</var> be a new {{CryptoKeyPair}}
+                dictionary.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKeyPair/publicKey}} attribute
+                of <var>result</var> to be <var>publicKey</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKeyPair/privateKey}} attribute
+                of <var>result</var> to be <var>privateKey</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Return the result of converting <var>result</var> to an ECMAScript Object, as
+                defined by [[WebIDL]].
+              </p>
+            </li>
+          </ol>
+        </dd>
+
+        <dt>Import Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>Let <var>keyData</var> be the key data to be imported.</p>
+            </li>
+            <li>
+              <dl class="switch">
+                <dt>If <var>format</var> is {{KeyFormat/"spki"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> is not empty
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>spki</var> be the result of running the
+                        [= parse a subjectPublicKeyInfo =]
+                        algorithm over <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurred while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>algorithm</code> object identifier field of the
+                        <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
+                        not equal to the <code>id-X448</code>
+                        object identifier defined in [[RFC8410]],
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>parameters</code> field of the <code>algorithm</code>
+                        AlgorithmIdentifier field of <var>spki</var> is present,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>publicKey</var> be the X448 public key identified by
+                        the <code>subjectPublicKey</code> field of <var>spki</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        that represents <var>publicKey</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to <code>"public"</code>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"X448"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"pkcs8"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> contains an entry which is not
+                        <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>privateKeyInfo</var> be the result of running the
+                        [= parse a privateKeyInfo =]
+                        algorithm over <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurs while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>algorithm</code> object identifier field of the
+                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
+                        <var>privateKeyInfo</var> is not equal to the
+                        <code>id-X448</code> object identifier defined in [[RFC8410]],
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>parameters</code> field of the
+                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
+                        of <var>privateKeyInfo</var> is present,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>curvePrivateKey</var> be the result of performing the [= parse an ASN.1 structure =]
+                        algorithm, with <var>data</var> as the <code>privateKey</code> field
+                        of <var>privateKeyInfo</var>, <var>structure</var> as the ASN.1
+                        <code>CurvePrivateKey</code> structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurred while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        that represents the X448 private key identified by <var>curvePrivateKey</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to {{KeyType/"private"}}
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"X448"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"jwk"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <dl class="switch">
+                        <dt>If <var>keyData</var> is a {{JsonWebKey}} dictionary:</dt>
+                        <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
+                        <dt>Otherwise:</dt>
+                        <dd><p>[= exception/Throw =] a {{DataError}}.</p></dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/d}} field is present and if <var>usages</var>
+                        contains an entry which is not
+                        <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/d}} field is not present and if <var>usages</var> is not
+                        empty
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/kty}} field of <var>jwk</var> is not
+                        <code>"OKP"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/crv}} field of <var>jwk</var> is not
+                        <code>"X448"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If <var>usages</var> is non-empty and the {{JsonWebKey/use}} field of <var>jwk</var> is present
+                        and is not equal to <code>"enc"</code> then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/key_ops}} field of <var>jwk</var> is present, and
+                        is invalid according to the requirements of JSON Web
+                        Key [[JWK]], or it does not contain all of the specified <var>usages</var>
+                        values,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/ext}} field of <var>jwk</var> is present and
+                        has the value false and <var>extractable</var> is true,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <dl class="switch">
+                        <dt>If the {{JsonWebKey/d}} field is present:</dt>
+                        <dd>
+                          <ol>
+                            <li>
+                              <p>
+                                If <var>jwk</var> does not meet the requirements of Section 2
+                                of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let <var>key</var> be a new {{CryptoKey}} object that represents the
+                                X448 private key identified by interpreting
+                                <var>jwk</var> according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Set the {{CryptoKey/[[type]]}}
+                                internal slot of <var>Key</var> to {{KeyType/"private"}}.
+                              </p>
+                            </li>
+                          </ol>
+                        </dd>
+                        <dt>Otherwise:</dt>
+                        <dd>
+                          <ol>
+                            <li>
+                              <p>
+                                If <var>jwk</var> does not meet the requirements of Section 2
+                                of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let <var>key</var> be a new {{CryptoKey}} object that represents the
+                                X448 public key identified by interpreting
+                                <var>jwk</var> according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Set the {{CryptoKey/[[type]]}}
+                                internal slot of <var>Key</var> to {{KeyType/"public"}}.
+                              </p>
+                            </li>
+                          </ol>
+                        </dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new instance of a {{KeyAlgorithm}} object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"X448"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"raw"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> contains a value which is not
+                        <code>"verify"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}} object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"X448"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        representing the key data provided in <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to <code>"public"</code>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>Otherwise:</dt>
+                <dd>
+                  <p>
+                    [= exception/throw =] a
+                    {{NotSupportedError}}.
+                  </p>
+                </dd>
+              </dl>
+            </li>
+            <li>
+              <p>
+                Return <var>key</var>
+              </p>
+            </li>
+          </ol>
+        </dd>
+
+        <dt>Export Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>
+                Let <var>key</var> be the {{CryptoKey}} to be
+                exported.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the underlying cryptographic key material represented by the {{CryptoKey/[[handle]]}} internal slot of <var>key</var>
+                cannot be accessed, then [= exception/throw =] an {{OperationError}}.
+              </p>
+            </li>
+            <li>
+              <dl class="switch">
+                <dt>If <var>format</var> is {{KeyFormat/"spki"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an instance of the <code>subjectPublicKeyInfo</code>
+                        ASN.1 structure defined in [[RFC5280]]
+                        with the following properties:
+                      </p>
+                      <ul>
+                        <li>
+                          <p>
+                            Set the <var>algorithm</var> field to an
+                            <code>AlgorithmIdentifier</code> ASN.1 type with the following
+                            properties:
+                          </p>
+                          <ul>
+                            <li>
+                              <p>
+                                Set the <var>algorithm</var> object identifier to the
+                                <code>id-X448</code> OID defined in [[RFC8410]].
+                              </p>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>subjectPublicKey</var> field to <var>keyData</var>.
+                          </p>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"pkcs8"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not {{KeyType/"private"}}, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an instance of the <code>privateKeyInfo</code>
+                        ASN.1 structure defined in [[RFC5208]]
+                        with the following properties:
+                      </p>
+                      <ul>
+                        <li>
+                          <p>
+                            Set the <var>version</var> field to <code>0</code>.
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>privateKeyAlgorithm</var> field to a
+                            <code>PrivateKeyAlgorithmIdentifier</code> ASN.1 type with the
+                            following properties:
+                          </p>
+                          <ul>
+                            <li>
+                              <p>
+                                Set the <var>algorithm</var> object identifier to the
+                                <code>id-X448</code> OID defined in [[RFC8410]].
+                              </p>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>privateKey</var> field to the result of DER-encoding
+                            a <code>CurvePrivateKey</code> ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
+                            X448 private key represented by the {{CryptoKey/[[handle]]}} internal slot of
+                            <var>key</var>
+                          </p>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"jwk"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        Let <var>jwk</var> be a new {{JsonWebKey}}
+                        dictionary.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>kty</code> attribute of <var>jwk</var> to
+                        <code>"OKP"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>crv</code> attribute of <var>jwk</var> to
+                        <code>"X448"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{JsonWebKey/x}} attribute of <var>jwk</var> according to the
+                        definition in Section 2 of [[RFC8037]].
+                      </p>
+                    </li>
+                    <li>
+                      <dl class="switch">
+                        <dt>
+                          If the {{CryptoKey/[[type]]}} internal slot
+                          of <var>key</var> is {{KeyType/"private"}}
+                        </dt>
+                        <dd>
+                          Set the {{JsonWebKey/d}} attribute of <var>jwk</var> according to the
+                          definition in Section 2 of [[RFC8037]].
+                        </dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>ext</code> attribute of <var>jwk</var> to the {{CryptoKey/[[extractable]]}} internal slot
+                        of <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be the result of converting <var>jwk</var>
+                        to an ECMAScript Object, as defined by [[WebIDL]].
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>
+                  If <var>format</var> is {{KeyFormat/"raw"}}:
+                </dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an [= octet string =] representing the X448
+                        public key represented by the {{CryptoKey/[[handle]]}} internal slot of
+                        <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>Otherwise:</dt>
+                <dd>
+                  <p>
+                    [= exception/throw =] a
+                    {{NotSupportedError}}.
+                  </p>
+                </dd>
+              </dl>
+            </li>
+            <li>
+              <p>
+                Return <var>result</var>.
+              </p>
+            </li>
+          </ol>
+        </dd>
+      </dl>
+    </section>
+  </section>
+
+  <section id="ed25519">
+    <h3>Ed25519</h3>
+    <section id="ed25519-description" class="informative">
+      <h4>Description</h4>
+      <p>
+        The <code>"Ed25519"</code> algorithm identifier is used to perform signing
+        and verification using the Ed25519 algorithm specified in
+        [[RFC8032]].
+      </p>
+    </section>
+    <section id="ed25519-registration">
+      <h4>Registration</h4>
+      <p>
+        The [= recognized algorithm name =] for
+        this algorithm is <code>"Ed25519"</code>.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th><a href="#supported-operations">Operation</a></th>
+            <th><a href="#algorithm-specific-params">Parameters</a></th>
+            <th><a href="#algorithm-result">Result</a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>sign</td>
+            <td>None</td>
+            <td>{{ArrayBuffer}}</td>
+          </tr>
+          <tr>
+            <td>verify</td>
+            <td>None</td>
+            <td>boolean</td>
+          </tr>
+          <tr>
+            <td>generateKey</td>
+            <td>None</td>
+            <td>{{CryptoKeyPair}}</td>
+          </tr>
+          <tr>
+            <td>importKey</td>
+            <td>None</td>
+            <td>{{CryptoKey}}</td>
+          </tr>
+          <tr>
+            <td>exportKey</td>
+            <td>None</td>
+            <td>object</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ed25519-operations">
+      <h4>Operations</h4>
+      <dl>
+        <dt>Sign</dt>
+        <dd>
+          When signing, the following algorithm should be used:
+          <ol>
+            <li>
+              <p>
+                If the {{CryptoKey/[[type]]}} internal slot of
+                <var>key</var> is not {{KeyType/"private"}}, then [= exception/throw =] an {{InvalidAccessError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Perform the Ed25519 signing process, as specified in [[RFC8032]],
+                Section 5.1.6, with <var>message</var> as <var>M</var>,
+                using the Ed25519 private key associated with <var>key</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Return a new {{ArrayBuffer}} associated with the
+                [= relevant global object =]
+                of <code>this</code> [[HTML]], and containing the
+                bytes of the signature resulting from performing
+                the Ed25519 signing process.
+              </p>
+            </li>
+          </ol>
+        </dd>
+        <dt>Verify</dt>
+        <dd>
+          When verifying, the following algorithm should be used:
+          <ol>
+            <li>
+              <p>
+                If the {{CryptoKey/[[type]]}} internal slot of
+                <var>key</var> is not {{KeyType/"public"}}, then [= exception/throw =] an {{InvalidAccessError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Perform the Ed25519 verification steps, as specified in [[RFC8032]],
+                Section 5.1.7, on the <var>signature</var>, with <var>message</var> as <var>M</var>,
+                using the Ed25519 public key associated with <var>key</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>result</var> be a boolean with the value <code>true</code> if the signature is valid
+                and the value <code>false</code> otherwise.
+              </p>
+            </li>
+            <li>
+              <p>
+                Return <var>result</var>.
+              </p>
+            </li>
+          </ol>
+        </dd>
+        <dt>Generate Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>
+                If <var>usages</var> contains a value which is not
+                one of <code>"sign"</code> or <code>"verify"</code>,
+                then [= exception/throw =] a
+                {{SyntaxError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Generate an Ed25519 key pair, as defined in [[RFC8032]], section 5.1.5.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>algorithm</var> be a new {{KeyAlgorithm}} object.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{KeyAlgorithm/name}} attribute of
+                <var>algorithm</var> to <code>"Ed25519"</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>publicKey</var> be a new {{CryptoKey}} associated with the
+                [= relevant global object =]
+                of <code>this</code> [[HTML]], and
+                representing the public key of the generated key pair.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[type]]}} internal slot of
+                <var>publicKey</var> to <code>"public"</code>
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[algorithm]]}} internal
+                slot of <var>publicKey</var> to <var>algorithm</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[extractable]]}} internal
+                slot of <var>publicKey</var> to true.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[usages]]}} internal slot of
+                <var>publicKey</var> to be the [= usage
+                intersection =] of <var>usages</var> and <code>[ "verify" ]</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>privateKey</var> be a new {{CryptoKey}} associated with the
+                [= relevant global object =]
+                of <code>this</code> [[HTML]], and
+                representing the private key of the generated key pair.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[type]]}} internal slot of
+                <var>privateKey</var> to {{KeyType/"private"}}
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[algorithm]]}} internal
+                slot of <var>privateKey</var> to <var>algorithm</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[extractable]]}} internal
+                slot of <var>privateKey</var> to <var>extractable</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[usages]]}} internal slot of
+                <var>privateKey</var> to be the [= usage
+                intersection =] of <var>usages</var> and <code>[ "sign" ]</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>result</var> be a new {{CryptoKeyPair}}
+                dictionary.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKeyPair/publicKey}} attribute
+                of <var>result</var> to be <var>publicKey</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKeyPair/privateKey}} attribute
+                of <var>result</var> to be <var>privateKey</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Return the result of converting <var>result</var> to an ECMAScript Object, as
+                defined by [[WebIDL]].
+              </p>
+            </li>
+          </ol>
+        </dd>
+
+        <dt>Import Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>Let <var>keyData</var> be the key data to be imported.</p>
+            </li>
+            <li>
+              <dl class="switch">
+                <dt>If <var>format</var> is {{KeyFormat/"spki"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> contains a value which is not
+                        <code>"verify"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>spki</var> be the result of running the
+                        [= parse a subjectPublicKeyInfo =]
+                        algorithm over <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurred while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>algorithm</code> object identifier field of the
+                        <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
+                        not equal to the <code>id-Ed25519</code>
+                        object identifier defined in [[RFC8410]],
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>parameters</code> field of the <code>algorithm</code>
+                        AlgorithmIdentifier field of <var>spki</var> is present,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>publicKey</var> be the Ed25519 public key identified by
+                        the <code>subjectPublicKey</code> field of <var>spki</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        that represents <var>publicKey</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to <code>"public"</code>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"Ed25519"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"pkcs8"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> contains a value which is not
+                        <code>"sign"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>privateKeyInfo</var> be the result of running the
+                        [= parse a privateKeyInfo =]
+                        algorithm over <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurs while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>algorithm</code> object identifier field of the
+                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
+                        <var>privateKeyInfo</var> is not equal to the
+                        <code>id-Ed25519</code> object identifier defined in [[RFC8410]],
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>parameters</code> field of the
+                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
+                        of <var>privateKeyInfo</var> is present,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>curvePrivateKey</var> be the result of performing the [= parse an ASN.1 structure =]
+                        algorithm, with <var>data</var> as the <code>privateKey</code> field
+                        of <var>privateKeyInfo</var>, <var>structure</var> as the ASN.1
+                        <code>CurvePrivateKey</code> structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurred while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        that represents the Ed25519 private key identified by <var>curvePrivateKey</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to {{KeyType/"private"}}
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"Ed25519"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"jwk"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <dl class="switch">
+                        <dt>If <var>keyData</var> is a {{JsonWebKey}} dictionary:</dt>
+                        <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
+                        <dt>Otherwise:</dt>
+                        <dd><p>[= exception/Throw =] a {{DataError}}.</p></dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/d}} field is present and <var>usages</var> contains
+                        a value which is not
+                        <code>"sign"</code>, or,
+                        if the {{JsonWebKey/d}} field is not present and <var>usages</var> contains
+                        a value which is not
+                        <code>"verify"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/kty}} field of <var>jwk</var> is not
+                        <code>"OKP"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/crv}} field of <var>jwk</var> is not
+                        <code>"Ed25519"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If <var>usages</var> is non-empty and the {{JsonWebKey/use}} field of <var>jwk</var> is present and is
+                        not <code>"sig"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/key_ops}} field of <var>jwk</var> is present, and
+                        is invalid according to the requirements of JSON Web
+                        Key [[JWK]], or it does not contain all of the specified <var>usages</var>
+                        values,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/ext}} field of <var>jwk</var> is present and
+                        has the value false and <var>extractable</var> is true,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <dl class="switch">
+                        <dt>If the {{JsonWebKey/d}} field is present:</dt>
+                        <dd>
+                          <ol>
+                            <li>
+                              <p>
+                                If <var>jwk</var> does not meet the requirements of Section 2
+                                of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let <var>key</var> be a new {{CryptoKey}} object that represents the
+                                Ed25519 private key identified by interpreting
+                                <var>jwk</var> according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Set the {{CryptoKey/[[type]]}}
+                                internal slot of <var>Key</var> to {{KeyType/"private"}}.
+                              </p>
+                            </li>
+                          </ol>
+                        </dd>
+                        <dt>Otherwise:</dt>
+                        <dd>
+                          <ol>
+                            <li>
+                              <p>
+                                If <var>jwk</var> does not meet the requirements of Section 2
+                                of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let <var>key</var> be a new {{CryptoKey}} object that represents the
+                                Ed25519 public key identified by interpreting
+                                <var>jwk</var> according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Set the {{CryptoKey/[[type]]}}
+                                internal slot of <var>Key</var> to {{KeyType/"public"}}.
+                              </p>
+                            </li>
+                          </ol>
+                        </dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new instance of a {{KeyAlgorithm}} object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"Ed25519"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"raw"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> contains a value which is not
+                        <code>"verify"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}} object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"Ed25519"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        representing the key data provided in <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to <code>"public"</code>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>Otherwise:</dt>
+                <dd>
+                  <p>
+                    [= exception/throw =] a
+                    {{NotSupportedError}}.
+                  </p>
+                </dd>
+              </dl>
+            </li>
+            <li>
+              <p>
+                Return <var>key</var>
+              </p>
+            </li>
+          </ol>
+        </dd>
+
+        <dt>Export Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>
+                Let <var>key</var> be the {{CryptoKey}} to be
+                exported.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the underlying cryptographic key material represented by the {{CryptoKey/[[handle]]}} internal slot of <var>key</var>
+                cannot be accessed, then [= exception/throw =] an {{OperationError}}.
+              </p>
+            </li>
+            <li>
+              <dl class="switch">
+                <dt>If <var>format</var> is {{KeyFormat/"spki"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an instance of the <code>subjectPublicKeyInfo</code>
+                        ASN.1 structure defined in [[RFC5280]]
+                        with the following properties:
+                      </p>
+                      <ul>
+                        <li>
+                          <p>
+                            Set the <var>algorithm</var> field to an
+                            <code>AlgorithmIdentifier</code> ASN.1 type with the following
+                            properties:
+                          </p>
+                          <ul>
+                            <li>
+                              <p>
+                                Set the <var>algorithm</var> object identifier to the
+                                <code>id-Ed25519</code> OID defined in [[RFC8410]].
+                              </p>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>subjectPublicKey</var> field to <var>keyData</var>.
+                          </p>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"pkcs8"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not {{KeyType/"private"}}, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an instance of the <code>privateKeyInfo</code>
+                        ASN.1 structure defined in [[RFC5208]]
+                        with the following properties:
+                      </p>
+                      <ul>
+                        <li>
+                          <p>
+                            Set the <var>version</var> field to <code>0</code>.
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>privateKeyAlgorithm</var> field to a
+                            <code>PrivateKeyAlgorithmIdentifier</code> ASN.1 type with the
+                            following properties:
+                          </p>
+                          <ul>
+                            <li>
+                              <p>
+                                Set the <var>algorithm</var> object identifier to the
+                                <code>id-Ed25519</code> OID defined in [[RFC8410]].
+                              </p>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>privateKey</var> field to the result of DER-encoding
+                            a <code>CurvePrivateKey</code> ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
+                            Ed25519 private key represented by the {{CryptoKey/[[handle]]}} internal slot of
+                            <var>key</var>
+                          </p>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"jwk"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        Let <var>jwk</var> be a new {{JsonWebKey}}
+                        dictionary.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>kty</code> attribute of <var>jwk</var> to
+                        <code>"OKP"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>crv</code> attribute of <var>jwk</var> to
+                        <code>"Ed25519"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{JsonWebKey/x}} attribute of <var>jwk</var> according to the
+                        definition in Section 2 of [[RFC8037]].
+                      </p>
+                    </li>
+                    <li>
+                      <dl class="switch">
+                        <dt>
+                          If the {{CryptoKey/[[type]]}} internal slot
+                          of <var>key</var> is {{KeyType/"private"}}
+                        </dt>
+                        <dd>
+                          Set the {{JsonWebKey/d}} attribute of <var>jwk</var> according to the
+                          definition in Section 2 of [[RFC8037]].
+                        </dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>ext</code> attribute of <var>jwk</var> to the {{CryptoKey/[[extractable]]}} internal slot
+                        of <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be the result of converting <var>jwk</var>
+                        to an ECMAScript Object, as defined by [[WebIDL]].
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>
+                  If <var>format</var> is {{KeyFormat/"raw"}}:
+                </dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an [= octet string =] representing the Ed25519
+                        public key represented by the {{CryptoKey/[[handle]]}} internal slot of
+                        <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>Otherwise:</dt>
+                <dd>
+                  <p>
+                    [= exception/throw =] a
+                    {{NotSupportedError}}.
+                  </p>
+                </dd>
+              </dl>
+            </li>
+            <li>
+              <p>
+                Return <var>result</var>.
+              </p>
+            </li>
+          </ol>
+        </dd>
+      </dl>
+    </section>
+  </section>
+
+  <section id="ed448">
+    <h3>Ed448</h3>
+    <section id="ed448-description" class="informative">
+      <h4>Description</h4>
+      <p>
+        The <code>"Ed448"</code> algorithm identifier is used to perform signing
+        and verification using the Ed448 algorithm specified in
+        [[RFC8032]].
+      </p>
+    </section>
+    <section id="ed448-registration">
+      <h4>Registration</h4>
+      <p>
+        The [= recognized algorithm name =] for
+        this algorithm is <code>"Ed448"</code>.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th><a href="#supported-operations">Operation</a></th>
+            <th><a href="#algorithm-specific-params">Parameters</a></th>
+            <th><a href="#algorithm-result">Result</a></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>sign</td>
+            <td>None</td>
+            <td>{{ArrayBuffer}}</td>
+          </tr>
+          <tr>
+            <td>verify</td>
+            <td>{{Ed448Params}}</td>
+            <td>boolean</td>
+          </tr>
+          <tr>
+            <td>generateKey</td>
+            <td>{{Ed448Params}}</td>
+            <td>{{CryptoKeyPair}}</td>
+          </tr>
+          <tr>
+            <td>importKey</td>
+            <td>None</td>
+            <td>{{CryptoKey}}</td>
+          </tr>
+          <tr>
+            <td>exportKey</td>
+            <td>None</td>
+            <td>object</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ed448-params">
+      <h4><dfn data-idl id="dfn-Ed448Params">Ed448Params</dfn> dictionary</h4>
+      <pre class=idl>
+dictionary Ed448Params : Algorithm {
+  BufferSource context;
+};
+      </pre>
+      <p>The <dfn data-idl data-dfn-for=Ed448Params id="dfn-Ed448Params-context">context</dfn> member represents the optional context data to associate with the message.</p>
+    </section>
+    <section id="ed448-operations">
+      <h4>Operations</h4>
+      <dl>
+        <dt>Sign</dt>
+        <dd>
+          When signing, the following algorithm should be used:
+          <ol>
+            <li>
+              <p>
+                If the {{CryptoKey/[[type]]}} internal slot of
+                <var>key</var> is not {{KeyType/"private"}}, then [= exception/throw =] an {{InvalidAccessError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>context</var> be the <a href="#concept-contents-of-arraybuffer">contents of</a> the {{Ed448Params/context}} member of
+                <var>normalizedAlgorithm</var> or the empty octet string if the
+                {{Ed448Params/context}} member of
+                <var>normalizedAlgorithm</var> is not present.
+              </p>
+            </li>
+            <li>
+              <p>
+                If <var>context</var> has a length greater than 255 bytes,
+                then [= exception/throw =] an {{OperationError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Perform the Ed448 signing process, as specified in [[RFC8032]],
+                Section 5.2.6, with <var>message</var> as <var>M</var>
+                and <var>context</var> as <var>C</var>,
+                using the Ed448 private key associated with <var>key</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Return a new {{ArrayBuffer}} associated with the
+                [= relevant global object =]
+                of <code>this</code> [[HTML]], and containing the
+                bytes of the signature resulting from performing
+                the Ed448 signing process.
+              </p>
+            </li>
+          </ol>
+        </dd>
+        <dt>Verify</dt>
+        <dd>
+          When verifying, the following algorithm should be used:
+          <ol>
+            <li>
+              <p>
+                If the {{CryptoKey/[[type]]}} internal slot of
+                <var>key</var> is not {{KeyType/"public"}}, then [= exception/throw =] an {{InvalidAccessError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>context</var> be the <a href="#concept-contents-of-arraybuffer">contents of</a> the {{Ed448Params/context}} member of
+                <var>normalizedAlgorithm</var> or the empty octet string if the
+                {{Ed448Params/context}} member of
+                <var>normalizedAlgorithm</var> is not present.
+              </p>
+            </li>
+            <li>
+              <p>
+                If <var>context</var> has a length greater than 255 bytes,
+                then [= exception/throw =] an {{OperationError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Perform the Ed448 verification steps, as specified in [[RFC8032]],
+                Section 5.2.7, on the <var>signature</var>, with <var>message</var> as <var>M</var>
+                and <var>context</var> as <var>C</var>,
+                using the Ed448 public key associated with <var>key</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>result</var> be a boolean with the value <code>true</code> if the signature is valid
+                and the value <code>false</code> otherwise.
+              </p>
+            </li>
+            <li>
+              <p>
+                Return <var>result</var>.
+              </p>
+            </li>
+          </ol>
+        </dd>
+        <dt>Generate Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>
+                If <var>usages</var> contains a value which is not
+                one of <code>"sign"</code> or <code>"verify"</code>,
+                then [= exception/throw =] a
+                {{SyntaxError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                Generate an Ed448 key pair, as defined in [[RFC8032]], section 5.1.5.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>algorithm</var> be a new {{KeyAlgorithm}} object.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{KeyAlgorithm/name}} attribute of
+                <var>algorithm</var> to <code>"Ed448"</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>publicKey</var> be a new {{CryptoKey}} associated with the
+                [= relevant global object =]
+                of <code>this</code> [[HTML]], and
+                representing the public key of the generated key pair.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[type]]}} internal slot of
+                <var>publicKey</var> to <code>"public"</code>
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[algorithm]]}} internal
+                slot of <var>publicKey</var> to <var>algorithm</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[extractable]]}} internal
+                slot of <var>publicKey</var> to true.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[usages]]}} internal slot of
+                <var>publicKey</var> to be the [= usage
+                intersection =] of <var>usages</var> and <code>[ "verify" ]</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>privateKey</var> be a new {{CryptoKey}} associated with the
+                [= relevant global object =]
+                of <code>this</code> [[HTML]], and
+                representing the private key of the generated key pair.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[type]]}} internal slot of
+                <var>privateKey</var> to {{KeyType/"private"}}
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[algorithm]]}} internal
+                slot of <var>privateKey</var> to <var>algorithm</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[extractable]]}} internal
+                slot of <var>privateKey</var> to <var>extractable</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKey/[[usages]]}} internal slot of
+                <var>privateKey</var> to be the [= usage
+                intersection =] of <var>usages</var> and <code>[ "sign" ]</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Let <var>result</var> be a new {{CryptoKeyPair}}
+                dictionary.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKeyPair/publicKey}} attribute
+                of <var>result</var> to be <var>publicKey</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Set the {{CryptoKeyPair/privateKey}} attribute
+                of <var>result</var> to be <var>privateKey</var>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Return the result of converting <var>result</var> to an ECMAScript Object, as
+                defined by [[WebIDL]].
+              </p>
+            </li>
+          </ol>
+        </dd>
+
+        <dt>Import Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>Let <var>keyData</var> be the key data to be imported.</p>
+            </li>
+            <li>
+              <dl class="switch">
+                <dt>If <var>format</var> is {{KeyFormat/"spki"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> contains a value which is not
+                        <code>"verify"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>spki</var> be the result of running the
+                        [= parse a subjectPublicKeyInfo =]
+                        algorithm over <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurred while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>algorithm</code> object identifier field of the
+                        <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
+                        not equal to the <code>id-Ed448</code>
+                        object identifier defined in [[RFC8410]],
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>parameters</code> field of the <code>algorithm</code>
+                        AlgorithmIdentifier field of <var>spki</var> is present,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>publicKey</var> be the Ed448 public key identified by
+                        the <code>subjectPublicKey</code> field of <var>spki</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        that represents <var>publicKey</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to <code>"public"</code>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"Ed448"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"pkcs8"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> contains a value which is not
+                        <code>"sign"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>privateKeyInfo</var> be the result of running the
+                        [= parse a privateKeyInfo =]
+                        algorithm over <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurs while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>algorithm</code> object identifier field of the
+                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
+                        <var>privateKeyInfo</var> is not equal to the
+                        <code>id-Ed448</code> object identifier defined in [[RFC8410]],
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>parameters</code> field of the
+                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
+                        of <var>privateKeyInfo</var> is present,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>curvePrivateKey</var> be the result of performing the [= parse an ASN.1 structure =]
+                        algorithm, with <var>data</var> as the <code>privateKey</code> field
+                        of <var>privateKeyInfo</var>, <var>structure</var> as the ASN.1
+                        <code>CurvePrivateKey</code> structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If an error occurred while parsing,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        that represents the Ed448 private key identified by <var>curvePrivateKey</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to {{KeyType/"private"}}
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"Ed448"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"jwk"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <dl class="switch">
+                        <dt>If <var>keyData</var> is a {{JsonWebKey}} dictionary:</dt>
+                        <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
+                        <dt>Otherwise:</dt>
+                        <dd><p>[= exception/Throw =] a {{DataError}}.</p></dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/d}} field is present and <var>usages</var> contains
+                        a value which is not
+                        <code>"sign"</code>, or,
+                        if the {{JsonWebKey/d}} field is not present and <var>usages</var> contains
+                        a value which is not
+                        <code>"verify"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/kty}} field of <var>jwk</var> is not
+                        <code>"OKP"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/crv}} field of <var>jwk</var> is not
+                        <code>"Ed448"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If <var>usages</var> is non-empty and the {{JsonWebKey/use}} field of <var>jwk</var> is present and is
+                        not <code>"sig"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/key_ops}} field of <var>jwk</var> is present, and
+                        is invalid according to the requirements of JSON Web
+                        Key [[JWK]], or it does not contain all of the specified <var>usages</var>
+                        values,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the {{JsonWebKey/ext}} field of <var>jwk</var> is present and
+                        has the value false and <var>extractable</var> is true,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <dl class="switch">
+                        <dt>If the {{JsonWebKey/d}} field is present:</dt>
+                        <dd>
+                          <ol>
+                            <li>
+                              <p>
+                                If <var>jwk</var> does not meet the requirements of Section 2
+                                of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let <var>key</var> be a new {{CryptoKey}} object that represents the
+                                Ed448 private key identified by interpreting
+                                <var>jwk</var> according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Set the {{CryptoKey/[[type]]}}
+                                internal slot of <var>Key</var> to {{KeyType/"private"}}.
+                              </p>
+                            </li>
+                          </ol>
+                        </dd>
+                        <dt>Otherwise:</dt>
+                        <dd>
+                          <ol>
+                            <li>
+                              <p>
+                                If <var>jwk</var> does not meet the requirements of Section 2
+                                of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let <var>key</var> be a new {{CryptoKey}} object that represents the
+                                Ed448 public key identified by interpreting
+                                <var>jwk</var> according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Set the {{CryptoKey/[[type]]}}
+                                internal slot of <var>Key</var> to {{KeyType/"public"}}.
+                              </p>
+                            </li>
+                          </ol>
+                        </dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new instance of a {{KeyAlgorithm}} object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"Ed448"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"raw"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If <var>usages</var> contains a value which is not
+                        <code>"verify"</code>
+                        then [= exception/throw =] a
+                        {{SyntaxError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new {{EcKeyAlgorithm}} object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{KeyAlgorithm/name}} attribute of
+                        <var>algorithm</var> to <code>"Ed448"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>key</var> be a new {{CryptoKey}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and
+                        representing the key data provided in <var>keyData</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> to <code>"public"</code>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{CryptoKey/[[algorithm]]}}
+                        internal slot of <var>key</var> to <var>algorithm</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>Otherwise:</dt>
+                <dd>
+                  <p>
+                    [= exception/throw =] a
+                    {{NotSupportedError}}.
+                  </p>
+                </dd>
+              </dl>
+            </li>
+            <li>
+              <p>
+                Return <var>key</var>
+              </p>
+            </li>
+          </ol>
+        </dd>
+
+        <dt>Export Key</dt>
+        <dd>
+          <ol>
+            <li>
+              <p>
+                Let <var>key</var> be the {{CryptoKey}} to be
+                exported.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the underlying cryptographic key material represented by the {{CryptoKey/[[handle]]}} internal slot of <var>key</var>
+                cannot be accessed, then [= exception/throw =] an {{OperationError}}.
+              </p>
+            </li>
+            <li>
+              <dl class="switch">
+                <dt>If <var>format</var> is {{KeyFormat/"spki"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an instance of the <code>subjectPublicKeyInfo</code>
+                        ASN.1 structure defined in [[RFC5280]]
+                        with the following properties:
+                      </p>
+                      <ul>
+                        <li>
+                          <p>
+                            Set the <var>algorithm</var> field to an
+                            <code>AlgorithmIdentifier</code> ASN.1 type with the following
+                            properties:
+                          </p>
+                          <ul>
+                            <li>
+                              <p>
+                                Set the <var>algorithm</var> object identifier to the
+                                <code>id-Ed448</code> OID defined in [[RFC8410]].
+                              </p>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>subjectPublicKey</var> field to <var>keyData</var>.
+                          </p>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"pkcs8"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not {{KeyType/"private"}}, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an instance of the <code>privateKeyInfo</code>
+                        ASN.1 structure defined in [[RFC5208]]
+                        with the following properties:
+                      </p>
+                      <ul>
+                        <li>
+                          <p>
+                            Set the <var>version</var> field to <code>0</code>.
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>privateKeyAlgorithm</var> field to a
+                            <code>PrivateKeyAlgorithmIdentifier</code> ASN.1 type with the
+                            following properties:
+                          </p>
+                          <ul>
+                            <li>
+                              <p>
+                                Set the <var>algorithm</var> object identifier to the
+                                <code>id-Ed448</code> OID defined in [[RFC8410]].
+                              </p>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>
+                          <p>
+                            Set the <var>privateKey</var> field to the result of DER-encoding
+                            a <code>CurvePrivateKey</code> ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
+                            Ed448 private key represented by the {{CryptoKey/[[handle]]}} internal slot of
+                            <var>key</var>
+                          </p>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>If <var>format</var> is {{KeyFormat/"jwk"}}:</dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        Let <var>jwk</var> be a new {{JsonWebKey}}
+                        dictionary.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>kty</code> attribute of <var>jwk</var> to
+                        <code>"OKP"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>crv</code> attribute of <var>jwk</var> to
+                        <code>"Ed448"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the {{JsonWebKey/x}} attribute of <var>jwk</var> according to the
+                        definition in Section 2 of [[RFC8037]].
+                      </p>
+                    </li>
+                    <li>
+                      <dl class="switch">
+                        <dt>
+                          If the {{CryptoKey/[[type]]}} internal slot
+                          of <var>key</var> is {{KeyType/"private"}}
+                        </dt>
+                        <dd>
+                          Set the {{JsonWebKey/d}} attribute of <var>jwk</var> according to the
+                          definition in Section 2 of [[RFC8037]].
+                        </dd>
+                      </dl>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>ext</code> attribute of <var>jwk</var> to the {{CryptoKey/[[extractable]]}} internal slot
+                        of <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be the result of converting <var>jwk</var>
+                        to an ECMAScript Object, as defined by [[WebIDL]].
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>
+                  If <var>format</var> is {{KeyFormat/"raw"}}:
+                </dt>
+                <dd>
+                  <ol>
+                    <li>
+                      <p>
+                        If the {{CryptoKey/[[type]]}} internal slot
+                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>data</var> be an [= octet string =] representing the Ed448
+                        public key represented by the {{CryptoKey/[[handle]]}} internal slot of
+                        <var>key</var>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>result</var> be a new {{ArrayBuffer}} associated with the
+                        [= relevant global object =]
+                        of <code>this</code> [[HTML]], and containing
+                        <var>data</var>.
+                      </p>
+                    </li>
+                  </ol>
+                </dd>
+                <dt>Otherwise:</dt>
+                <dd>
+                  <p>
+                    [= exception/throw =] a
+                    {{NotSupportedError}}.
+                  </p>
+                </dd>
+              </dl>
+            </li>
+            <li>
+              <p>
+                Return <var>result</var>.
+              </p>
+            </li>
+          </ol>
+        </dd>
+      </dl>
+    </section>
   </section>
 </body>
 
