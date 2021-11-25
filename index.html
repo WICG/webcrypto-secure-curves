@@ -3,6 +3,15 @@
 <meta name="generator" content="ReSpec 28.0.5">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
+span.example-title{text-transform:none}
+:is(aside,div).example,div.illegal-example{padding:.5em;margin:1em 0;position:relative;clear:both}
+div.illegal-example{color:red}
+div.illegal-example p{color:#000}
+:is(aside,div).example{border-left-width:.5em;border-left-style:solid;border-color:#e0cb52;background:#fcfaee}
+aside.example div.example{border-left-width:.1em;border-color:#999;background:#fff}
+.example pre{background-color:rgba(0,0,0,.03)}
+</style>
+<style>
 pre.idl{padding:1em;position:relative}
 pre.idl>code{color:#000}
 @media print{
@@ -155,6 +164,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     "WebIDL",
     "WebCryptoAPI"
   ],
+  "localBiblio": {
+    "SafeCurves": {
+      "title": "Daniel J. Bernstein and Tanja Lange. SafeCurves: choosing safe curves for elliptic-curve cryptography",
+      "href": "https://safecurves.cr.yp.to/",
+      "id": "safecurves"
+    }
+  },
   "publishISODate": "2021-11-25T00:00:00.000Z",
   "generatedSubtitle": "Draft Community Group Report 25 November 2021"
 }</script>
@@ -227,21 +243,28 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           discussion of this specification.
         
     
-  </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a></li><li class="tocline"><a class="tocxref" href="#specification-conventions"><bdi class="secno">2. </bdi>Specification Conventions</a></li><li class="tocline"><a class="tocxref" href="#x25519"><bdi class="secno">3. </bdi>X25519</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#x25519-description"><bdi class="secno">3.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#x25519-registration"><bdi class="secno">3.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#x25519-operations"><bdi class="secno">3.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#x448"><bdi class="secno">4. </bdi>X448</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#x448-description"><bdi class="secno">4.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#x448-registration"><bdi class="secno">4.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#x448-operations"><bdi class="secno">4.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ed25519"><bdi class="secno">5. </bdi>Ed25519</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#ed25519-description"><bdi class="secno">5.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#ed25519-registration"><bdi class="secno">5.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#ed25519-operations"><bdi class="secno">5.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ed448"><bdi class="secno">6. </bdi>Ed448</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#ed448-description"><bdi class="secno">6.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#ed448-registration"><bdi class="secno">6.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#ed448-params"><bdi class="secno">6.3 </bdi><span data-idl="dictionary" data-export="" data-dfn-type="dictionary" data-title="Ed448Params" data-dfn-for=""><code>Ed448Params</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#ed448-operations"><bdi class="secno">6.4 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#jwk-mapping"><bdi class="secno">A. </bdi>Mapping between JSON Web Key / JSON Web Algorithm</a></li><li class="tocline"><a class="tocxref" href="#spki-mapping"><bdi class="secno">B. </bdi>Mapping between Algorithm and SubjectPublicKeyInfo</a></li><li class="tocline"><a class="tocxref" href="#pkcs8-mapping"><bdi class="secno">C. </bdi>Mapping between Algorithm and PKCS#8 PrivateKeyInfo</a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">D. </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">E. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">E.1 </bdi>Normative references</a></li></ol></li></ol></nav>
-  <section id="introduction">
-    <h2 id="x1-introduction"><a class="self-link" href="#introduction" aria-label="Permalink for Section 1."></a><bdi class="secno">1. </bdi>Introduction</h2>
+  </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a></li><li class="tocline"><a class="tocxref" href="#specification-conventions"><bdi class="secno">2. </bdi>Specification Conventions</a></li><li class="tocline"><a class="tocxref" href="#x25519"><bdi class="secno">3. </bdi>X25519</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#x25519-description"><bdi class="secno">3.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#x25519-registration"><bdi class="secno">3.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#x25519-operations"><bdi class="secno">3.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#x448"><bdi class="secno">4. </bdi>X448</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#x448-description"><bdi class="secno">4.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#x448-registration"><bdi class="secno">4.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#x448-operations"><bdi class="secno">4.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ed25519"><bdi class="secno">5. </bdi>Ed25519</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#ed25519-description"><bdi class="secno">5.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#ed25519-registration"><bdi class="secno">5.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#ed25519-operations"><bdi class="secno">5.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ed448"><bdi class="secno">6. </bdi>Ed448</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#ed448-description"><bdi class="secno">6.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#ed448-registration"><bdi class="secno">6.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#ed448-params"><bdi class="secno">6.3 </bdi><span data-idl="dictionary" data-export="" data-dfn-type="dictionary" data-title="Ed448Params" data-dfn-for=""><code>Ed448Params</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#ed448-operations"><bdi class="secno">6.4 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#usage-example"><bdi class="secno">7. </bdi>Usage Example</a></li><li class="tocline"><a class="tocxref" href="#jwk-mapping"><bdi class="secno">A. </bdi>Mapping between JSON Web Key / JSON Web Algorithm</a></li><li class="tocline"><a class="tocxref" href="#spki-mapping"><bdi class="secno">B. </bdi>Mapping between Algorithm and SubjectPublicKeyInfo</a></li><li class="tocline"><a class="tocxref" href="#pkcs8-mapping"><bdi class="secno">C. </bdi>Mapping between Algorithm and PKCS#8 PrivateKeyInfo</a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">D. </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">E. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">E.1 </bdi>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">E.2 </bdi>Informative references</a></li></ol></li></ol></nav>
+  <section id="introduction" class="informative">
+    <h2 id="x1-introduction"><a class="self-link" href="#introduction" aria-label="Permalink for Section 1."></a><bdi class="secno">1. </bdi>Introduction</h2><p><em>This section is non-normative.</em></p>
     <p>
-      This specification defines a number of algorithms for the <cite><a href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite>.
+      The <cite><a href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite> currently does not specify any "safe curves" [<cite><a class="bibref" data-link-type="biblio" href="#bib-safecurves" title="Daniel J. Bernstein and Tanja Lange. SafeCurves: choosing safe curves for elliptic-curve cryptography">SafeCurves</a></cite>].
+      Among the safe curves, Curve25519 and Curve448 have gained the most traction, and
+      have been specified for use in TLS 1.3, among others. This specification aims to
+      expose these algorithms to the web platform.
+      To this end, this specification defines a number of algorithms and operations for
+      the <cite><a href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite>, namely key agreement using X25519 and X448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7748" title="Elliptic Curves for Security">RFC7748</a></cite>], and
+      signing and verifying using Ed25519 and Ed448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8032" title="Edwards-Curve Digital Signature Algorithm (EdDSA)">RFC8032</a></cite>].
     </p>
   </section>
   <section id="specification-conventions">
     <h2 id="x2-specification-conventions"><a class="self-link" href="#specification-conventions" aria-label="Permalink for Section 2."></a><bdi class="secno">2. </bdi>Specification Conventions</h2>
     <p>
-      This specification follows the conventions laid out in Section 18.3 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-webcryptoapi" title="Web Cryptography API">WebCryptoAPI</a></cite>].
-      None of the algorithms defined here are required to be implemented, but if a conforming
-      User Agent implements an algorithm, it <em class="rfc2119">MUST</em> implement all of the supported operations
-      specified in this document, and must perform the steps to define an algorithm specified in
-      section 18.4.3 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-webcryptoapi" title="Web Cryptography API">WebCryptoAPI</a></cite>] for each of the supported operations.
+      This specification follows the <a href="https://www.w3.org/TR/WebCryptoAPI/#algorithm-conventions">conventions</a>
+      laid out in Section 18.3 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-webcryptoapi" title="Web Cryptography API">WebCryptoAPI</a></cite>]. None of the algorithms defined here
+      are required to be implemented, but if a conforming User Agent implements an
+      algorithm, it <em class="rfc2119">MUST</em> implement all of the supported operations specified in this
+      document, and must perform the steps to <a href="https://www.w3.org/TR/WebCryptoAPI/#concept-define-an-algorithm">define an algorithm</a>
+      specified in section 18.4.3 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-webcryptoapi" title="Web Cryptography API">WebCryptoAPI</a></cite>] for each of the supported operations.
     </p>
   </section>
 
@@ -3670,6 +3693,55 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </section>
   </section>
 
+  <section id="usage-example">
+    <h2 id="x7-usage-example"><a class="self-link" href="#usage-example" aria-label="Permalink for Section 7."></a><bdi class="secno">7. </bdi>Usage Example</h2>
+    <p>
+      This example generates two X25519 key pairs, one for Alice and one for Bob, performs
+      a key agreement between them, derives a 256-bit AES-GCM key from the result using
+      HKDF with SHA-256, and encrypts and decrypts some data with it.
+    </p>
+    <div class="example" id="example-x25519-key-agreement">
+        <div class="marker">
+    <a class="self-link" href="#example-x25519-key-agreement">Example<bdi> 1</bdi></a><span class="example-title">: X25519 key agreement</span>
+  </div> <pre aria-busy="false"><code class="hljs js"><span class="hljs-comment">// Generate a key pair for Alice.</span>
+<span class="hljs-keyword">const</span> alice_x25519_key = <span class="hljs-keyword">await</span> crypto.subtle.generateKey(<span class="hljs-string">'X25519'</span>, <span class="hljs-literal">false</span> <span class="hljs-comment">/* extractable */</span>, [<span class="hljs-string">'deriveKey'</span>]);
+<span class="hljs-keyword">const</span> alice_private_key = alice_x25519_key.privateKey;
+
+<span class="hljs-comment">// Normally, the public key would be sent by Bob to Alice in advance over some secure channel.</span>
+<span class="hljs-comment">// In this example, we'll generate another key pair and use its public key instead.</span>
+<span class="hljs-keyword">const</span> bob_x25519_key = <span class="hljs-keyword">await</span> crypto.subtle.generateKey(<span class="hljs-string">'X25519'</span>, <span class="hljs-literal">false</span> <span class="hljs-comment">/* extractable */</span>, [<span class="hljs-string">'deriveKey'</span>]);
+<span class="hljs-keyword">const</span> bob_public_key = bob_x25519_key.publicKey;
+
+<span class="hljs-comment">// Perform the key agreement.</span>
+<span class="hljs-keyword">const</span> alice_x25519_params = { <span class="hljs-attr">name</span>: <span class="hljs-string">'X25519'</span>, <span class="hljs-attr">public</span>: bob_public_key };
+<span class="hljs-keyword">const</span> alice_shared_key = <span class="hljs-keyword">await</span> crypto.subtle.deriveKey(x25519_params, alice_private_key, <span class="hljs-string">'HKDF'</span>, <span class="hljs-literal">false</span> <span class="hljs-comment">/* extractable */</span>, [<span class="hljs-string">'deriveKey'</span>]);
+
+<span class="hljs-comment">// Derive a symmetric key from the result.</span>
+<span class="hljs-keyword">const</span> salt = crypto.getRandomValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint8Array</span>(<span class="hljs-number">32</span>));
+<span class="hljs-keyword">const</span> info = <span class="hljs-keyword">new</span> TextEncoder().encode(<span class="hljs-string">'X25519 key agreement for an AES-GCM-256 key'</span>);
+<span class="hljs-keyword">const</span> hkdf_params = { <span class="hljs-attr">name</span>: <span class="hljs-string">'HKDF'</span>, <span class="hljs-attr">hash</span>: <span class="hljs-string">'SHA-256'</span>, salt, info };
+<span class="hljs-keyword">const</span> gcm_params = { <span class="hljs-attr">name</span>: <span class="hljs-string">'AES-GCM'</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">256</span> };
+<span class="hljs-keyword">const</span> alice_symmetric_key = <span class="hljs-keyword">await</span> crypto.subtle.deriveKey(hkdf_params, alice_shared_key, gcm_params, <span class="hljs-literal">false</span> <span class="hljs-comment">/* extractable */</span>, [<span class="hljs-string">'encrypt'</span>, <span class="hljs-string">'decrypt'</span>]);
+
+<span class="hljs-comment">// Encrypt some data with the symmetric key, and send it to Bob. The IV must be passed along as well.</span>
+<span class="hljs-keyword">const</span> iv = crypto.getRandomValues(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Uint8Array</span>(<span class="hljs-number">12</span>));
+<span class="hljs-keyword">const</span> message = <span class="hljs-keyword">new</span> TextEncoder().encode(<span class="hljs-string">'Hi Bob!'</span>);
+<span class="hljs-keyword">const</span> encrypted = <span class="hljs-keyword">await</span> crypto.subtle.encrypt({ ...gcm_params, iv }, alice_symmetric_key, message);
+
+<span class="hljs-comment">// On Bob's side, Alice's public key and Bob's private key are used, instead.</span>
+<span class="hljs-comment">// To get the same result, Alice and Bob must agree on using the same salt and info.</span>
+<span class="hljs-keyword">const</span> alice_public_key = alice_x25519_key.publicKey;
+<span class="hljs-keyword">const</span> bob_private_key = bob_x25519_key.privateKey;
+<span class="hljs-keyword">const</span> bob_x25519_params = { <span class="hljs-attr">name</span>: <span class="hljs-string">'X25519'</span>, <span class="hljs-attr">public</span>: alice_public_key };
+<span class="hljs-keyword">const</span> bob_shared_key = <span class="hljs-keyword">await</span> crypto.subtle.deriveKey(bob_x25519_params, bob_private_key, <span class="hljs-string">'HKDF'</span>, <span class="hljs-literal">false</span> <span class="hljs-comment">/* extractable */</span>, [<span class="hljs-string">'deriveKey'</span>]);
+<span class="hljs-keyword">const</span> bob_symmetric_key = <span class="hljs-keyword">await</span> crypto.subtle.deriveKey(hkdf_params, bob_shared_key, gcm_params, <span class="hljs-literal">false</span> <span class="hljs-comment">/* extractable */</span>, [<span class="hljs-string">'encrypt'</span>, <span class="hljs-string">'decrypt'</span>]);
+
+<span class="hljs-comment">// On Bob's side, the data can be decrypted.</span>
+<span class="hljs-keyword">const</span> decrypted = <span class="hljs-keyword">await</span> crypto.subtle.decrypt({ ...gcm_params, iv }, bob_symmetric_key, encrypted);
+<span class="hljs-keyword">const</span> decrypted_message = <span class="hljs-keyword">new</span> TextDecoder().decode(decrypted);</code></pre>
+      </div>
+  </section>
+
   <section id="jwk-mapping" class="appendix informative">
     <h2 id="a-mapping-between-json-web-key-json-web-algorithm"><a class="self-link" href="#jwk-mapping" aria-label="Permalink for Appendix A."></a><bdi class="secno">A. </bdi>Mapping between JSON Web Key / JSON Web Algorithm</h2><p><em>This section is non-normative.</em></p>
     <p>
@@ -3855,6 +3927,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
 <section id="references" class="appendix"><h2 id="e-references"><a class="self-link" href="#references" aria-label="Permalink for Appendix E."></a><bdi class="secno">E. </bdi>References</h2><section id="normative-references">
     <h3 id="e-1-normative-references"><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix E.1"></a><bdi class="secno">E.1 </bdi>Normative references</h3>
     <dl class="bibliography"><dt id="bib-html">[HTML]</dt><dd><a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a></dd><dt id="bib-jwk">[JWK]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc7517"><cite>JSON Web Key (JWK)</cite></a>. M. Jones.  IETF. May 2015. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc7517">https://www.rfc-editor.org/rfc/rfc7517</a></dd><dt id="bib-rfc2119">[RFC2119]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a></dd><dt id="bib-rfc5208">[RFC5208]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc5208"><cite>Public-Key Cryptography Standards (PKCS) #8: Private-Key Information Syntax Specification Version 1.2</cite></a>. B. Kaliski.  IETF. May 2008. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc5208">https://www.rfc-editor.org/rfc/rfc5208</a></dd><dt id="bib-rfc5280">[RFC5280]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc5280"><cite>Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</cite></a>. D. Cooper; S. Santesson; S. Farrell; S. Boeyen; R. Housley; W. Polk.  IETF. May 2008. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc5280">https://www.rfc-editor.org/rfc/rfc5280</a></dd><dt id="bib-rfc7748">[RFC7748]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc7748"><cite>Elliptic Curves for Security</cite></a>. A. Langley; M. Hamburg; S. Turner.  IETF. January 2016. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc7748">https://www.rfc-editor.org/rfc/rfc7748</a></dd><dt id="bib-rfc8032">[RFC8032]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc8032"><cite>Edwards-Curve Digital Signature Algorithm (EdDSA)</cite></a>. S. Josefsson; I. Liusvaara.  IETF. January 2017. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc8032">https://www.rfc-editor.org/rfc/rfc8032</a></dd><dt id="bib-rfc8037">[RFC8037]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc8037"><cite>CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)</cite></a>. I. Liusvaara.  IETF. January 2017. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8037">https://www.rfc-editor.org/rfc/rfc8037</a></dd><dt id="bib-rfc8174">[RFC8174]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a></dd><dt id="bib-rfc8410">[RFC8410]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc8410"><cite>Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure</cite></a>. S. Josefsson; J. Schaad.  IETF. August 2018. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8410">https://www.rfc-editor.org/rfc/rfc8410</a></dd><dt id="bib-webcryptoapi">[WebCryptoAPI]</dt><dd><a href="https://www.w3.org/TR/WebCryptoAPI/"><cite>Web Cryptography API</cite></a>. Mark Watson.  W3C. 26 January 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/WebCryptoAPI/">https://www.w3.org/TR/WebCryptoAPI/</a></dd><dt id="bib-webidl">[WebIDL]</dt><dd><a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Edgar Chen; Timothy Gu.  WHATWG. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a></dd></dl>
+  </section><section id="informative-references">
+    <h3 id="e-2-informative-references"><a class="self-link" href="#informative-references" aria-label="Permalink for Appendix E.2"></a><bdi class="secno">E.2 </bdi>Informative references</h3>
+    <dl class="bibliography"><dt id="bib-safecurves">[SafeCurves]</dt><dd><a href="https://safecurves.cr.yp.to/"><cite>Daniel J. Bernstein and Tanja Lange. SafeCurves: choosing safe curves for elliptic-curve cryptography</cite></a>. URL: <a href="https://safecurves.cr.yp.to/">https://safecurves.cr.yp.to/</a></dd></dl>
   </section></section><p role="navigation" id="back-to-top">
     <a href="#title"><abbr title="Back to Top">↑</abbr></a>
   </p><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-Ed448Params" aria-label="Links in this document to definition: Ed448Params">
