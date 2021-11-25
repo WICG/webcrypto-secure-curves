@@ -22,6 +22,12 @@
     "specStatus": "CG-DRAFT",
     "group": "wicg",
     "xref": ["WebIDL", "WebCryptoAPI"],
+    "localBiblio": {
+      "SafeCurves": {
+        "title": "Daniel J. Bernstein and Tanja Lange. SafeCurves: choosing safe curves for elliptic-curve cryptography",
+        "href": "https://safecurves.cr.yp.to/",
+      }
+    },
   };
   </script>
 </head>
@@ -38,10 +44,16 @@
       This is an unofficial proposal.
     </p>
   </section>
-  <section id="introduction">
+  <section id="introduction" class="informative">
     <h2>Introduction</h2>
     <p>
-      This specification defines a number of algorithms for the [[[WebCryptoAPI]]].
+      The [[[WebCryptoAPI]]] currently does not specify any "safe curves" [[SafeCurves]].
+      Among the safe curves, Curve25519 and Curve448 have gained the most traction, and
+      have been specified for use in TLS 1.3, among others. This specification aims to
+      expose these algorithms to the web platform.
+      To this end, this specification defines a number of algorithms and operations for
+      the [[[WebCryptoAPI]]], namely key agreement using X25519 and X448 [[RFC7748]], and
+      signing and verifying using Ed25519 and Ed448 [[RFC8032]].
     </p>
   </section>
   <section id="specification-conventions">
