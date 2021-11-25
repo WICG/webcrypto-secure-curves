@@ -3482,6 +3482,194 @@ dictionary Ed448Params : Algorithm {
     </section>
   </section>
 
+  <section id="jwk-mapping" class="appendix informative">
+    <h2>Mapping between JSON Web Key / JSON Web Algorithm</h2>
+    <p>
+      Refer to algorithm-specific sections for the
+      normative requirements of importing and exporting JWK.
+    </p>
+    <h3>Algorithm mappings</h3>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">JSON Web Key</th>
+          <th scope="col">AlgorithmIdentifier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+<pre class=js>
+{ kty: "OKP",
+  crv: "X25519" }
+</pre>
+          </td>
+          <td>
+<pre class=js>
+{ name: "X25519" }
+</pre>
+          </td>
+        </tr>
+        <tr>
+          <td>
+<pre class=js>
+{ kty: "OKP",
+  crv: "X448" }
+</pre>
+          </td>
+          <td>
+<pre class=js>
+{ name: "X448" }
+</pre>
+          </td>
+        </tr>
+          <td>
+<pre class=js>
+{ kty: "OKP",
+  crv: "Ed25519" }
+</pre>
+          </td>
+          <td>
+<pre class=js>
+{ name: "Ed25519" }
+</pre>
+          </td>
+        </tr>
+        <tr>
+          <td>
+<pre class=js>
+{ kty: "OKP",
+  crv: "Ed448" }
+</pre>
+          </td>
+          <td>
+<pre class=js>
+{ name: "Ed448" }
+</pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="spki-mapping" class="appendix informative" >
+    <h2>Mapping between Algorithm and SubjectPublicKeyInfo</h2>
+    <p>
+      Refer to algorithm-specific sections for the
+      normative requirements of importing and exporting SPKI.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Algorithm OID</th>
+          <th scope="col">subjectPublicKey ASN.1 structure</th>
+          <th scope="col">AlgorithmIdentifier</th>
+          <th scope="col">Reference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id-X25519 (1.3.101.110)</td>
+          <td>BIT STRING</td>
+          <td>
+            <code>"X25519"</code>
+          </td>
+          <td>
+            [[RFC8410]]
+          </td>
+        </tr>
+        <tr>
+          <td>id-X448 (1.3.101.111)</td>
+          <td>BIT STRING</td>
+          <td>
+            <code>"X448"</code>
+          </td>
+          <td>
+            [[RFC8410]]
+          </td>
+        </tr>
+        <tr>
+          <td>id-Ed25519 (1.3.101.112)</td>
+          <td>BIT STRING</td>
+          <td>
+            <code>"Ed25519"</code>
+          </td>
+          <td>
+            [[RFC8410]]
+          </td>
+        </tr>
+        <tr>
+          <td>id-Ed448 (1.3.101.113)</td>
+          <td>BIT STRING</td>
+          <td>
+            <code>"Ed448"</code>
+          </td>
+          <td>
+            [[RFC8410]]
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section id="pkcs8-mapping" class="appendix informative">
+    <h2>Mapping between Algorithm and PKCS#8 PrivateKeyInfo</h2>
+    <p>
+      Refer to algorithm-specific sections for the
+      normative requirements of importing and exporting PKCS#8 PrivateKeyInfo.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">privateKeyAlgorithm</th>
+          <th scope="col">privateKey format</th>
+          <th scope="col">AlgorithmIdentifier</th>
+          <th scope="col">Reference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id-X25519 (1.3.101.110)</td>
+          <td>CurvePrivateKey</td>
+          <td>
+            <code>"X25519"</code>
+          </td>
+          <td>
+            [[RFC8410]]
+          </td>
+        </tr>
+        <tr>
+          <td>id-X448 (1.3.101.111)</td>
+          <td>CurvePrivateKey</td>
+          <td>
+            <code>"X448"</code>
+          </td>
+          <td>
+            [[RFC8410]]
+          </td>
+        </tr>
+        <tr>
+          <td>id-Ed25519 (1.3.101.112)</td>
+          <td>CurvePrivateKey</td>
+          <td>
+            <code>"Ed25519"</code>
+          </td>
+          <td>
+            [[RFC8410]]
+          </td>
+        </tr>
+        <tr>
+          <td>id-Ed448 (1.3.101.113)</td>
+          <td>CurvePrivateKey</td>
+          <td>
+            <code>"Ed448"</code>
+          </td>
+          <td>
+            [[RFC8410]]
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
   <section id="conformance"></section>
 </body>
 
