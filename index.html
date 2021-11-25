@@ -3495,6 +3495,53 @@ dictionary Ed448Params : Algorithm {
     </section>
   </section>
 
+  <section>
+    <h2>Usage Example</h2>
+    <p>
+      This example generates two X25519 key pairs, one for Alice and one for Bob, performs
+      a key agreement between them, derives a 256-bit AES-GCM key from the result using
+      HKDF with SHA-256, and encrypts and decrypts some data with it.
+    </p>
+    <pre class="example js" title="X25519 key agreement">
+      // Generate a key pair for Alice.
+      const alice_x25519_key = await crypto.subtle.generateKey('X25519', false /* extractable */, ['deriveKey']);
+      const alice_private_key = alice_x25519_key.privateKey;
+
+      // Normally, the public key would be sent by Bob to Alice in advance over some authenticated channel.
+      // In this example, we'll generate another key pair and use its public key instead.
+      const bob_x25519_key = await crypto.subtle.generateKey('X25519', false /* extractable */, ['deriveKey']);
+      const bob_public_key = bob_x25519_key.publicKey;
+
+      // Perform the key agreement.
+      const alice_x25519_params = { name: 'X25519', public: bob_public_key };
+      const alice_shared_key = await crypto.subtle.deriveKey(x25519_params, alice_private_key, 'HKDF', false /* extractable */, ['deriveKey']);
+
+      // Derive a symmetric key from the result.
+      const salt = crypto.getRandomValues(new Uint8Array(32));
+      const info = new TextEncoder().encode('X25519 key agreement for an AES-GCM-256 key');
+      const hkdf_params = { name: 'HKDF', hash: 'SHA-256', salt, info };
+      const gcm_params = { name: 'AES-GCM', length: 256 };
+      const alice_symmetric_key = await crypto.subtle.deriveKey(hkdf_params, alice_shared_key, gcm_params, false /* extractable */, ['encrypt', 'decrypt']);
+
+      // Encrypt some data with the symmetric key, and send it to Bob. The IV must be passed along as well.
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const message = new TextEncoder().encode('Hi Bob!');
+      const encrypted = await crypto.subtle.encrypt({ ...gcm_params, iv }, alice_symmetric_key, message);
+
+      // On Bob's side, Alice's public key and Bob's private key are used, instead.
+      // To get the same result, Alice and Bob must agree on using the same salt and info.
+      const alice_public_key = alice_x25519_key.publicKey;
+      const bob_private_key = bob_x25519_key.privateKey;
+      const bob_x25519_params = { name: 'X25519', public: alice_public_key };
+      const bob_shared_key = await crypto.subtle.deriveKey(bob_x25519_params, bob_private_key, 'HKDF', false /* extractable */, ['deriveKey']);
+      const bob_symmetric_key = await crypto.subtle.deriveKey(hkdf_params, bob_shared_key, gcm_params, false /* extractable */, ['encrypt', 'decrypt']);
+
+      // On Bob's side, the data can be decrypted.
+      const decrypted = await crypto.subtle.decrypt({ ...gcm_params, iv }, bob_symmetric_key, encrypted);
+      const decrypted_message = new TextDecoder().decode(decrypted);
+    </pre>
+  </section>
+
   <section id="jwk-mapping" class="appendix informative">
     <h2>Mapping between JSON Web Key / JSON Web Algorithm</h2>
     <p>
