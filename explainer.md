@@ -76,10 +76,12 @@ The following operations are supported with the recognized algorithm names
 4. importKey
 5. exportKey
 
+### Import and export formats
+
 For key serialization and deserialization, the supported formats include the raw
-format for X25519 and X448 public keys as an array of raw bytes, as well as the
-SPKI, the PKCS#8, and the JWK formats for the public and/or the private X25519,
-X448, Ed25519 or Ed448 keys.
+format for public keys as an ArrayBuffer containing the raw bytes, as well as
+the SPKI format for public keys, the PKCS#8 format for private keys, and the JWK
+format for public and private keys.
 
 ## Code Examples
 
