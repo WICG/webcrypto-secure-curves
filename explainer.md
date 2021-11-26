@@ -86,36 +86,53 @@ X448, Ed25519 or Ed448 keys.
 ### Key generation
 
 ```js
-// Use a string of the recognized algorithm name.
-const ed25519_key = await window.crypto.subtle.generateKey(
-  'Ed25519', true /* extractable */, ['sign', 'verify']);
-// Or use a dictionary with only the name property.
-const x25519_key = await window.crypto.subtle.generateKey(
-  {name: 'X25519'}, true /* extractable */, ['deriveKey', 'deriveBits']);
+// Pass a string of the recognized algorithm name.
+const ed25519_key = await crypto.subtle.generateKey('Ed25519',
+  true /* extractable */, ['sign', 'verify']);
+// Or pass an object with only the name property.
+const x25519_key = await crypto.subtle.generateKey({ name: 'X25519' },
+  true /* extractable */, ['deriveKey', 'deriveBits']);
 ```
 
-### Digital signature with Ed25519 or Ed448
+### Signing and verification using Ed25519
 
 ```js
-// |data| is to be signed.
-// The digital signature parameter has only the name property:
-//   name, a string that should be set to 'Ed25519' or 'Ed448'.
-const alg = {name: 'Ed25519'};
-window.crypto.subtle.sign(alg, ed25519_key.privateKey, data).then(signature =>
-  window.crypto.subtle.verify(alg, ed25519_key.publicKey, signature, data))
+// Some message to be signed.
+const data = new TextEncoder().encode('Some message');
+// Pass a string or an object with only the name property, as above.
+const signature = await crypto.subtle.sign('Ed25519', ed25519_key.privateKey,
+  data);
+const verified = await crypto.subtle.verify('Ed25519', ed25519_key.publicKey,
+  signature, data);
 ```
 
-### Key agreement with X25519 or X448
+### Signing and verification using Ed448 with a context
+
+```js
+// Some message to be signed.
+const data = new TextEncoder().encode('Some message');
+// Some context for the message, to provide domain separation.
+const context = new TextEncoder().encode('Some context');
+// The context is optional, and defaults to the empty octet string.
+// If the context is not needed, the string 'Ed448' can be passed as well,
+// instead of an object.
+const signature = await crypto.subtle.sign(
+  { name: 'Ed448', context }, ed448_key.privateKey, data);
+const verified = await crypto.subtle.verify(
+  { name: 'Ed448', context }, ed448_key.publicKey, signature, data);
+```
+
+### Key agreement using X25519 or X448
 
 ```js
 const private_x25519_key = x25519_key.privateKey;
-// Received the peer public key |peer_public_x25519_key|.
+// Assume we received the peer's public key, |peer_public_x25519_key|.
 //
 // The key derivation parameters:
 //   name, a string that should be set to 'X25519' or 'X448'.
 //   public, a CryptoKey object representing the public key of the peer.
-const key_derive_params = {name: 'X25519', public: peer_public_x25519_key};
-const result = window.crypto.subtle.deriveBits(
+const key_derive_params = { name: 'X25519', public: peer_public_x25519_key };
+const result = await crypto.subtle.deriveBits(
   key_derive_params, private_x25519_key, 256 /* number of bits to derive */);
 ```
 
@@ -124,27 +141,24 @@ const result = window.crypto.subtle.deriveBits(
 ```js
 // An example using the raw format for X25519 public keys.
 const raw_public_key =
-  await window.crypto.subtle.exportKey('raw', x25519_key.publicKey);
-// The key import parameter has only the name property:
-//   name, a string that should be set to 'Ed25519', 'Ed448', 'X25519' or 'X448'
-const key_import_param = {name: 'X25519'};
-const result = window.subtle.importKey('raw', raw_public_key, key_import_param,
+  await crypto.subtle.exportKey('raw', x25519_key.publicKey);
+// Pass a string or an object with only the name property,
+// which should be set to 'Ed25519', 'Ed448', 'X25519' or 'X448'.
+const result = await subtle.importKey('raw', raw_public_key, 'X25519',
   true /* extractable */, ['deriveKey', 'deriveBits']);
 
 // An example using the SPKI format. An example for the PKCS#8 format would be
 // similar.
 const spki_public_key =
-  await window.crypto.subtle.exportKey('spki', x25519_key.publicKey);
-const key_import_param = {name: 'X25519'};
-const result = window.subtle.importKey('spki', spki_public_key, key_import_param,
+  await crypto.subtle.exportKey('spki', x25519_key.publicKey);
+const result = await subtle.importKey('spki', spki_public_key, 'X25519',
   true /* extractable */, ['deriveKey', 'deriveBits']);
 
 // An example using the JWK format.
 const jwk_private_key =
-  await window.crypto.subtle.exportKey('jwk', ed25519_key.privateKey);
-const key_import_param = {name: 'Ed25519'};
-const result = window.subtle.importKey(
-  'jwk', jwk_private_key, key_import_param, true /* extractable */, ['sign']);
+  await crypto.subtle.exportKey('jwk', ed25519_key.privateKey);
+const result = await subtle.importKey(
+  'jwk', jwk_private_key, 'Ed25519', true /* extractable */, ['sign']);
 ```
 
 ## References
