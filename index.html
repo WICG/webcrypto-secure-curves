@@ -171,8 +171,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "safecurves"
     }
   },
-  "publishISODate": "2021-11-25T00:00:00.000Z",
-  "generatedSubtitle": "Draft Community Group Report 25 November 2021"
+  "publishISODate": "2021-11-26T00:00:00.000Z",
+  "generatedSubtitle": "Draft Community Group Report 26 November 2021"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/cg-draft"></head>
 
@@ -181,7 +181,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     
     <h2>
       Draft Community Group Report
-      <time class="dt-published" datetime="2021-11-25">25 November 2021</time>
+      <time class="dt-published" datetime="2021-11-26">26 November 2021</time>
     </h2>
     <dl>
       
@@ -3707,7 +3707,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
 <span class="hljs-keyword">const</span> alice_x25519_key = <span class="hljs-keyword">await</span> crypto.subtle.generateKey(<span class="hljs-string">'X25519'</span>, <span class="hljs-literal">false</span> <span class="hljs-comment">/* extractable */</span>, [<span class="hljs-string">'deriveKey'</span>]);
 <span class="hljs-keyword">const</span> alice_private_key = alice_x25519_key.privateKey;
 
-<span class="hljs-comment">// Normally, the public key would be sent by Bob to Alice in advance over some secure channel.</span>
+<span class="hljs-comment">// Normally, the public key would be sent by Bob to Alice in advance over some authenticated channel.</span>
 <span class="hljs-comment">// In this example, we'll generate another key pair and use its public key instead.</span>
 <span class="hljs-keyword">const</span> bob_x25519_key = <span class="hljs-keyword">await</span> crypto.subtle.generateKey(<span class="hljs-string">'X25519'</span>, <span class="hljs-literal">false</span> <span class="hljs-comment">/* extractable */</span>, [<span class="hljs-string">'deriveKey'</span>]);
 <span class="hljs-keyword">const</span> bob_public_key = bob_x25519_key.publicKey;
