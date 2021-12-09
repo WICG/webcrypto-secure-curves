@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 28.0.6">
+<meta name="generator" content="ReSpec 28.0.7">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -171,8 +171,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "safecurves"
     }
   },
-  "publishISODate": "2021-12-06T00:00:00.000Z",
-  "generatedSubtitle": "Draft Community Group Report 06 December 2021"
+  "publishISODate": "2021-12-09T00:00:00.000Z",
+  "generatedSubtitle": "Draft Community Group Report 09 December 2021"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/cg-draft"></head>
 
@@ -181,7 +181,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     
     <h2>
       Draft Community Group Report
-      <time class="dt-published" datetime="2021-12-06">06 December 2021</time>
+      <time class="dt-published" datetime="2021-12-09">09 December 2021</time>
     </h2>
     <dl>
       
@@ -2432,6 +2432,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
+                        If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-alg"><code>alg</code></a> field of <var>jwk</var> is present and is
+                        not <code>"EdDSA"</code>,
+                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
                         If <var>usages</var> is non-empty and the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present and is
                         not <code>"sig"</code>,
                         then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
@@ -2722,6 +2730,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         Set the <code>kty</code> attribute of <var>jwk</var> to
                         <code>"OKP"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>alg</code> attribute of <var>jwk</var> to
+                        <code>"EdDSA"</code>.
                       </p>
                     </li>
                     <li>
@@ -3310,6 +3324,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
+                        If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-alg"><code>alg</code></a> field of <var>jwk</var> is present and is
+                        not <code>"EdDSA"</code>,
+                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
                         If <var>usages</var> is non-empty and the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present and is
                         not <code>"sig"</code>,
                         then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
@@ -3600,6 +3622,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         Set the <code>kty</code> attribute of <var>jwk</var> to
                         <code>"OKP"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>alg</code> attribute of <var>jwk</var> to
+                        <code>"EdDSA"</code>.
                       </p>
                     </li>
                     <li>
