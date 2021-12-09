@@ -2232,6 +2232,14 @@
                     </li>
                     <li>
                       <p>
+                        If the {{JsonWebKey/alg}} field of <var>jwk</var> is present and is
+                        not <code>"EdDSA"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
                         If <var>usages</var> is non-empty and the {{JsonWebKey/use}} field of <var>jwk</var> is present and is
                         not <code>"sig"</code>,
                         then [= exception/throw =] a
@@ -2522,6 +2530,12 @@
                       <p>
                         Set the <code>kty</code> attribute of <var>jwk</var> to
                         <code>"OKP"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>alg</code> attribute of <var>jwk</var> to
+                        <code>"EdDSA"</code>.
                       </p>
                     </li>
                     <li>
@@ -3112,6 +3126,14 @@ dictionary Ed448Params : Algorithm {
                     </li>
                     <li>
                       <p>
+                        If the {{JsonWebKey/alg}} field of <var>jwk</var> is present and is
+                        not <code>"EdDSA"</code>,
+                        then [= exception/throw =] a
+                        {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
                         If <var>usages</var> is non-empty and the {{JsonWebKey/use}} field of <var>jwk</var> is present and is
                         not <code>"sig"</code>,
                         then [= exception/throw =] a
@@ -3402,6 +3424,12 @@ dictionary Ed448Params : Algorithm {
                       <p>
                         Set the <code>kty</code> attribute of <var>jwk</var> to
                         <code>"OKP"</code>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <code>alg</code> attribute of <var>jwk</var> to
+                        <code>"EdDSA"</code>.
                       </p>
                     </li>
                     <li>
