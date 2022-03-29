@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 28.0.7">
+<meta name="generator" content="ReSpec 32.1.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -69,7 +69,6 @@ dfn{cursor:pointer}
 25%{transform:scale(1.25,1.25);opacity:.75}
 100%{transform:scale(1,1)}
 }
-.hljs{background:0 0!important}
 :is(h1,h2,h3,h4,h5,h6,a) abbr{border:none}
 dfn{font-weight:700}
 a.internalDFN{color:inherit;border-bottom:1px solid #99c;text-decoration:none}
@@ -109,14 +108,16 @@ details.respec-tests-details[open]{z-index:999999;position:absolute;border:thin 
 details.respec-tests-details[open]>summary{border-bottom:thin solid #cad3e2;padding-left:1em;margin-bottom:1em;line-height:2em}
 details.respec-tests-details>ul{width:100%;margin-top:-.3em}
 details.respec-tests-details>li{padding-left:1em}
-a[href].self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
-h2,h3,h4,h5,h6{position:relative}
+.self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
 aside.example .marker>a.self-link{color:inherit}
-:is(h2,h3,h4,h5,h6)>a.self-link{border:none;color:inherit;font-size:83%;height:2em;left:-1.6em;opacity:.5;position:absolute;text-align:center;text-decoration:none;top:0;transition:opacity .2s;width:2em}
-:is(h2,h3,h4,h5,h6)>a.self-link::before{content:"§";display:block}
+.header-wrapper{display:flex;align-items:baseline}
+:is(h2,h3,h4,h5,h6):not(#toc>h2,#abstract>h2,#sotd>h2,.head>h2){position:relative;left:-.5em}
+:is(h2,h3,h4,h5,h6):not(#toch2)+a.self-link{color:inherit;order:-1;position:relative;left:-1.1em;font-size:1rem;opacity:.5}
+:is(h2,h3,h4,h5,h6)+a.self-link::before{content:"§";text-decoration:none;color:var(--heading-text)}
+:is(h2,h3)+a.self-link{top:-.2em}
+:is(h4,h5,h6)+a.self-link::before{color:#000}
 @media (max-width:767px){
 dd{margin-left:0}
-:is(h2,h3,h4,h5,h6)>a.self-link{left:auto;top:auto}
 }
 @media print{
 .removeOnSave{display:none}
@@ -171,41 +172,45 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "safecurves"
     }
   },
-  "publishISODate": "2021-12-09T00:00:00.000Z",
-  "generatedSubtitle": "Draft Community Group Report 09 December 2021"
+  "publishISODate": "2022-03-29T00:00:00.000Z",
+  "generatedSubtitle": "Draft Community Group Report 29 March 2022"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/cg-draft"></head>
 
 <body class="h-entry" data-cite="WEBIDL WebIDL WebCryptoAPI"><div class="head">
-     <h1 id="title" class="title">Secure Curves in the Web Cryptography API</h1>
     
-    <h2>
-      Draft Community Group Report
-      <time class="dt-published" datetime="2021-12-09">09 December 2021</time>
-    </h2>
+    <h1 id="title" class="title">Secure Curves in the Web Cryptography API</h1> 
+    <p id="w3c-state">
+      <a href="https://www.w3.org/standards/types#reports">Draft Community Group Report</a>
+      <time class="dt-published" datetime="2022-03-29">29 March 2022</time>
+    </p>
     <dl>
       
       <dt>Latest published version:</dt><dd>
-              <a href="https://www.w3.org/TR/webcrypto-secure-curves/">https://www.w3.org/TR/webcrypto-secure-curves/</a>
+              <a href="https://www.w3.org/webcrypto-secure-curves/">https://www.w3.org/webcrypto-secure-curves/</a>
             </dd>
       <dt>Latest editor's draft:</dt><dd><a href="https://twiss.github.io/webcrypto-secure-curves/">https://twiss.github.io/webcrypto-secure-curves/</a></dd>
       
       
       
       
-      <dt>Editor:</dt>
-      <dd class="editor p-author h-card vcard">
+      <dt>Editor:</dt><dd class="editor p-author h-card vcard">
     <a class="ed_mailto u-email email p-name" href="mailto:d.huigens@protonmail.com">Daniel Huigens</a> (<a class="p-org org h-org" href="https://protonmail.com/">Proton AG</a>)
   </dd>
       
       
-      
+      <dt>Feedback:</dt><dd>
+        <a href="https://github.com/twiss/webcrypto-secure-curves/">GitHub twiss/webcrypto-secure-curves</a>
+        (<a href="https://github.com/twiss/webcrypto-secure-curves/pulls/">pull requests</a>,
+        <a href="https://github.com/twiss/webcrypto-secure-curves/issues/new/choose">new issue</a>,
+        <a href="https://github.com/twiss/webcrypto-secure-curves/issues/">open issues</a>)
+      </dd>
     </dl>
     
     <p class="copyright">
           <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
           ©
-          2021
+          2022
           
           the Contributors to the Secure Curves in the Web Cryptography API
           Specification, published by the
@@ -217,13 +222,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         </p>
     <hr title="Separator for header">
   </div>
-  <section id="abstract" class="introductory"><h2 id="abstract-0">Abstract<a class="self-link" href="#abstract" aria-label="Permalink for Section"></a></h2>
+  <section id="abstract" class="introductory"><h2>Abstract</h2>
     <p>
-      This specification defines a number of algorithms for the <cite><a href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite>,
+      This specification defines a number of algorithms for the <cite><a data-matched-text="[[[WebCryptoAPI]]]" href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite>,
       namely X25519 and X448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7748" title="Elliptic Curves for Security">RFC7748</a></cite>], and Ed25519 and Ed448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8032" title="Edwards-Curve Digital Signature Algorithm (EdDSA)">RFC8032</a></cite>].
     </p>
   </section>
-  <section id="sotd" class="introductory"><h2 id="status-of-this-document">Status of This Document<a class="self-link" href="#sotd" aria-label="Permalink for Section"></a></h2><p>
+  <section id="sotd" class="introductory"><h2>Status of This Document</h2><p>
       This specification was published by the
       <a href="https://www.w3.org/groups/cg/wicg">Web Platform Incubator Community Group</a>. It is not a W3C Standard nor is it
       on the W3C Standards Track.
@@ -243,21 +248,21 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           discussion of this specification.
         
     
-  </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a></li><li class="tocline"><a class="tocxref" href="#specification-conventions"><bdi class="secno">2. </bdi>Specification Conventions</a></li><li class="tocline"><a class="tocxref" href="#x25519"><bdi class="secno">3. </bdi>X25519</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#x25519-description"><bdi class="secno">3.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#x25519-registration"><bdi class="secno">3.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#x25519-operations"><bdi class="secno">3.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#x448"><bdi class="secno">4. </bdi>X448</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#x448-description"><bdi class="secno">4.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#x448-registration"><bdi class="secno">4.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#x448-operations"><bdi class="secno">4.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ed25519"><bdi class="secno">5. </bdi>Ed25519</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#ed25519-description"><bdi class="secno">5.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#ed25519-registration"><bdi class="secno">5.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#ed25519-operations"><bdi class="secno">5.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ed448"><bdi class="secno">6. </bdi>Ed448</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#ed448-description"><bdi class="secno">6.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#ed448-registration"><bdi class="secno">6.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#ed448-params"><bdi class="secno">6.3 </bdi><span data-idl="dictionary" data-export="" data-dfn-type="dictionary" data-title="Ed448Params" data-dfn-for=""><code>Ed448Params</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#ed448-operations"><bdi class="secno">6.4 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#usage-example"><bdi class="secno">7. </bdi>Usage Example</a></li><li class="tocline"><a class="tocxref" href="#jwk-mapping"><bdi class="secno">A. </bdi>Mapping between JSON Web Key / JSON Web Algorithm</a></li><li class="tocline"><a class="tocxref" href="#spki-mapping"><bdi class="secno">B. </bdi>Mapping between Algorithm and SubjectPublicKeyInfo</a></li><li class="tocline"><a class="tocxref" href="#pkcs8-mapping"><bdi class="secno">C. </bdi>Mapping between Algorithm and PKCS#8 PrivateKeyInfo</a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">D. </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">E. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">E.1 </bdi>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">E.2 </bdi>Informative references</a></li></ol></li></ol></nav>
-  <section id="introduction" class="informative">
-    <h2 id="x1-introduction"><bdi class="secno">1. </bdi>Introduction<a class="self-link" href="#introduction" aria-label="Permalink for Section 1."></a></h2><p><em>This section is non-normative.</em></p>
+  </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a></li><li class="tocline"><a class="tocxref" href="#specification-conventions"><bdi class="secno">2. </bdi>Specification Conventions</a></li><li class="tocline"><a class="tocxref" href="#x25519"><bdi class="secno">3. </bdi>X25519</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#x25519-description"><bdi class="secno">3.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#x25519-registration"><bdi class="secno">3.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#x25519-operations"><bdi class="secno">3.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#x448"><bdi class="secno">4. </bdi>X448</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#x448-description"><bdi class="secno">4.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#x448-registration"><bdi class="secno">4.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#x448-operations"><bdi class="secno">4.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ed25519"><bdi class="secno">5. </bdi>Ed25519</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#ed25519-description"><bdi class="secno">5.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#ed25519-registration"><bdi class="secno">5.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#ed25519-operations"><bdi class="secno">5.3 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#ed448"><bdi class="secno">6. </bdi>Ed448</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#ed448-description"><bdi class="secno">6.1 </bdi>Description</a></li><li class="tocline"><a class="tocxref" href="#ed448-registration"><bdi class="secno">6.2 </bdi>Registration</a></li><li class="tocline"><a class="tocxref" href="#ed448-params"><bdi class="secno">6.3 </bdi><span data-idl="dictionary" data-export="" data-dfn-type="dictionary" data-title="Ed448Params" data-dfn-for=""><code>Ed448Params</code></span> dictionary</a></li><li class="tocline"><a class="tocxref" href="#ed448-operations"><bdi class="secno">6.4 </bdi>Operations</a></li></ol></li><li class="tocline"><a class="tocxref" href="#usage-example"><bdi class="secno">7. </bdi>Usage Example</a></li><li class="tocline"><a class="tocxref" href="#jwk-mapping"><bdi class="secno">A. </bdi>Mapping between JSON Web Key / JSON Web Algorithm</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#algorithm-mappings"><bdi class="secno">A.1 </bdi>Algorithm mappings</a></li></ol></li><li class="tocline"><a class="tocxref" href="#spki-mapping"><bdi class="secno">B. </bdi>Mapping between Algorithm and SubjectPublicKeyInfo</a></li><li class="tocline"><a class="tocxref" href="#pkcs8-mapping"><bdi class="secno">C. </bdi>Mapping between Algorithm and PKCS#8 PrivateKeyInfo</a></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">D. </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">E. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">E.1 </bdi>Normative references</a></li><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">E.2 </bdi>Informative references</a></li></ol></li></ol></nav>
+  <section id="introduction" class="informative"><div class="header-wrapper"><h2 id="x1-introduction"><bdi class="secno">1. </bdi>Introduction</h2><a class="self-link" href="#introduction" aria-label="Permalink for Section 1."></a></div><p><em>This section is non-normative.</em></p>
+    
     <p>
-      The <cite><a href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite> currently does not specify any "safe curves" [<cite><a class="bibref" data-link-type="biblio" href="#bib-safecurves" title="Daniel J. Bernstein and Tanja Lange. SafeCurves: choosing safe curves for elliptic-curve cryptography">SafeCurves</a></cite>].
+      The <cite><a data-matched-text="[[[WebCryptoAPI]]]" href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite> currently does not specify any "safe curves" [<cite><a class="bibref" data-link-type="biblio" href="#bib-safecurves" title="Daniel J. Bernstein and Tanja Lange. SafeCurves: choosing safe curves for elliptic-curve cryptography">SafeCurves</a></cite>].
       Among the safe curves, Curve25519 and Curve448 have gained the most traction, and
       have been specified for use in TLS 1.3, among others. This specification aims to
       expose these algorithms to the web platform.
       To this end, this specification defines a number of algorithms and operations for
-      the <cite><a href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite>, namely key agreement using X25519 and X448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7748" title="Elliptic Curves for Security">RFC7748</a></cite>], and
+      the <cite><a data-matched-text="[[[WebCryptoAPI]]]" href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite>, namely key agreement using X25519 and X448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7748" title="Elliptic Curves for Security">RFC7748</a></cite>], and
       signing and verifying using Ed25519 and Ed448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8032" title="Edwards-Curve Digital Signature Algorithm (EdDSA)">RFC8032</a></cite>].
     </p>
   </section>
-  <section id="specification-conventions">
-    <h2 id="x2-specification-conventions"><bdi class="secno">2. </bdi>Specification Conventions<a class="self-link" href="#specification-conventions" aria-label="Permalink for Section 2."></a></h2>
+  <section id="specification-conventions"><div class="header-wrapper"><h2 id="x2-specification-conventions"><bdi class="secno">2. </bdi>Specification Conventions</h2><a class="self-link" href="#specification-conventions" aria-label="Permalink for Section 2."></a></div>
+    
     <p>
       This specification follows the <a href="https://www.w3.org/TR/WebCryptoAPI/#algorithm-conventions">conventions</a>
       laid out in Section 18.3 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-webcryptoapi" title="Web Cryptography API">WebCryptoAPI</a></cite>]. None of the algorithms defined here
@@ -268,18 +273,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </p>
   </section>
 
-  <section id="x25519">
-    <h2 id="x3-x25519"><bdi class="secno">3. </bdi>X25519<a class="self-link" href="#x25519" aria-label="Permalink for Section 3."></a></h2>
-    <section id="x25519-description" class="informative">
-      <h3 id="x3-1-description"><bdi class="secno">3.1 </bdi>Description<a class="self-link" href="#x25519-description" aria-label="Permalink for Section 3.1"></a></h3><p><em>This section is non-normative.</em></p>
+  <section id="x25519"><div class="header-wrapper"><h2 id="x3-x25519"><bdi class="secno">3. </bdi>X25519</h2><a class="self-link" href="#x25519" aria-label="Permalink for Section 3."></a></div>
+    
+    <section id="x25519-description" class="informative"><div class="header-wrapper"><h3 id="x3-1-description"><bdi class="secno">3.1 </bdi>Description</h3><a class="self-link" href="#x25519-description" aria-label="Permalink for Section 3.1"></a></div><p><em>This section is non-normative.</em></p>
+      
       <p>
         The <code>"X25519"</code> algorithm identifier is used to perform
         key agreement using the X25519 algorithm specified in
         [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7748" title="Elliptic Curves for Security">RFC7748</a></cite>].
       </p>
     </section>
-    <section id="x25519-registration">
-      <h3 id="x3-2-registration"><bdi class="secno">3.2 </bdi>Registration<a class="self-link" href="#x25519-registration" aria-label="Permalink for Section 3.2"></a></h3>
+    <section id="x25519-registration"><div class="header-wrapper"><h3 id="x3-2-registration"><bdi class="secno">3.2 </bdi>Registration</h3><a class="self-link" href="#x25519-registration" aria-label="Permalink for Section 3.2"></a></div>
+      
       <p>
         The <a href="https://www.w3.org/TR/WebCryptoAPI/#recognized-algorithm-name">recognized algorithm name</a>
         for this algorithm is <code>"X25519"</code>.
@@ -317,8 +322,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       </table>
     </section>
 
-    <section id="x25519-operations">
-      <h3 id="x3-3-operations"><bdi class="secno">3.3 </bdi>Operations<a class="self-link" href="#x25519-operations" aria-label="Permalink for Section 3.3"></a></h3>
+    <section id="x25519-operations"><div class="header-wrapper"><h3 id="x3-3-operations"><bdi class="secno">3.3 </bdi>Operations</h3><a class="self-link" href="#x25519-operations" aria-label="Permalink for Section 3.3"></a></div>
+      
       <dl>
         <dt>Derive Bits</dt>
         <dd>
@@ -1121,18 +1126,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </section>
   </section>
 
-  <section id="x448">
-    <h2 id="x4-x448"><bdi class="secno">4. </bdi>X448<a class="self-link" href="#x448" aria-label="Permalink for Section 4."></a></h2>
-    <section id="x448-description" class="informative">
-      <h3 id="x4-1-description"><bdi class="secno">4.1 </bdi>Description<a class="self-link" href="#x448-description" aria-label="Permalink for Section 4.1"></a></h3><p><em>This section is non-normative.</em></p>
+  <section id="x448"><div class="header-wrapper"><h2 id="x4-x448"><bdi class="secno">4. </bdi>X448</h2><a class="self-link" href="#x448" aria-label="Permalink for Section 4."></a></div>
+    
+    <section id="x448-description" class="informative"><div class="header-wrapper"><h3 id="x4-1-description"><bdi class="secno">4.1 </bdi>Description</h3><a class="self-link" href="#x448-description" aria-label="Permalink for Section 4.1"></a></div><p><em>This section is non-normative.</em></p>
+      
       <p>
         The <code>"X448"</code> algorithm identifier is used to perform
         key agreement using the X448 algorithm specified in
         [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7748" title="Elliptic Curves for Security">RFC7748</a></cite>].
       </p>
     </section>
-    <section id="x448-registration">
-      <h3 id="x4-2-registration"><bdi class="secno">4.2 </bdi>Registration<a class="self-link" href="#x448-registration" aria-label="Permalink for Section 4.2"></a></h3>
+    <section id="x448-registration"><div class="header-wrapper"><h3 id="x4-2-registration"><bdi class="secno">4.2 </bdi>Registration</h3><a class="self-link" href="#x448-registration" aria-label="Permalink for Section 4.2"></a></div>
+      
       <p>
         The <a href="https://www.w3.org/TR/WebCryptoAPI/#recognized-algorithm-name">recognized algorithm name</a>
         for this algorithm is <code>"X448"</code>.
@@ -1170,8 +1175,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       </table>
     </section>
 
-    <section id="x448-operations">
-      <h3 id="x4-3-operations"><bdi class="secno">4.3 </bdi>Operations<a class="self-link" href="#x448-operations" aria-label="Permalink for Section 4.3"></a></h3>
+    <section id="x448-operations"><div class="header-wrapper"><h3 id="x4-3-operations"><bdi class="secno">4.3 </bdi>Operations</h3><a class="self-link" href="#x448-operations" aria-label="Permalink for Section 4.3"></a></div>
+      
       <dl>
         <dt>Derive Bits</dt>
         <dd>
@@ -1974,18 +1979,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </section>
   </section>
 
-  <section id="ed25519">
-    <h2 id="x5-ed25519"><bdi class="secno">5. </bdi>Ed25519<a class="self-link" href="#ed25519" aria-label="Permalink for Section 5."></a></h2>
-    <section id="ed25519-description" class="informative">
-      <h3 id="x5-1-description"><bdi class="secno">5.1 </bdi>Description<a class="self-link" href="#ed25519-description" aria-label="Permalink for Section 5.1"></a></h3><p><em>This section is non-normative.</em></p>
+  <section id="ed25519"><div class="header-wrapper"><h2 id="x5-ed25519"><bdi class="secno">5. </bdi>Ed25519</h2><a class="self-link" href="#ed25519" aria-label="Permalink for Section 5."></a></div>
+    
+    <section id="ed25519-description" class="informative"><div class="header-wrapper"><h3 id="x5-1-description"><bdi class="secno">5.1 </bdi>Description</h3><a class="self-link" href="#ed25519-description" aria-label="Permalink for Section 5.1"></a></div><p><em>This section is non-normative.</em></p>
+      
       <p>
         The <code>"Ed25519"</code> algorithm identifier is used to perform signing
         and verification using the Ed25519 algorithm specified in
         [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8032" title="Edwards-Curve Digital Signature Algorithm (EdDSA)">RFC8032</a></cite>].
       </p>
     </section>
-    <section id="ed25519-registration">
-      <h3 id="x5-2-registration"><bdi class="secno">5.2 </bdi>Registration<a class="self-link" href="#ed25519-registration" aria-label="Permalink for Section 5.2"></a></h3>
+    <section id="ed25519-registration"><div class="header-wrapper"><h3 id="x5-2-registration"><bdi class="secno">5.2 </bdi>Registration</h3><a class="self-link" href="#ed25519-registration" aria-label="Permalink for Section 5.2"></a></div>
+      
       <p>
         The <a href="https://www.w3.org/TR/WebCryptoAPI/#recognized-algorithm-name">recognized algorithm name</a>
         for this algorithm is <code>"Ed25519"</code>.
@@ -2028,8 +2033,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       </table>
     </section>
 
-    <section id="ed25519-operations">
-      <h3 id="x5-3-operations"><bdi class="secno">5.3 </bdi>Operations<a class="self-link" href="#ed25519-operations" aria-label="Permalink for Section 5.3"></a></h3>
+    <section id="ed25519-operations"><div class="header-wrapper"><h3 id="x5-3-operations"><bdi class="secno">5.3 </bdi>Operations</h3><a class="self-link" href="#ed25519-operations" aria-label="Permalink for Section 5.3"></a></div>
+      
       <dl>
         <dt>Sign</dt>
         <dd>
@@ -2829,18 +2834,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </section>
   </section>
 
-  <section id="ed448">
-    <h2 id="x6-ed448"><bdi class="secno">6. </bdi>Ed448<a class="self-link" href="#ed448" aria-label="Permalink for Section 6."></a></h2>
-    <section id="ed448-description" class="informative">
-      <h3 id="x6-1-description"><bdi class="secno">6.1 </bdi>Description<a class="self-link" href="#ed448-description" aria-label="Permalink for Section 6.1"></a></h3><p><em>This section is non-normative.</em></p>
+  <section id="ed448"><div class="header-wrapper"><h2 id="x6-ed448"><bdi class="secno">6. </bdi>Ed448</h2><a class="self-link" href="#ed448" aria-label="Permalink for Section 6."></a></div>
+    
+    <section id="ed448-description" class="informative"><div class="header-wrapper"><h3 id="x6-1-description"><bdi class="secno">6.1 </bdi>Description</h3><a class="self-link" href="#ed448-description" aria-label="Permalink for Section 6.1"></a></div><p><em>This section is non-normative.</em></p>
+      
       <p>
         The <code>"Ed448"</code> algorithm identifier is used to perform signing
         and verification using the Ed448 algorithm specified in
         [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8032" title="Edwards-Curve Digital Signature Algorithm (EdDSA)">RFC8032</a></cite>].
       </p>
     </section>
-    <section id="ed448-registration">
-      <h3 id="x6-2-registration"><bdi class="secno">6.2 </bdi>Registration<a class="self-link" href="#ed448-registration" aria-label="Permalink for Section 6.2"></a></h3>
+    <section id="ed448-registration"><div class="header-wrapper"><h3 id="x6-2-registration"><bdi class="secno">6.2 </bdi>Registration</h3><a class="self-link" href="#ed448-registration" aria-label="Permalink for Section 6.2"></a></div>
+      
       <p>
         The <a href="https://www.w3.org/TR/WebCryptoAPI/#recognized-algorithm-name">recognized algorithm name</a>
         for this algorithm is <code>"Ed448"</code>.
@@ -2883,15 +2888,15 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       </table>
     </section>
 
-    <section id="ed448-params">
-      <h3 id="x6-3-ed448params-dictionary"><bdi class="secno">6.3 </bdi><dfn data-idl="dictionary" id="dfn-Ed448Params" data-export="" data-dfn-type="dictionary" data-title="Ed448Params" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>Ed448Params</code></dfn> dictionary<a class="self-link" href="#ed448-params" aria-label="Permalink for Section 6.3"></a></h3>
+    <section id="ed448-params"><div class="header-wrapper"><h3 id="x6-3-ed448params-dictionary"><bdi class="secno">6.3 </bdi><dfn data-idl="dictionary" id="dfn-Ed448Params" data-export="" data-dfn-type="dictionary" data-title="Ed448Params" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>Ed448Params</code></dfn> dictionary</h3><a class="self-link" href="#ed448-params" aria-label="Permalink for Section 6.3"></a></div>
+      
       <pre class="idl def" id="webidl-894840244"><span class="idlHeader"><a class="self-link" href="#webidl-894840244">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-ed448params" data-title="Ed448Params">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dfn-Ed448Params" id="ref-for-dfn-Ed448Params-3"><code>Ed448Params</code></a> : <span class="idlSuperclass"><a data-type="dictionary" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-Algorithm">Algorithm</a></span> {<span data-idl="" class="idlMember" id="idl-def-ed448params-context" data-title="context" data-dfn-for="Ed448Params"><span class="idlType">
   <a data-type="typedef" href="https://webidl.spec.whatwg.org/#BufferSource">BufferSource</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dfn-Ed448Params-context" id="ref-for-dfn-Ed448Params-context-1"><code>context</code></a>;</span>
 };</span></code></pre>
       <p>The <dfn data-idl="field" data-dfn-for="Ed448Params" id="dfn-Ed448Params-context" data-export="" data-dfn-type="dict-member" data-title="context" data-type="BufferSource" tabindex="0" aria-haspopup="dialog"><code>context</code></dfn> member represents the optional context data to associate with the message.</p>
     </section>
-    <section id="ed448-operations">
-      <h3 id="x6-4-operations"><bdi class="secno">6.4 </bdi>Operations<a class="self-link" href="#ed448-operations" aria-label="Permalink for Section 6.4"></a></h3>
+    <section id="ed448-operations"><div class="header-wrapper"><h3 id="x6-4-operations"><bdi class="secno">6.4 </bdi>Operations</h3><a class="self-link" href="#ed448-operations" aria-label="Permalink for Section 6.4"></a></div>
+      
       <dl>
         <dt>Sign</dt>
         <dd>
@@ -3721,8 +3726,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </section>
   </section>
 
-  <section id="usage-example">
-    <h2 id="x7-usage-example"><bdi class="secno">7. </bdi>Usage Example<a class="self-link" href="#usage-example" aria-label="Permalink for Section 7."></a></h2>
+  <section id="usage-example"><div class="header-wrapper"><h2 id="x7-usage-example"><bdi class="secno">7. </bdi>Usage Example</h2><a class="self-link" href="#usage-example" aria-label="Permalink for Section 7."></a></div>
+    
     <p>
       This example generates two X25519 key pairs, one for Alice and one for Bob, performs
       a key agreement between them, derives a 256-bit AES-GCM key from the result using
@@ -3770,13 +3775,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       </div>
   </section>
 
-  <section id="jwk-mapping" class="appendix informative">
-    <h2 id="a-mapping-between-json-web-key-json-web-algorithm"><bdi class="secno">A. </bdi>Mapping between JSON Web Key / JSON Web Algorithm<a class="self-link" href="#jwk-mapping" aria-label="Permalink for Appendix A."></a></h2><p><em>This section is non-normative.</em></p>
+  <section id="jwk-mapping" class="appendix informative"><div class="header-wrapper"><h2 id="a-mapping-between-json-web-key-json-web-algorithm"><bdi class="secno">A. </bdi>Mapping between JSON Web Key / JSON Web Algorithm</h2><a class="self-link" href="#jwk-mapping" aria-label="Permalink for Appendix A."></a></div><p><em>This section is non-normative.</em></p>
+    
     <p>
       Refer to algorithm-specific sections for the
       normative requirements of importing and exporting JWK.
     </p>
-    <h3 id="algorithm-mappings">Algorithm mappings<a class="self-link" href="#jwk-mapping" aria-label="Permalink for Appendix"></a></h3>
+    <section id="algorithm-mappings"><div class="header-wrapper"><h3 id="a-1-algorithm-mappings"><bdi class="secno">A.1 </bdi>Algorithm mappings</h3><a class="self-link" href="#algorithm-mappings" aria-label="Permalink for Appendix A.1"></a></div>
     <table>
       <thead>
         <tr>
@@ -3824,9 +3829,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         </tr>
       </tbody>
     </table>
-  </section>
-  <section id="spki-mapping" class="appendix informative">
-    <h2 id="b-mapping-between-algorithm-and-subjectpublickeyinfo"><bdi class="secno">B. </bdi>Mapping between Algorithm and SubjectPublicKeyInfo<a class="self-link" href="#spki-mapping" aria-label="Permalink for Appendix B."></a></h2><p><em>This section is non-normative.</em></p>
+  </section></section>
+  <section id="spki-mapping" class="appendix informative"><div class="header-wrapper"><h2 id="b-mapping-between-algorithm-and-subjectpublickeyinfo"><bdi class="secno">B. </bdi>Mapping between Algorithm and SubjectPublicKeyInfo</h2><a class="self-link" href="#spki-mapping" aria-label="Permalink for Appendix B."></a></div><p><em>This section is non-normative.</em></p>
+    
     <p>
       Refer to algorithm-specific sections for the
       normative requirements of importing and exporting SPKI.
@@ -3884,8 +3889,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       </tbody>
     </table>
   </section>
-  <section id="pkcs8-mapping" class="appendix informative">
-    <h2 id="c-mapping-between-algorithm-and-pkcs-8-privatekeyinfo"><bdi class="secno">C. </bdi>Mapping between Algorithm and PKCS#8 PrivateKeyInfo<a class="self-link" href="#pkcs8-mapping" aria-label="Permalink for Appendix C."></a></h2><p><em>This section is non-normative.</em></p>
+  <section id="pkcs8-mapping" class="appendix informative"><div class="header-wrapper"><h2 id="c-mapping-between-algorithm-and-pkcs-8-privatekeyinfo"><bdi class="secno">C. </bdi>Mapping between Algorithm and PKCS#8 PrivateKeyInfo</h2><a class="self-link" href="#pkcs8-mapping" aria-label="Permalink for Appendix C."></a></div><p><em>This section is non-normative.</em></p>
+    
     <p>
       Refer to algorithm-specific sections for the
       normative requirements of importing and exporting PKCS#8 PrivateKeyInfo.
@@ -3944,7 +3949,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </table>
   </section>
 
-  <section id="conformance"><h2 id="d-conformance"><bdi class="secno">D. </bdi>Conformance<a class="self-link" href="#conformance" aria-label="Permalink for Section D."></a></h2><p>As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.</p><p>
+  <section id="conformance"><div class="header-wrapper"><h2 id="d-conformance"><bdi class="secno">D. </bdi>Conformance</h2><a class="self-link" href="#conformance" aria-label="Permalink for Section D."></a></div><p>As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.</p><p>
         The key word <em class="rfc2119">MUST</em> in this document
         is to be interpreted as described in
         <a href="https://datatracker.ietf.org/doc/html/bcp14">BCP 14</a>
@@ -3954,12 +3959,38 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
 
 
 
-<section id="references" class="appendix"><h2 id="e-references"><bdi class="secno">E. </bdi>References<a class="self-link" href="#references" aria-label="Permalink for Appendix E."></a></h2><section id="normative-references">
-    <h3 id="e-1-normative-references"><bdi class="secno">E.1 </bdi>Normative references<a class="self-link" href="#normative-references" aria-label="Permalink for Appendix E.1"></a></h3>
-    <dl class="bibliography"><dt id="bib-html">[HTML]</dt><dd><a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a></dd><dt id="bib-jwk">[JWK]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc7517"><cite>JSON Web Key (JWK)</cite></a>. M. Jones.  IETF. May 2015. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc7517">https://www.rfc-editor.org/rfc/rfc7517</a></dd><dt id="bib-rfc2119">[RFC2119]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a></dd><dt id="bib-rfc5208">[RFC5208]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc5208"><cite>Public-Key Cryptography Standards (PKCS) #8: Private-Key Information Syntax Specification Version 1.2</cite></a>. B. Kaliski.  IETF. May 2008. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc5208">https://www.rfc-editor.org/rfc/rfc5208</a></dd><dt id="bib-rfc5280">[RFC5280]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc5280"><cite>Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</cite></a>. D. Cooper; S. Santesson; S. Farrell; S. Boeyen; R. Housley; W. Polk.  IETF. May 2008. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc5280">https://www.rfc-editor.org/rfc/rfc5280</a></dd><dt id="bib-rfc7748">[RFC7748]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc7748"><cite>Elliptic Curves for Security</cite></a>. A. Langley; M. Hamburg; S. Turner.  IETF. January 2016. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc7748">https://www.rfc-editor.org/rfc/rfc7748</a></dd><dt id="bib-rfc8032">[RFC8032]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc8032"><cite>Edwards-Curve Digital Signature Algorithm (EdDSA)</cite></a>. S. Josefsson; I. Liusvaara.  IETF. January 2017. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc8032">https://www.rfc-editor.org/rfc/rfc8032</a></dd><dt id="bib-rfc8037">[RFC8037]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc8037"><cite>CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)</cite></a>. I. Liusvaara.  IETF. January 2017. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8037">https://www.rfc-editor.org/rfc/rfc8037</a></dd><dt id="bib-rfc8174">[RFC8174]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a></dd><dt id="bib-rfc8410">[RFC8410]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc8410"><cite>Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure</cite></a>. S. Josefsson; J. Schaad.  IETF. August 2018. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8410">https://www.rfc-editor.org/rfc/rfc8410</a></dd><dt id="bib-webcryptoapi">[WebCryptoAPI]</dt><dd><a href="https://www.w3.org/TR/WebCryptoAPI/"><cite>Web Cryptography API</cite></a>. Mark Watson.  W3C. 26 January 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/WebCryptoAPI/">https://www.w3.org/TR/WebCryptoAPI/</a></dd><dt id="bib-webidl">[WebIDL]</dt><dd><a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Edgar Chen; Timothy Gu.  WHATWG. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a></dd></dl>
-  </section><section id="informative-references">
-    <h3 id="e-2-informative-references"><bdi class="secno">E.2 </bdi>Informative references<a class="self-link" href="#informative-references" aria-label="Permalink for Appendix E.2"></a></h3>
-    <dl class="bibliography"><dt id="bib-safecurves">[SafeCurves]</dt><dd><a href="https://safecurves.cr.yp.to/"><cite>Daniel J. Bernstein and Tanja Lange. SafeCurves: choosing safe curves for elliptic-curve cryptography</cite></a>. URL: <a href="https://safecurves.cr.yp.to/">https://safecurves.cr.yp.to/</a></dd></dl>
+<section id="references" class="appendix"><div class="header-wrapper"><h2 id="e-references"><bdi class="secno">E. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix E."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="e-1-normative-references"><bdi class="secno">E.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix E.1"></a></div>
+    
+    <dl class="bibliography"><dt id="bib-html">[HTML]</dt><dd>
+      <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+    </dd><dt id="bib-jwk">[JWK]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc7517"><cite>JSON Web Key (JWK)</cite></a>. M. Jones.  IETF. May 2015. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc7517">https://www.rfc-editor.org/rfc/rfc7517</a>
+    </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>
+    </dd><dt id="bib-rfc5208">[RFC5208]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc5208"><cite>Public-Key Cryptography Standards (PKCS) #8: Private-Key Information Syntax Specification Version 1.2</cite></a>. B. Kaliski.  IETF. May 2008. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc5208">https://www.rfc-editor.org/rfc/rfc5208</a>
+    </dd><dt id="bib-rfc5280">[RFC5280]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc5280"><cite>Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile</cite></a>. D. Cooper; S. Santesson; S. Farrell; S. Boeyen; R. Housley; W. Polk.  IETF. May 2008. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc5280">https://www.rfc-editor.org/rfc/rfc5280</a>
+    </dd><dt id="bib-rfc7748">[RFC7748]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc7748"><cite>Elliptic Curves for Security</cite></a>. A. Langley; M. Hamburg; S. Turner.  IETF. January 2016. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc7748">https://www.rfc-editor.org/rfc/rfc7748</a>
+    </dd><dt id="bib-rfc8032">[RFC8032]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc8032"><cite>Edwards-Curve Digital Signature Algorithm (EdDSA)</cite></a>. S. Josefsson; I. Liusvaara.  IETF. January 2017. Informational. URL: <a href="https://www.rfc-editor.org/rfc/rfc8032">https://www.rfc-editor.org/rfc/rfc8032</a>
+    </dd><dt id="bib-rfc8037">[RFC8037]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc8037"><cite>CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)</cite></a>. I. Liusvaara.  IETF. January 2017. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8037">https://www.rfc-editor.org/rfc/rfc8037</a>
+    </dd><dt id="bib-rfc8174">[RFC8174]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>
+    </dd><dt id="bib-rfc8410">[RFC8410]</dt><dd>
+      <a href="https://www.rfc-editor.org/rfc/rfc8410"><cite>Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure</cite></a>. S. Josefsson; J. Schaad.  IETF. August 2018. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8410">https://www.rfc-editor.org/rfc/rfc8410</a>
+    </dd><dt id="bib-webcryptoapi">[WebCryptoAPI]</dt><dd>
+      <a href="https://www.w3.org/TR/WebCryptoAPI/"><cite>Web Cryptography API</cite></a>. Mark Watson.  W3C. 26 January 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/WebCryptoAPI/">https://www.w3.org/TR/WebCryptoAPI/</a>
+    </dd><dt id="bib-webidl">[WebIDL]</dt><dd>
+      <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Edgar Chen; Timothy Gu.  WHATWG. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
+    </dd></dl>
+  </section><section id="informative-references"><div class="header-wrapper"><h3 id="e-2-informative-references"><bdi class="secno">E.2 </bdi>Informative references</h3><a class="self-link" href="#informative-references" aria-label="Permalink for Appendix E.2"></a></div>
+    
+    <dl class="bibliography"><dt id="bib-safecurves">[SafeCurves]</dt><dd>
+      <a href="https://safecurves.cr.yp.to/"><cite>Daniel J. Bernstein and Tanja Lange. SafeCurves: choosing safe curves for elliptic-curve cryptography</cite></a>. URL: <a href="https://safecurves.cr.yp.to/">https://safecurves.cr.yp.to/</a>
+    </dd></dl>
   </section></section><p role="navigation" id="back-to-top">
     <a href="#title"><abbr title="Back to Top">↑</abbr></a>
   </p><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-Ed448Params" aria-label="Links in this document to definition: Ed448Params">
