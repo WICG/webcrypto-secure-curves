@@ -3542,7 +3542,7 @@ dictionary Ed448Params : Algorithm {
 
       // Perform the key agreement.
       const alice_x25519_params = { name: 'X25519', public: bob_public_key };
-      const alice_shared_key = await crypto.subtle.deriveKey(x25519_params, alice_private_key, 'HKDF', false /* extractable */, ['deriveKey']);
+      const alice_shared_key = await crypto.subtle.deriveKey(alice_x25519_params, alice_private_key, 'HKDF', false /* extractable */, ['deriveKey']);
 
       // Derive a symmetric key from the result.
       const salt = crypto.getRandomValues(new Uint8Array(32));
