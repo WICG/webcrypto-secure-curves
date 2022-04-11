@@ -73,7 +73,7 @@
     <section id="x25519-description" class="informative">
       <h4>Description</h4>
       <p>
-        The <code>"X25519"</code> algorithm identifier is used to perform
+        The "`X25519`" algorithm identifier is used to perform
         key agreement using the X25519 algorithm specified in
         [[RFC7748]].
       </p>
@@ -82,7 +82,7 @@
       <h4>Registration</h4>
       <p>
         The <a data-cite="WebCryptoAPI#recognized-algorithm-name">recognized algorithm name</a>
-        for this algorithm is <code>"X25519"</code>.
+        for this algorithm is "`X25519`".
       </p>
       <table>
         <thead>
@@ -139,7 +139,7 @@
             <li>
               <p>
                 If the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot of
-                <var>publicKey</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                <var>publicKey</var> is not "`public`", then [= exception/throw =] an {{InvalidAccessError}}.
               </p>
             </li>
             <li>
@@ -196,7 +196,7 @@
             <li>
               <p>
                 If <var>usages</var> contains an entry which is not
-                <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                "`deriveKey`" or "`deriveBits`"
                 then [= exception/throw =] a
                 {{SyntaxError}}.
               </p>
@@ -204,7 +204,7 @@
             <li>
               <p>
                 Generate an X25519 key pair, with the private key being 32 random bytes,
-                and the public key being <code>X25519(a, 9)</code>,
+                and the public key being `X25519(a, 9)`,
                 as defined in [[RFC7748]], section 6.1.
               </p>
             </li>
@@ -216,21 +216,21 @@
             <li>
               <p>
                 Set the {{KeyAlgorithm/name}} attribute of
-                <var>algorithm</var> to <code>"X25519"</code>.
+                <var>algorithm</var> to "`X25519`".
               </p>
             </li>
             <li>
               <p>
                 Let <var>publicKey</var> be a new {{CryptoKey}} associated with the
                 [= relevant global object =]
-                of <code>this</code> [[HTML]], and
+                of `this` [[HTML]], and
                 representing the public key of the generated key pair.
               </p>
             </li>
             <li>
               <p>
                 Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot of
-                <var>publicKey</var> to <code>"public"</code>
+                <var>publicKey</var> to "`public`"
               </p>
             </li>
             <li>
@@ -255,7 +255,7 @@
               <p>
                 Let <var>privateKey</var> be a new {{CryptoKey}} associated with the
                 [= relevant global object =]
-                of <code>this</code> [[HTML]], and
+                of `this` [[HTML]], and
                 representing the private key of the generated key pair.
               </p>
             </li>
@@ -282,7 +282,7 @@
                 Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-usages">[[\usages]]</a> internal slot of
                 <var>privateKey</var> to be the
                 <a data-cite="WebCryptoAPI#concept-usage-intersection">usage intersection</a> of
-                <var>usages</var> and <code>[ "deriveKey", "deriveBits" ]</code>.
+                <var>usages</var> and `[ "deriveKey", "deriveBits" ]`.
               </p>
             </li>
             <li>
@@ -346,9 +346,9 @@
                     </li>
                     <li>
                       <p>
-                        If the <code>algorithm</code> object identifier field of the
-                        <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
-                        not equal to the <code>id-X25519</code>
+                        If the `algorithm` object identifier field of the
+                        `algorithm` AlgorithmIdentifier field of <var>spki</var> is
+                        not equal to the `id-X25519`
                         object identifier defined in [[RFC8410]],
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -356,7 +356,7 @@
                     </li>
                     <li>
                       <p>
-                        If the <code>parameters</code> field of the <code>algorithm</code>
+                        If the `parameters` field of the `algorithm`
                         AlgorithmIdentifier field of <var>spki</var> is present,
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -365,21 +365,21 @@
                     <li>
                       <p>
                         Let <var>publicKey</var> be the X25519 public key identified by
-                        the <code>subjectPublicKey</code> field of <var>spki</var>.
+                        the `subjectPublicKey` field of <var>spki</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         that represents <var>publicKey</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> to <code>"public"</code>
+                        of <var>key</var> to "`public`"
                       </p>
                     </li>
                     <li>
@@ -390,7 +390,7 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"X25519"</code>.
+                        <var>algorithm</var> to "`X25519`".
                       </p>
                     </li>
                     <li>
@@ -407,7 +407,7 @@
                     <li>
                       <p>
                         If <var>usages</var> contains an entry which is not
-                        <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                        "`deriveKey`" or "`deriveBits`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -428,18 +428,18 @@
                     </li>
                     <li>
                       <p>
-                        If the <code>algorithm</code> object identifier field of the
-                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
+                        If the `algorithm` object identifier field of the
+                        `privateKeyAlgorithm` PrivateKeyAlgorithm field of
                         <var>privateKeyInfo</var> is not equal to the
-                        <code>id-X25519</code> object identifier defined in [[RFC8410]],
+                        `id-X25519` object identifier defined in [[RFC8410]],
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
                     </li>
                     <li>
                       <p>
-                        If the <code>parameters</code> field of the
-                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
+                        If the `parameters` field of the
+                        `privateKeyAlgorithm` PrivateKeyAlgorithmIdentifier field
                         of <var>privateKeyInfo</var> is present,
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -448,9 +448,9 @@
                     <li>
                       <p>
                         Let <var>curvePrivateKey</var> be the result of performing the <a data-cite="WebCryptoAPI#concept-parse-an-asn1-structure">parse an ASN.1 structure</a>
-                        algorithm, with <var>data</var> as the <code>privateKey</code> field
+                        algorithm, with <var>data</var> as the `privateKey` field
                         of <var>privateKeyInfo</var>, <var>structure</var> as the ASN.1
-                        <code>CurvePrivateKey</code> structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
+                        `CurvePrivateKey` structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
                       </p>
                     </li>
                     <li>
@@ -464,7 +464,7 @@
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         that represents the X25519 private key identified by <var>curvePrivateKey</var>.
                       </p>
                     </li>
@@ -482,7 +482,7 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"X25519"</code>.
+                        <var>algorithm</var> to "`X25519`".
                       </p>
                     </li>
                     <li>
@@ -508,7 +508,7 @@
                       <p>
                         If the {{JsonWebKey/d}} field is present and if <var>usages</var>
                         contains an entry which is not
-                        <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                        "`deriveKey`" or "`deriveBits`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -524,7 +524,7 @@
                     <li>
                       <p>
                         If the {{JsonWebKey/kty}} field of <var>jwk</var> is not
-                        <code>"OKP"</code>,
+                        "`OKP`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -532,7 +532,7 @@
                     <li>
                       <p>
                         If the {{JsonWebKey/crv}} field of <var>jwk</var> is not
-                        <code>"X25519"</code>,
+                        "`X25519`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -540,7 +540,7 @@
                     <li>
                       <p>
                         If <var>usages</var> is non-empty and the {{JsonWebKey/use}} field of <var>jwk</var> is present
-                        and is not equal to <code>"enc"</code> then [= exception/throw =] a
+                        and is not equal to "`enc`" then [= exception/throw =] a
                         {{DataError}}.
                       </p>
                     </li>
@@ -622,7 +622,7 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"X25519"</code>.
+                        <var>algorithm</var> to "`X25519`".
                       </p>
                     </li>
                     <li>
@@ -651,21 +651,21 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"X25519"</code>.
+                        <var>algorithm</var> to "`X25519`".
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         representing the key data provided in <var>keyData</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> to <code>"public"</code>
+                        of <var>key</var> to "`public`"
                       </p>
                     </li>
                     <li>
@@ -716,12 +716,12 @@
                     <li>
                       <p>
                         If the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                        of <var>key</var> is not "`public`", then [= exception/throw =] an {{InvalidAccessError}}.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>data</var> be an instance of the <code>subjectPublicKeyInfo</code>
+                        Let <var>data</var> be an instance of the `subjectPublicKeyInfo`
                         ASN.1 structure defined in [[RFC5280]]
                         with the following properties:
                       </p>
@@ -729,14 +729,14 @@
                         <li>
                           <p>
                             Set the <var>algorithm</var> field to an
-                            <code>AlgorithmIdentifier</code> ASN.1 type with the following
+                            `AlgorithmIdentifier` ASN.1 type with the following
                             properties:
                           </p>
                           <ul>
                             <li>
                               <p>
                                 Set the <var>algorithm</var> object identifier to the
-                                <code>id-X25519</code> OID defined in [[RFC8410]].
+                                `id-X25519` OID defined in [[RFC8410]].
                               </p>
                             </li>
                           </ul>
@@ -752,7 +752,7 @@
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -769,27 +769,27 @@
                     </li>
                     <li>
                       <p>
-                        Let <var>data</var> be an instance of the <code>privateKeyInfo</code>
+                        Let <var>data</var> be an instance of the `privateKeyInfo`
                         ASN.1 structure defined in [[RFC5208]]
                         with the following properties:
                       </p>
                       <ul>
                         <li>
                           <p>
-                            Set the <var>version</var> field to <code>0</code>.
+                            Set the <var>version</var> field to `0`.
                           </p>
                         </li>
                         <li>
                           <p>
                             Set the <var>privateKeyAlgorithm</var> field to a
-                            <code>PrivateKeyAlgorithmIdentifier</code> ASN.1 type with the
+                            `PrivateKeyAlgorithmIdentifier` ASN.1 type with the
                             following properties:
                           </p>
                           <ul>
                             <li>
                               <p>
                                 Set the <var>algorithm</var> object identifier to the
-                                <code>id-X25519</code> OID defined in [[RFC8410]].
+                                `id-X25519` OID defined in [[RFC8410]].
                               </p>
                             </li>
                           </ul>
@@ -797,7 +797,7 @@
                         <li>
                           <p>
                             Set the <var>privateKey</var> field to the result of DER-encoding
-                            a <code>CurvePrivateKey</code> ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
+                            a `CurvePrivateKey` ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
                             X25519 private key represented by the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-handle">[[\handle]]</a> internal slot of
                             <var>key</var>
                           </p>
@@ -808,7 +808,7 @@
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -825,14 +825,14 @@
                     </li>
                     <li>
                       <p>
-                        Set the <code>kty</code> attribute of <var>jwk</var> to
-                        <code>"OKP"</code>.
+                        Set the `kty` attribute of <var>jwk</var> to
+                        "`OKP`".
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <code>crv</code> attribute of <var>jwk</var> to
-                        <code>"X25519"</code>.
+                        Set the `crv` attribute of <var>jwk</var> to
+                        "`X25519`".
                       </p>
                     </li>
                     <li>
@@ -855,12 +855,12 @@
                     </li>
                     <li>
                       <p>
-                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
+                        Set the `key_ops` attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <code>ext</code> attribute of <var>jwk</var> to the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-extractable">[[\extractable]]</a> internal slot
+                        Set the `ext` attribute of <var>jwk</var> to the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-extractable">[[\extractable]]</a> internal slot
                         of <var>key</var>.
                       </p>
                     </li>
@@ -880,7 +880,7 @@
                     <li>
                       <p>
                         If the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                        of <var>key</var> is not "`public`", then [= exception/throw =] an {{InvalidAccessError}}.
                       </p>
                     </li>
                     <li>
@@ -894,7 +894,7 @@
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -925,7 +925,7 @@
     <section id="x448-description" class="informative">
       <h4>Description</h4>
       <p>
-        The <code>"X448"</code> algorithm identifier is used to perform
+        The "`X448`" algorithm identifier is used to perform
         key agreement using the X448 algorithm specified in
         [[RFC7748]].
       </p>
@@ -934,7 +934,7 @@
       <h4>Registration</h4>
       <p>
         The <a data-cite="WebCryptoAPI#recognized-algorithm-name">recognized algorithm name</a>
-        for this algorithm is <code>"X448"</code>.
+        for this algorithm is "`X448`".
       </p>
       <table>
         <thead>
@@ -991,7 +991,7 @@
             <li>
               <p>
                 If the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot of
-                <var>publicKey</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                <var>publicKey</var> is not "`public`", then [= exception/throw =] an {{InvalidAccessError}}.
               </p>
             </li>
             <li>
@@ -1048,7 +1048,7 @@
             <li>
               <p>
                 If <var>usages</var> contains an entry which is not
-                <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                "`deriveKey`" or "`deriveBits`"
                 then [= exception/throw =] a
                 {{SyntaxError}}.
               </p>
@@ -1056,7 +1056,7 @@
             <li>
               <p>
                 Generate an X448 key pair, with the private key being 56 random bytes,
-                and the public key being <code>X448(a, 5)</code>,
+                and the public key being `X448(a, 5)`,
                 as defined in [[RFC7748]], section 6.2.
               </p>
             </li>
@@ -1068,21 +1068,21 @@
             <li>
               <p>
                 Set the {{KeyAlgorithm/name}} attribute of
-                <var>algorithm</var> to <code>"X448"</code>.
+                <var>algorithm</var> to "`X448`".
               </p>
             </li>
             <li>
               <p>
                 Let <var>publicKey</var> be a new {{CryptoKey}} associated with the
                 [= relevant global object =]
-                of <code>this</code> [[HTML]], and
+                of `this` [[HTML]], and
                 representing the public key of the generated key pair.
               </p>
             </li>
             <li>
               <p>
                 Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot of
-                <var>publicKey</var> to <code>"public"</code>
+                <var>publicKey</var> to "`public`"
               </p>
             </li>
             <li>
@@ -1107,7 +1107,7 @@
               <p>
                 Let <var>privateKey</var> be a new {{CryptoKey}} associated with the
                 [= relevant global object =]
-                of <code>this</code> [[HTML]], and
+                of `this` [[HTML]], and
                 representing the private key of the generated key pair.
               </p>
             </li>
@@ -1134,7 +1134,7 @@
                 Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-usages">[[\usages]]</a> internal slot of
                 <var>privateKey</var> to be the
                 <a data-cite="WebCryptoAPI#concept-usage-intersection">usage intersection</a> of
-                <var>usages</var> and <code>[ "deriveKey", "deriveBits" ]</code>.
+                <var>usages</var> and `[ "deriveKey", "deriveBits" ]`.
               </p>
             </li>
             <li>
@@ -1198,9 +1198,9 @@
                     </li>
                     <li>
                       <p>
-                        If the <code>algorithm</code> object identifier field of the
-                        <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
-                        not equal to the <code>id-X448</code>
+                        If the `algorithm` object identifier field of the
+                        `algorithm` AlgorithmIdentifier field of <var>spki</var> is
+                        not equal to the `id-X448`
                         object identifier defined in [[RFC8410]],
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -1208,7 +1208,7 @@
                     </li>
                     <li>
                       <p>
-                        If the <code>parameters</code> field of the <code>algorithm</code>
+                        If the `parameters` field of the `algorithm`
                         AlgorithmIdentifier field of <var>spki</var> is present,
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -1217,21 +1217,21 @@
                     <li>
                       <p>
                         Let <var>publicKey</var> be the X448 public key identified by
-                        the <code>subjectPublicKey</code> field of <var>spki</var>.
+                        the `subjectPublicKey` field of <var>spki</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         that represents <var>publicKey</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> to <code>"public"</code>
+                        of <var>key</var> to "`public`"
                       </p>
                     </li>
                     <li>
@@ -1242,7 +1242,7 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"X448"</code>.
+                        <var>algorithm</var> to "`X448`".
                       </p>
                     </li>
                     <li>
@@ -1259,7 +1259,7 @@
                     <li>
                       <p>
                         If <var>usages</var> contains an entry which is not
-                        <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                        "`deriveKey`" or "`deriveBits`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -1280,18 +1280,18 @@
                     </li>
                     <li>
                       <p>
-                        If the <code>algorithm</code> object identifier field of the
-                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
+                        If the `algorithm` object identifier field of the
+                        `privateKeyAlgorithm` PrivateKeyAlgorithm field of
                         <var>privateKeyInfo</var> is not equal to the
-                        <code>id-X448</code> object identifier defined in [[RFC8410]],
+                        `id-X448` object identifier defined in [[RFC8410]],
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
                     </li>
                     <li>
                       <p>
-                        If the <code>parameters</code> field of the
-                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
+                        If the `parameters` field of the
+                        `privateKeyAlgorithm` PrivateKeyAlgorithmIdentifier field
                         of <var>privateKeyInfo</var> is present,
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -1300,9 +1300,9 @@
                     <li>
                       <p>
                         Let <var>curvePrivateKey</var> be the result of performing the <a data-cite="WebCryptoAPI#concept-parse-an-asn1-structure">parse an ASN.1 structure</a>
-                        algorithm, with <var>data</var> as the <code>privateKey</code> field
+                        algorithm, with <var>data</var> as the `privateKey` field
                         of <var>privateKeyInfo</var>, <var>structure</var> as the ASN.1
-                        <code>CurvePrivateKey</code> structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
+                        `CurvePrivateKey` structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
                       </p>
                     </li>
                     <li>
@@ -1316,7 +1316,7 @@
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         that represents the X448 private key identified by <var>curvePrivateKey</var>.
                       </p>
                     </li>
@@ -1334,7 +1334,7 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"X448"</code>.
+                        <var>algorithm</var> to "`X448`".
                       </p>
                     </li>
                     <li>
@@ -1360,7 +1360,7 @@
                       <p>
                         If the {{JsonWebKey/d}} field is present and if <var>usages</var>
                         contains an entry which is not
-                        <code>"deriveKey"</code> or <code>"deriveBits"</code>
+                        "`deriveKey`" or "`deriveBits`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -1376,7 +1376,7 @@
                     <li>
                       <p>
                         If the {{JsonWebKey/kty}} field of <var>jwk</var> is not
-                        <code>"OKP"</code>,
+                        "`OKP`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -1384,7 +1384,7 @@
                     <li>
                       <p>
                         If the {{JsonWebKey/crv}} field of <var>jwk</var> is not
-                        <code>"X448"</code>,
+                        "`X448`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -1392,7 +1392,7 @@
                     <li>
                       <p>
                         If <var>usages</var> is non-empty and the {{JsonWebKey/use}} field of <var>jwk</var> is present
-                        and is not equal to <code>"enc"</code> then [= exception/throw =] a
+                        and is not equal to "`enc`" then [= exception/throw =] a
                         {{DataError}}.
                       </p>
                     </li>
@@ -1474,7 +1474,7 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"X448"</code>.
+                        <var>algorithm</var> to "`X448`".
                       </p>
                     </li>
                     <li>
@@ -1503,21 +1503,21 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"X448"</code>.
+                        <var>algorithm</var> to "`X448`".
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         representing the key data provided in <var>keyData</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> to <code>"public"</code>
+                        of <var>key</var> to "`public`"
                       </p>
                     </li>
                     <li>
@@ -1568,12 +1568,12 @@
                     <li>
                       <p>
                         If the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                        of <var>key</var> is not "`public`", then [= exception/throw =] an {{InvalidAccessError}}.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>data</var> be an instance of the <code>subjectPublicKeyInfo</code>
+                        Let <var>data</var> be an instance of the `subjectPublicKeyInfo`
                         ASN.1 structure defined in [[RFC5280]]
                         with the following properties:
                       </p>
@@ -1581,14 +1581,14 @@
                         <li>
                           <p>
                             Set the <var>algorithm</var> field to an
-                            <code>AlgorithmIdentifier</code> ASN.1 type with the following
+                            `AlgorithmIdentifier` ASN.1 type with the following
                             properties:
                           </p>
                           <ul>
                             <li>
                               <p>
                                 Set the <var>algorithm</var> object identifier to the
-                                <code>id-X448</code> OID defined in [[RFC8410]].
+                                `id-X448` OID defined in [[RFC8410]].
                               </p>
                             </li>
                           </ul>
@@ -1604,7 +1604,7 @@
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -1621,27 +1621,27 @@
                     </li>
                     <li>
                       <p>
-                        Let <var>data</var> be an instance of the <code>privateKeyInfo</code>
+                        Let <var>data</var> be an instance of the `privateKeyInfo`
                         ASN.1 structure defined in [[RFC5208]]
                         with the following properties:
                       </p>
                       <ul>
                         <li>
                           <p>
-                            Set the <var>version</var> field to <code>0</code>.
+                            Set the <var>version</var> field to `0`.
                           </p>
                         </li>
                         <li>
                           <p>
                             Set the <var>privateKeyAlgorithm</var> field to a
-                            <code>PrivateKeyAlgorithmIdentifier</code> ASN.1 type with the
+                            `PrivateKeyAlgorithmIdentifier` ASN.1 type with the
                             following properties:
                           </p>
                           <ul>
                             <li>
                               <p>
                                 Set the <var>algorithm</var> object identifier to the
-                                <code>id-X448</code> OID defined in [[RFC8410]].
+                                `id-X448` OID defined in [[RFC8410]].
                               </p>
                             </li>
                           </ul>
@@ -1649,7 +1649,7 @@
                         <li>
                           <p>
                             Set the <var>privateKey</var> field to the result of DER-encoding
-                            a <code>CurvePrivateKey</code> ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
+                            a `CurvePrivateKey` ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
                             X448 private key represented by the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-handle">[[\handle]]</a> internal slot of
                             <var>key</var>
                           </p>
@@ -1660,7 +1660,7 @@
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -1677,14 +1677,14 @@
                     </li>
                     <li>
                       <p>
-                        Set the <code>kty</code> attribute of <var>jwk</var> to
-                        <code>"OKP"</code>.
+                        Set the `kty` attribute of <var>jwk</var> to
+                        "`OKP`".
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <code>crv</code> attribute of <var>jwk</var> to
-                        <code>"X448"</code>.
+                        Set the `crv` attribute of <var>jwk</var> to
+                        "`X448`".
                       </p>
                     </li>
                     <li>
@@ -1707,12 +1707,12 @@
                     </li>
                     <li>
                       <p>
-                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
+                        Set the `key_ops` attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <code>ext</code> attribute of <var>jwk</var> to the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-extractable">[[\extractable]]</a> internal slot
+                        Set the `ext` attribute of <var>jwk</var> to the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-extractable">[[\extractable]]</a> internal slot
                         of <var>key</var>.
                       </p>
                     </li>
@@ -1732,7 +1732,7 @@
                     <li>
                       <p>
                         If the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                        of <var>key</var> is not "`public`", then [= exception/throw =] an {{InvalidAccessError}}.
                       </p>
                     </li>
                     <li>
@@ -1746,7 +1746,7 @@
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -1777,7 +1777,7 @@
     <section id="ed25519-description" class="informative">
       <h4>Description</h4>
       <p>
-        The <code>"Ed25519"</code> algorithm identifier is used to perform signing
+        The "`Ed25519`" algorithm identifier is used to perform signing
         and verification using the Ed25519 algorithm specified in
         [[RFC8032]].
       </p>
@@ -1786,7 +1786,7 @@
       <h4>Registration</h4>
       <p>
         The <a data-cite="WebCryptoAPI#recognized-algorithm-name">recognized algorithm name</a>
-        for this algorithm is <code>"Ed25519"</code>.
+        for this algorithm is "`Ed25519`".
       </p>
       <table>
         <thead>
@@ -1850,7 +1850,7 @@
               <p>
                 Return a new {{ArrayBuffer}} associated with the
                 [= relevant global object =]
-                of <code>this</code> [[HTML]], and containing the
+                of `this` [[HTML]], and containing the
                 bytes of the signature resulting from performing
                 the Ed25519 signing process.
               </p>
@@ -1876,8 +1876,8 @@
             </li>
             <li>
               <p>
-                Let <var>result</var> be a boolean with the value <code>true</code> if the signature is valid
-                and the value <code>false</code> otherwise.
+                Let <var>result</var> be a boolean with the value `true` if the signature is valid
+                and the value `false` otherwise.
               </p>
             </li>
             <li>
@@ -1893,7 +1893,7 @@
             <li>
               <p>
                 If <var>usages</var> contains a value which is not
-                one of <code>"sign"</code> or <code>"verify"</code>,
+                one of "`sign`" or "`verify`",
                 then [= exception/throw =] a
                 {{SyntaxError}}.
               </p>
@@ -1911,21 +1911,21 @@
             <li>
               <p>
                 Set the {{KeyAlgorithm/name}} attribute of
-                <var>algorithm</var> to <code>"Ed25519"</code>.
+                <var>algorithm</var> to "`Ed25519`".
               </p>
             </li>
             <li>
               <p>
                 Let <var>publicKey</var> be a new {{CryptoKey}} associated with the
                 [= relevant global object =]
-                of <code>this</code> [[HTML]], and
+                of `this` [[HTML]], and
                 representing the public key of the generated key pair.
               </p>
             </li>
             <li>
               <p>
                 Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot of
-                <var>publicKey</var> to <code>"public"</code>
+                <var>publicKey</var> to "`public`"
               </p>
             </li>
             <li>
@@ -1944,14 +1944,14 @@
               <p>
                 Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-usages">[[\usages]]</a> internal slot of
                 <var>publicKey</var> to be the<a data-cite="WebCryptoAPI#concept-usage-intersection">usage intersection</a>
-                of <var>usages</var> and <code>[ "verify" ]</code>.
+                of <var>usages</var> and `[ "verify" ]`.
               </p>
             </li>
             <li>
               <p>
                 Let <var>privateKey</var> be a new {{CryptoKey}} associated with the
                 [= relevant global object =]
-                of <code>this</code> [[HTML]], and
+                of `this` [[HTML]], and
                 representing the private key of the generated key pair.
               </p>
             </li>
@@ -1977,7 +1977,7 @@
               <p>
                 Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-usages">[[\usages]]</a> internal slot of
                 <var>privateKey</var> to be the <a data-cite="WebCryptoAPI#concept-usage-intersection">usage intersection</a>
-                of <var>usages</var> and <code>[ "sign" ]</code>.
+                of <var>usages</var> and `[ "sign" ]`.
               </p>
             </li>
             <li>
@@ -2021,7 +2021,7 @@
                     <li>
                       <p>
                         If <var>usages</var> contains a value which is not
-                        <code>"verify"</code>
+                        "`verify`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -2042,9 +2042,9 @@
                     </li>
                     <li>
                       <p>
-                        If the <code>algorithm</code> object identifier field of the
-                        <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
-                        not equal to the <code>id-Ed25519</code>
+                        If the `algorithm` object identifier field of the
+                        `algorithm` AlgorithmIdentifier field of <var>spki</var> is
+                        not equal to the `id-Ed25519`
                         object identifier defined in [[RFC8410]],
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -2052,7 +2052,7 @@
                     </li>
                     <li>
                       <p>
-                        If the <code>parameters</code> field of the <code>algorithm</code>
+                        If the `parameters` field of the `algorithm`
                         AlgorithmIdentifier field of <var>spki</var> is present,
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -2061,21 +2061,21 @@
                     <li>
                       <p>
                         Let <var>publicKey</var> be the Ed25519 public key identified by
-                        the <code>subjectPublicKey</code> field of <var>spki</var>.
+                        the `subjectPublicKey` field of <var>spki</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         that represents <var>publicKey</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> to <code>"public"</code>
+                        of <var>key</var> to "`public`"
                       </p>
                     </li>
                     <li>
@@ -2086,7 +2086,7 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"Ed25519"</code>.
+                        <var>algorithm</var> to "`Ed25519`".
                       </p>
                     </li>
                     <li>
@@ -2103,7 +2103,7 @@
                     <li>
                       <p>
                         If <var>usages</var> contains a value which is not
-                        <code>"sign"</code>
+                        "`sign`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -2124,18 +2124,18 @@
                     </li>
                     <li>
                       <p>
-                        If the <code>algorithm</code> object identifier field of the
-                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
+                        If the `algorithm` object identifier field of the
+                        `privateKeyAlgorithm` PrivateKeyAlgorithm field of
                         <var>privateKeyInfo</var> is not equal to the
-                        <code>id-Ed25519</code> object identifier defined in [[RFC8410]],
+                        `id-Ed25519` object identifier defined in [[RFC8410]],
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
                     </li>
                     <li>
                       <p>
-                        If the <code>parameters</code> field of the
-                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
+                        If the `parameters` field of the
+                        `privateKeyAlgorithm` PrivateKeyAlgorithmIdentifier field
                         of <var>privateKeyInfo</var> is present,
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -2144,9 +2144,9 @@
                     <li>
                       <p>
                         Let <var>curvePrivateKey</var> be the result of performing the <a data-cite="WebCryptoAPI#concept-parse-an-asn1-structure">parse an ASN.1 structure</a>
-                        algorithm, with <var>data</var> as the <code>privateKey</code> field
+                        algorithm, with <var>data</var> as the `privateKey` field
                         of <var>privateKeyInfo</var>, <var>structure</var> as the ASN.1
-                        <code>CurvePrivateKey</code> structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
+                        `CurvePrivateKey` structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
                       </p>
                     </li>
                     <li>
@@ -2160,7 +2160,7 @@
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         that represents the Ed25519 private key identified by <var>curvePrivateKey</var>.
                       </p>
                     </li>
@@ -2178,7 +2178,7 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"Ed25519"</code>.
+                        <var>algorithm</var> to "`Ed25519`".
                       </p>
                     </li>
                     <li>
@@ -2204,10 +2204,10 @@
                       <p>
                         If the {{JsonWebKey/d}} field is present and <var>usages</var> contains
                         a value which is not
-                        <code>"sign"</code>, or,
+                        "`sign`", or,
                         if the {{JsonWebKey/d}} field is not present and <var>usages</var> contains
                         a value which is not
-                        <code>"verify"</code>
+                        "`verify`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -2215,7 +2215,7 @@
                     <li>
                       <p>
                         If the {{JsonWebKey/kty}} field of <var>jwk</var> is not
-                        <code>"OKP"</code>,
+                        "`OKP`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -2223,7 +2223,7 @@
                     <li>
                       <p>
                         If the {{JsonWebKey/crv}} field of <var>jwk</var> is not
-                        <code>"Ed25519"</code>,
+                        "`Ed25519`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -2231,7 +2231,7 @@
                     <li>
                       <p>
                         If the {{JsonWebKey/alg}} field of <var>jwk</var> is present and is
-                        not <code>"EdDSA"</code>,
+                        not "`EdDSA`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -2239,7 +2239,7 @@
                     <li>
                       <p>
                         If <var>usages</var> is non-empty and the {{JsonWebKey/use}} field of <var>jwk</var> is present and is
-                        not <code>"sig"</code>,
+                        not "`sig`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -2322,7 +2322,7 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"Ed25519"</code>.
+                        <var>algorithm</var> to "`Ed25519`".
                       </p>
                     </li>
                     <li>
@@ -2339,7 +2339,7 @@
                     <li>
                       <p>
                         If <var>usages</var> contains a value which is not
-                        <code>"verify"</code>
+                        "`verify`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -2352,21 +2352,21 @@
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"Ed25519"</code>.
+                        <var>algorithm</var> to "`Ed25519`".
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         representing the key data provided in <var>keyData</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> to <code>"public"</code>
+                        of <var>key</var> to "`public`"
                       </p>
                     </li>
                     <li>
@@ -2417,12 +2417,12 @@
                     <li>
                       <p>
                         If the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                        of <var>key</var> is not "`public`", then [= exception/throw =] an {{InvalidAccessError}}.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>data</var> be an instance of the <code>subjectPublicKeyInfo</code>
+                        Let <var>data</var> be an instance of the `subjectPublicKeyInfo`
                         ASN.1 structure defined in [[RFC5280]]
                         with the following properties:
                       </p>
@@ -2430,14 +2430,14 @@
                         <li>
                           <p>
                             Set the <var>algorithm</var> field to an
-                            <code>AlgorithmIdentifier</code> ASN.1 type with the following
+                            `AlgorithmIdentifier` ASN.1 type with the following
                             properties:
                           </p>
                           <ul>
                             <li>
                               <p>
                                 Set the <var>algorithm</var> object identifier to the
-                                <code>id-Ed25519</code> OID defined in [[RFC8410]].
+                                `id-Ed25519` OID defined in [[RFC8410]].
                               </p>
                             </li>
                           </ul>
@@ -2453,7 +2453,7 @@
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -2470,27 +2470,27 @@
                     </li>
                     <li>
                       <p>
-                        Let <var>data</var> be an instance of the <code>privateKeyInfo</code>
+                        Let <var>data</var> be an instance of the `privateKeyInfo`
                         ASN.1 structure defined in [[RFC5208]]
                         with the following properties:
                       </p>
                       <ul>
                         <li>
                           <p>
-                            Set the <var>version</var> field to <code>0</code>.
+                            Set the <var>version</var> field to `0`.
                           </p>
                         </li>
                         <li>
                           <p>
                             Set the <var>privateKeyAlgorithm</var> field to a
-                            <code>PrivateKeyAlgorithmIdentifier</code> ASN.1 type with the
+                            `PrivateKeyAlgorithmIdentifier` ASN.1 type with the
                             following properties:
                           </p>
                           <ul>
                             <li>
                               <p>
                                 Set the <var>algorithm</var> object identifier to the
-                                <code>id-Ed25519</code> OID defined in [[RFC8410]].
+                                `id-Ed25519` OID defined in [[RFC8410]].
                               </p>
                             </li>
                           </ul>
@@ -2498,7 +2498,7 @@
                         <li>
                           <p>
                             Set the <var>privateKey</var> field to the result of DER-encoding
-                            a <code>CurvePrivateKey</code> ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
+                            a `CurvePrivateKey` ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
                             Ed25519 private key represented by the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-handle">[[\handle]]</a> internal slot of
                             <var>key</var>
                           </p>
@@ -2509,7 +2509,7 @@
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -2526,20 +2526,20 @@
                     </li>
                     <li>
                       <p>
-                        Set the <code>kty</code> attribute of <var>jwk</var> to
-                        <code>"OKP"</code>.
+                        Set the `kty` attribute of <var>jwk</var> to
+                        "`OKP`".
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <code>alg</code> attribute of <var>jwk</var> to
-                        <code>"EdDSA"</code>.
+                        Set the `alg` attribute of <var>jwk</var> to
+                        "`EdDSA`".
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <code>crv</code> attribute of <var>jwk</var> to
-                        <code>"Ed25519"</code>.
+                        Set the `crv` attribute of <var>jwk</var> to
+                        "`Ed25519`".
                       </p>
                     </li>
                     <li>
@@ -2562,12 +2562,12 @@
                     </li>
                     <li>
                       <p>
-                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
+                        Set the `key_ops` attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <code>ext</code> attribute of <var>jwk</var> to the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-extractable">[[\extractable]]</a> internal slot
+                        Set the `ext` attribute of <var>jwk</var> to the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-extractable">[[\extractable]]</a> internal slot
                         of <var>key</var>.
                       </p>
                     </li>
@@ -2587,7 +2587,7 @@
                     <li>
                       <p>
                         If the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                        of <var>key</var> is not "`public`", then [= exception/throw =] an {{InvalidAccessError}}.
                       </p>
                     </li>
                     <li>
@@ -2601,7 +2601,7 @@
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -2632,7 +2632,7 @@
     <section id="ed448-description" class="informative">
       <h4>Description</h4>
       <p>
-        The <code>"Ed448"</code> algorithm identifier is used to perform signing
+        The "`Ed448`" algorithm identifier is used to perform signing
         and verification using the Ed448 algorithm specified in
         [[RFC8032]].
       </p>
@@ -2641,7 +2641,7 @@
       <h4>Registration</h4>
       <p>
         The <a data-cite="WebCryptoAPI#recognized-algorithm-name">recognized algorithm name</a>
-        for this algorithm is <code>"Ed448"</code>.
+        for this algorithm is "`Ed448`".
       </p>
       <table>
         <thead>
@@ -2729,7 +2729,7 @@ dictionary Ed448Params : Algorithm {
               <p>
                 Return a new {{ArrayBuffer}} associated with the
                 [= relevant global object =]
-                of <code>this</code> [[HTML]], and containing the
+                of `this` [[HTML]], and containing the
                 bytes of the signature resulting from performing
                 the Ed448 signing process.
               </p>
@@ -2770,8 +2770,8 @@ dictionary Ed448Params : Algorithm {
             </li>
             <li>
               <p>
-                Let <var>result</var> be a boolean with the value <code>true</code> if the signature is valid
-                and the value <code>false</code> otherwise.
+                Let <var>result</var> be a boolean with the value `true` if the signature is valid
+                and the value `false` otherwise.
               </p>
             </li>
             <li>
@@ -2787,7 +2787,7 @@ dictionary Ed448Params : Algorithm {
             <li>
               <p>
                 If <var>usages</var> contains a value which is not
-                one of <code>"sign"</code> or <code>"verify"</code>,
+                one of "`sign`" or "`verify`",
                 then [= exception/throw =] a
                 {{SyntaxError}}.
               </p>
@@ -2805,21 +2805,21 @@ dictionary Ed448Params : Algorithm {
             <li>
               <p>
                 Set the {{KeyAlgorithm/name}} attribute of
-                <var>algorithm</var> to <code>"Ed448"</code>.
+                <var>algorithm</var> to "`Ed448`".
               </p>
             </li>
             <li>
               <p>
                 Let <var>publicKey</var> be a new {{CryptoKey}} associated with the
                 [= relevant global object =]
-                of <code>this</code> [[HTML]], and
+                of `this` [[HTML]], and
                 representing the public key of the generated key pair.
               </p>
             </li>
             <li>
               <p>
                 Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot of
-                <var>publicKey</var> to <code>"public"</code>
+                <var>publicKey</var> to "`public`"
               </p>
             </li>
             <li>
@@ -2838,14 +2838,14 @@ dictionary Ed448Params : Algorithm {
               <p>
                 Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-usages">[[\usages]]</a> internal slot of
                 <var>publicKey</var> to be the <a data-cite="WebCryptoAPI#concept-usage-intersection">usage intersection</a>
-                of <var>usages</var> and <code>[ "verify" ]</code>.
+                of <var>usages</var> and `[ "verify" ]`.
               </p>
             </li>
             <li>
               <p>
                 Let <var>privateKey</var> be a new {{CryptoKey}} associated with the
                 [= relevant global object =]
-                of <code>this</code> [[HTML]], and
+                of `this` [[HTML]], and
                 representing the private key of the generated key pair.
               </p>
             </li>
@@ -2871,7 +2871,7 @@ dictionary Ed448Params : Algorithm {
               <p>
                 Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-usages">[[\usages]]</a> internal slot of
                 <var>privateKey</var> to be the <a data-cite="WebCryptoAPI#concept-usage-intersection">usage intersection</a>
-                of <var>usages</var> and <code>[ "sign" ]</code>.
+                of <var>usages</var> and `[ "sign" ]`.
               </p>
             </li>
             <li>
@@ -2915,7 +2915,7 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         If <var>usages</var> contains a value which is not
-                        <code>"verify"</code>
+                        "`verify`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -2936,9 +2936,9 @@ dictionary Ed448Params : Algorithm {
                     </li>
                     <li>
                       <p>
-                        If the <code>algorithm</code> object identifier field of the
-                        <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
-                        not equal to the <code>id-Ed448</code>
+                        If the `algorithm` object identifier field of the
+                        `algorithm` AlgorithmIdentifier field of <var>spki</var> is
+                        not equal to the `id-Ed448`
                         object identifier defined in [[RFC8410]],
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -2946,7 +2946,7 @@ dictionary Ed448Params : Algorithm {
                     </li>
                     <li>
                       <p>
-                        If the <code>parameters</code> field of the <code>algorithm</code>
+                        If the `parameters` field of the `algorithm`
                         AlgorithmIdentifier field of <var>spki</var> is present,
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -2955,21 +2955,21 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         Let <var>publicKey</var> be the Ed448 public key identified by
-                        the <code>subjectPublicKey</code> field of <var>spki</var>.
+                        the `subjectPublicKey` field of <var>spki</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         that represents <var>publicKey</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> to <code>"public"</code>
+                        of <var>key</var> to "`public`"
                       </p>
                     </li>
                     <li>
@@ -2980,7 +2980,7 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"Ed448"</code>.
+                        <var>algorithm</var> to "`Ed448`".
                       </p>
                     </li>
                     <li>
@@ -2997,7 +2997,7 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         If <var>usages</var> contains a value which is not
-                        <code>"sign"</code>
+                        "`sign`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -3018,18 +3018,18 @@ dictionary Ed448Params : Algorithm {
                     </li>
                     <li>
                       <p>
-                        If the <code>algorithm</code> object identifier field of the
-                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
+                        If the `algorithm` object identifier field of the
+                        `privateKeyAlgorithm` PrivateKeyAlgorithm field of
                         <var>privateKeyInfo</var> is not equal to the
-                        <code>id-Ed448</code> object identifier defined in [[RFC8410]],
+                        `id-Ed448` object identifier defined in [[RFC8410]],
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
                     </li>
                     <li>
                       <p>
-                        If the <code>parameters</code> field of the
-                        <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
+                        If the `parameters` field of the
+                        `privateKeyAlgorithm` PrivateKeyAlgorithmIdentifier field
                         of <var>privateKeyInfo</var> is present,
                         then [= exception/throw =] a
                         {{DataError}}.
@@ -3038,9 +3038,9 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         Let <var>curvePrivateKey</var> be the result of performing the <a data-cite="WebCryptoAPI#concept-parse-an-asn1-structure">parse an ASN.1 structure</a>
-                        algorithm, with <var>data</var> as the <code>privateKey</code> field
+                        algorithm, with <var>data</var> as the `privateKey` field
                         of <var>privateKeyInfo</var>, <var>structure</var> as the ASN.1
-                        <code>CurvePrivateKey</code> structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
+                        `CurvePrivateKey` structure specified in Section 7 of [[RFC8410]], and <var>exactData</var> set to true.
                       </p>
                     </li>
                     <li>
@@ -3054,7 +3054,7 @@ dictionary Ed448Params : Algorithm {
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         that represents the Ed448 private key identified by <var>curvePrivateKey</var>.
                       </p>
                     </li>
@@ -3072,7 +3072,7 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"Ed448"</code>.
+                        <var>algorithm</var> to "`Ed448`".
                       </p>
                     </li>
                     <li>
@@ -3098,10 +3098,10 @@ dictionary Ed448Params : Algorithm {
                       <p>
                         If the {{JsonWebKey/d}} field is present and <var>usages</var> contains
                         a value which is not
-                        <code>"sign"</code>, or,
+                        "`sign`", or,
                         if the {{JsonWebKey/d}} field is not present and <var>usages</var> contains
                         a value which is not
-                        <code>"verify"</code>
+                        "`verify`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -3109,7 +3109,7 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         If the {{JsonWebKey/kty}} field of <var>jwk</var> is not
-                        <code>"OKP"</code>,
+                        "`OKP`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -3117,7 +3117,7 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         If the {{JsonWebKey/crv}} field of <var>jwk</var> is not
-                        <code>"Ed448"</code>,
+                        "`Ed448`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -3125,7 +3125,7 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         If the {{JsonWebKey/alg}} field of <var>jwk</var> is present and is
-                        not <code>"EdDSA"</code>,
+                        not "`EdDSA`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -3133,7 +3133,7 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         If <var>usages</var> is non-empty and the {{JsonWebKey/use}} field of <var>jwk</var> is present and is
-                        not <code>"sig"</code>,
+                        not "`sig`",
                         then [= exception/throw =] a
                         {{DataError}}.
                       </p>
@@ -3216,7 +3216,7 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"Ed448"</code>.
+                        <var>algorithm</var> to "`Ed448`".
                       </p>
                     </li>
                     <li>
@@ -3233,7 +3233,7 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         If <var>usages</var> contains a value which is not
-                        <code>"verify"</code>
+                        "`verify`"
                         then [= exception/throw =] a
                         {{SyntaxError}}.
                       </p>
@@ -3246,21 +3246,21 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         Set the {{KeyAlgorithm/name}} attribute of
-                        <var>algorithm</var> to <code>"Ed448"</code>.
+                        <var>algorithm</var> to "`Ed448`".
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and
+                        of `this` [[HTML]], and
                         representing the key data provided in <var>keyData</var>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Set the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> to <code>"public"</code>
+                        of <var>key</var> to "`public`"
                       </p>
                     </li>
                     <li>
@@ -3311,12 +3311,12 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         If the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                        of <var>key</var> is not "`public`", then [= exception/throw =] an {{InvalidAccessError}}.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>data</var> be an instance of the <code>subjectPublicKeyInfo</code>
+                        Let <var>data</var> be an instance of the `subjectPublicKeyInfo`
                         ASN.1 structure defined in [[RFC5280]]
                         with the following properties:
                       </p>
@@ -3324,14 +3324,14 @@ dictionary Ed448Params : Algorithm {
                         <li>
                           <p>
                             Set the <var>algorithm</var> field to an
-                            <code>AlgorithmIdentifier</code> ASN.1 type with the following
+                            `AlgorithmIdentifier` ASN.1 type with the following
                             properties:
                           </p>
                           <ul>
                             <li>
                               <p>
                                 Set the <var>algorithm</var> object identifier to the
-                                <code>id-Ed448</code> OID defined in [[RFC8410]].
+                                `id-Ed448` OID defined in [[RFC8410]].
                               </p>
                             </li>
                           </ul>
@@ -3347,7 +3347,7 @@ dictionary Ed448Params : Algorithm {
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -3364,27 +3364,27 @@ dictionary Ed448Params : Algorithm {
                     </li>
                     <li>
                       <p>
-                        Let <var>data</var> be an instance of the <code>privateKeyInfo</code>
+                        Let <var>data</var> be an instance of the `privateKeyInfo`
                         ASN.1 structure defined in [[RFC5208]]
                         with the following properties:
                       </p>
                       <ul>
                         <li>
                           <p>
-                            Set the <var>version</var> field to <code>0</code>.
+                            Set the <var>version</var> field to `0`.
                           </p>
                         </li>
                         <li>
                           <p>
                             Set the <var>privateKeyAlgorithm</var> field to a
-                            <code>PrivateKeyAlgorithmIdentifier</code> ASN.1 type with the
+                            `PrivateKeyAlgorithmIdentifier` ASN.1 type with the
                             following properties:
                           </p>
                           <ul>
                             <li>
                               <p>
                                 Set the <var>algorithm</var> object identifier to the
-                                <code>id-Ed448</code> OID defined in [[RFC8410]].
+                                `id-Ed448` OID defined in [[RFC8410]].
                               </p>
                             </li>
                           </ul>
@@ -3392,7 +3392,7 @@ dictionary Ed448Params : Algorithm {
                         <li>
                           <p>
                             Set the <var>privateKey</var> field to the result of DER-encoding
-                            a <code>CurvePrivateKey</code> ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
+                            a `CurvePrivateKey` ASN.1 type, as defined in Section 7 of [[RFC8410]], that represents the
                             Ed448 private key represented by the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-handle">[[\handle]]</a> internal slot of
                             <var>key</var>
                           </p>
@@ -3403,7 +3403,7 @@ dictionary Ed448Params : Algorithm {
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -3420,20 +3420,20 @@ dictionary Ed448Params : Algorithm {
                     </li>
                     <li>
                       <p>
-                        Set the <code>kty</code> attribute of <var>jwk</var> to
-                        <code>"OKP"</code>.
+                        Set the `kty` attribute of <var>jwk</var> to
+                        "`OKP`".
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <code>alg</code> attribute of <var>jwk</var> to
-                        <code>"EdDSA"</code>.
+                        Set the `alg` attribute of <var>jwk</var> to
+                        "`EdDSA`".
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <code>crv</code> attribute of <var>jwk</var> to
-                        <code>"Ed448"</code>.
+                        Set the `crv` attribute of <var>jwk</var> to
+                        "`Ed448`".
                       </p>
                     </li>
                     <li>
@@ -3456,12 +3456,12 @@ dictionary Ed448Params : Algorithm {
                     </li>
                     <li>
                       <p>
-                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
+                        Set the `key_ops` attribute of <var>jwk</var> to the {{CryptoKey/usages}} attribute of <var>key</var>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <code>ext</code> attribute of <var>jwk</var> to the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-extractable">[[\extractable]]</a> internal slot
+                        Set the `ext` attribute of <var>jwk</var> to the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-extractable">[[\extractable]]</a> internal slot
                         of <var>key</var>.
                       </p>
                     </li>
@@ -3481,7 +3481,7 @@ dictionary Ed448Params : Algorithm {
                     <li>
                       <p>
                         If the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-type">[[\type]]</a> internal slot
-                        of <var>key</var> is not <code>"public"</code>, then [= exception/throw =] an {{InvalidAccessError}}.
+                        of <var>key</var> is not "`public`", then [= exception/throw =] an {{InvalidAccessError}}.
                       </p>
                     </li>
                     <li>
@@ -3495,7 +3495,7 @@ dictionary Ed448Params : Algorithm {
                       <p>
                         Let <var>result</var> be a new {{ArrayBuffer}} associated with the
                         [= relevant global object =]
-                        of <code>this</code> [[HTML]], and containing
+                        of `this` [[HTML]], and containing
                         <var>data</var>.
                       </p>
                     </li>
@@ -3659,7 +3659,7 @@ dictionary Ed448Params : Algorithm {
           <td>id-X25519 (1.3.101.110)</td>
           <td>BIT STRING</td>
           <td>
-            <code>"X25519"</code>
+            "`X25519`"
           </td>
           <td>
             [[RFC8410]]
@@ -3669,7 +3669,7 @@ dictionary Ed448Params : Algorithm {
           <td>id-X448 (1.3.101.111)</td>
           <td>BIT STRING</td>
           <td>
-            <code>"X448"</code>
+            "`X448`"
           </td>
           <td>
             [[RFC8410]]
@@ -3679,7 +3679,7 @@ dictionary Ed448Params : Algorithm {
           <td>id-Ed25519 (1.3.101.112)</td>
           <td>BIT STRING</td>
           <td>
-            <code>"Ed25519"</code>
+            "`Ed25519`"
           </td>
           <td>
             [[RFC8410]]
@@ -3689,7 +3689,7 @@ dictionary Ed448Params : Algorithm {
           <td>id-Ed448 (1.3.101.113)</td>
           <td>BIT STRING</td>
           <td>
-            <code>"Ed448"</code>
+            "`Ed448`"
           </td>
           <td>
             [[RFC8410]]
@@ -3718,7 +3718,7 @@ dictionary Ed448Params : Algorithm {
           <td>id-X25519 (1.3.101.110)</td>
           <td>CurvePrivateKey</td>
           <td>
-            <code>"X25519"</code>
+            "`X25519`"
           </td>
           <td>
             [[RFC8410]]
@@ -3728,7 +3728,7 @@ dictionary Ed448Params : Algorithm {
           <td>id-X448 (1.3.101.111)</td>
           <td>CurvePrivateKey</td>
           <td>
-            <code>"X448"</code>
+            "`X448`"
           </td>
           <td>
             [[RFC8410]]
@@ -3738,7 +3738,7 @@ dictionary Ed448Params : Algorithm {
           <td>id-Ed25519 (1.3.101.112)</td>
           <td>CurvePrivateKey</td>
           <td>
-            <code>"Ed25519"</code>
+            "`Ed25519`"
           </td>
           <td>
             [[RFC8410]]
@@ -3748,7 +3748,7 @@ dictionary Ed448Params : Algorithm {
           <td>id-Ed448 (1.3.101.113)</td>
           <td>CurvePrivateKey</td>
           <td>
-            <code>"Ed448"</code>
+            "`Ed448`"
           </td>
           <td>
             [[RFC8410]]
