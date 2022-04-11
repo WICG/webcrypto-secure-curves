@@ -159,13 +159,6 @@
               </p>
             </li>
             <li>
-              <p>
-                If |secret| is the all-zero value,
-                then [= exception/throw =] a {{OperationError}}.
-                This check must be performed in constant-time, as per [[RFC7748]] Section 6.1.
-              </p>
-            </li>
-            <li>
               <dl class="switch">
                 <dt>If |length| is null:</dt>
                 <dd>Return |secret|</dd>
@@ -1014,13 +1007,6 @@
                 [[RFC7748]] Section 5 with |key| as the X448 private key |k|
                 and the X448 public key represented by the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-handle">[[\handle]]</a>
                 internal slot of |publicKey| as the X448 public key |u|.
-              </p>
-            </li>
-            <li>
-              <p>
-                If |secret| is the all-zero value,
-                then [= exception/throw =] a {{OperationError}}.
-                This check must be performed in constant-time, as per [[RFC7748]] Section 6.2.
               </p>
             </li>
             <li>
