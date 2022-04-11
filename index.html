@@ -1894,6 +1894,13 @@
             </li>
             <li>
               <p>
+                If the point R, encoded in the first half of |signature|,
+                represents a small-order element on the Elliptic Curve of Ed25519,
+                [= exception/throw =] a {{DataError}}.
+              </p>
+            </li>
+            <li>
+              <p>
                 Return |result|.
               </p>
             </li>
@@ -2790,6 +2797,13 @@ dictionary Ed448Params : Algorithm {
               <p>
                 Let |result| be a boolean with the value `true` if the signature is valid
                 and the value `false` otherwise.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the point R, encoded in the first half of |signature|,
+                represents a small-order element on the Elliptic Curve of Ed448,
+                [= exception/throw =] a {{DataError}}.
               </p>
             </li>
             <li>
