@@ -687,6 +687,12 @@
             </li>
             <li>
               <p>
+                If the key data of |key| represents a small-order element
+                on the Elliptic Curve of X25519, [= exception/throw =] a {{DataError}}.
+              </p>
+            </li>
+            <li>
+              <p>
                 Return |key|
               </p>
             </li>
@@ -1539,6 +1545,12 @@
             </li>
             <li>
               <p>
+                If the key data of |key| represents a small-order element
+                on the Elliptic Curve of X448, [= exception/throw =] a {{DataError}}.
+              </p>
+            </li>
+            <li>
+              <p>
                 Return |key|
               </p>
             </li>
@@ -2385,6 +2397,12 @@
                   </p>
                 </dd>
               </dl>
+            </li>
+            <li>
+              <p>
+                If the key data of |key| represents a small-order element
+                on the Elliptic Curve of Ed25519, [= exception/throw =] a {{DataError}}.
+              </p>
             </li>
             <li>
               <p>
@@ -3279,6 +3297,12 @@ dictionary Ed448Params : Algorithm {
                   </p>
                 </dd>
               </dl>
+            </li>
+            <li>
+              <p>
+                If the key data of |key| represents a small-order element on
+                the Elliptic Curve of Ed448, [= exception/throw =] a {{DataError}}.
+              </p>
             </li>
             <li>
               <p>
