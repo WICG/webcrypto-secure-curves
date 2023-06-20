@@ -1869,6 +1869,19 @@
             </li>
             <li>
               <p>
+                If the key data of |key| represents an invalid point or a small-order element
+                on the Elliptic Curve of Ed25519, return `false`.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the point R, encoded in the first half of |signature|,
+                represents an invalid point or a small-order element
+                on the Elliptic Curve of Ed25519, return `false`.
+              </p>
+            </li>
+            <li>
+              <p>
                 Perform the Ed25519 verification steps, as specified in [[RFC8032]],
                 Section 5.1.7, on the |signature|, with |message| as |M|,
                 using the Ed25519 public key associated with |key|.
@@ -2758,6 +2771,19 @@ dictionary Ed448Params : Algorithm {
               <p>
                 If |context| has a length greater than 255 bytes,
                 then [= exception/throw =] an {{OperationError}}.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the key data of |key| represents an invalid point or a small-order element
+                on the Elliptic Curve of Ed448, return `false`.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the point R, encoded in the first half of |signature|,
+                represents an invalid point or a small-order element
+                on the Elliptic Curve of Ed448, return `false`.
               </p>
             </li>
             <li>
