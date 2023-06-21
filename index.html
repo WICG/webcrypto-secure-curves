@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 32.5.0">
+<meta name="generator" content="ReSpec 34.1.3">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -170,8 +170,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "safecurves"
     }
   },
-  "publishISODate": "2022-12-12T00:00:00.000Z",
-  "generatedSubtitle": "Draft Community Group Report 12 December 2022"
+  "publishISODate": "2023-06-21T00:00:00.000Z",
+  "generatedSubtitle": "Draft Community Group Report 21 June 2023"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/cg-draft"></head>
 
@@ -180,7 +180,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <h1 id="title" class="title">Secure Curves in the Web Cryptography API</h1> 
     <p id="w3c-state">
       <a href="https://www.w3.org/standards/types#reports">Draft Community Group Report</a>
-      <time class="dt-published" datetime="2022-12-12">12 December 2022</time>
+      <time class="dt-published" datetime="2023-06-21">21 June 2023</time>
     </p>
     <dl>
       
@@ -203,12 +203,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <a href="https://github.com/WICG/webcrypto-secure-curves/issues/new/choose">new issue</a>,
         <a href="https://github.com/WICG/webcrypto-secure-curves/issues/">open issues</a>)
       </dd>
+      
     </dl>
     
     <p class="copyright">
           <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
           ©
-          2022
+          2023
           
           the Contributors to the Secure Curves in the Web Cryptography API
           Specification, published by the
@@ -329,7 +330,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -342,7 +343,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>publicKey</var> is not "<code>public</code>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>publicKey</var> is not "<code>public</code>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -350,7 +351,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                 If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                 the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-algorithm">[[algorithm]]</a> internal slot of
                 <var>publicKey</var> is not equal to the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> property of the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-algorithm">[[algorithm]]</a> internal slot of
-                <var>key</var>, then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var>, then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -364,7 +365,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If <var>secret</var> is the all-zero value,
-                then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
+                then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
                 This check must be performed in constant-time, as per [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7748" title="Elliptic Curves for Security">RFC7748</a></cite>] Section 6.1.
               </p>
             </li>
@@ -380,7 +381,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <var>length</var>:
                     </dt>
                     <dd>
-                      <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an
+                      <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an
                       <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
                     </dd>
                     <dt>Otherwise:</dt>
@@ -400,7 +401,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
               <p>
                 If <var>usages</var> contains an entry which is not
                 "<code>deriveKey</code>" or "<code>deriveBits</code>"
-                then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                 <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
               </p>
             </li>
@@ -425,7 +426,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Let <var>publicKey</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the public key of the generated key pair.
               </p>
@@ -457,7 +458,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Let <var>privateKey</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the private key of the generated key pair.
               </p>
@@ -529,7 +530,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If <var>usages</var> is not empty
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -543,7 +544,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurred while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -553,7 +554,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
                         not equal to the <code>id-X25519</code>
                         object identifier defined in [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8410" title="Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure">RFC8410</a></cite>],
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -561,7 +562,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <code>parameters</code> field of the <code>algorithm</code>
                         AlgorithmIdentifier field of <var>spki</var> is present,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -574,7 +575,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents <var>publicKey</var>.
                       </p>
@@ -611,7 +612,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If <var>usages</var> contains an entry which is not
                         "<code>deriveKey</code>" or "<code>deriveBits</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -625,7 +626,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurs while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -635,7 +636,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
                         <var>privateKeyInfo</var> is not equal to the
                         <code>id-X25519</code> object identifier defined in [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8410" title="Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure">RFC8410</a></cite>],
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -644,7 +645,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         If the <code>parameters</code> field of the
                         <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
                         of <var>privateKeyInfo</var> is present,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -659,14 +660,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurred while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents the X25519 private key identified by <var>curvePrivateKey</var>.
                       </p>
@@ -704,7 +705,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <dt>If <var>keyData</var> is a <a data-link-type="idl" data-lt="JsonWebKey" data-type="dictionary" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
                         <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
                         <dt>Otherwise:</dt>
-                        <dd><p><a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
+                        <dd><p><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
                       </dl>
                     </li>
                     <li>
@@ -712,7 +713,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is present and if <var>usages</var>
                         contains an entry which is not
                         "<code>deriveKey</code>" or "<code>deriveBits</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -720,7 +721,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is not present and if <var>usages</var> is not
                         empty
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -728,7 +729,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
                         "<code>OKP</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -736,14 +737,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
                         "<code>X25519</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
                         If <var>usages</var> is non-empty and the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present
-                        and is not equal to "<code>enc</code>" then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        and is not equal to "<code>enc</code>" then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -753,7 +754,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         is invalid according to the requirements of JSON Web
                         Key [<cite><a class="bibref" data-link-type="biblio" href="#bib-jwk" title="JSON Web Key (JWK)">JWK</a></cite>], or it does not contain all of the specified <var>usages</var>
                         values,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -761,7 +762,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
                         has the value false and <var>extractable</var> is true,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -773,7 +774,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 If <var>jwk</var> does not meet the requirements of Section 2
-                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                               </p>
                             </li>
                             <li>
@@ -797,7 +798,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 If <var>jwk</var> does not meet the requirements of Section 2
-                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                               </p>
                             </li>
                             <li>
@@ -842,7 +843,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If <var>usages</var> is not empty
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -860,7 +861,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         representing the key data provided in <var>keyData</var>.
                       </p>
@@ -882,7 +883,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                 <dt>Otherwise:</dt>
                 <dd>
                   <p>
-                    <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                     <a data-link-type="idl" data-lt="NotSupportedError" data-type="exception" href="https://webidl.spec.whatwg.org/#notsupportederror"><code>NotSupportedError</code></a>.
                   </p>
                 </dd>
@@ -908,7 +909,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the underlying cryptographic key material represented by the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-handle">[[handle]]</a> internal slot of <var>key</var>
-                cannot be accessed, then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
+                cannot be accessed, then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
               </p>
             </li>
             <li>
@@ -919,7 +920,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -954,7 +955,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -967,7 +968,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -1010,7 +1011,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -1083,7 +1084,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -1096,7 +1097,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -1106,7 +1107,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                 <dt>Otherwise:</dt>
                 <dd>
                   <p>
-                    <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                     <a data-link-type="idl" data-lt="NotSupportedError" data-type="exception" href="https://webidl.spec.whatwg.org/#notsupportederror"><code>NotSupportedError</code></a>.
                   </p>
                 </dd>
@@ -1181,7 +1182,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -1194,7 +1195,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>publicKey</var> is not "<code>public</code>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>publicKey</var> is not "<code>public</code>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -1202,7 +1203,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                 If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                 the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-algorithm">[[algorithm]]</a> internal slot of
                 <var>publicKey</var> is not equal to the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> property of the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-algorithm">[[algorithm]]</a> internal slot of
-                <var>key</var>, then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var>, then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -1216,7 +1217,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If <var>secret</var> is the all-zero value,
-                then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
+                then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
                 This check must be performed in constant-time, as per [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7748" title="Elliptic Curves for Security">RFC7748</a></cite>] Section 6.2.
               </p>
             </li>
@@ -1232,7 +1233,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <var>length</var>:
                     </dt>
                     <dd>
-                      <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an
+                      <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an
                       <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
                     </dd>
                     <dt>Otherwise:</dt>
@@ -1252,7 +1253,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
               <p>
                 If <var>usages</var> contains an entry which is not
                 "<code>deriveKey</code>" or "<code>deriveBits</code>"
-                then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                 <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
               </p>
             </li>
@@ -1277,7 +1278,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Let <var>publicKey</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the public key of the generated key pair.
               </p>
@@ -1309,7 +1310,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Let <var>privateKey</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the private key of the generated key pair.
               </p>
@@ -1381,7 +1382,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If <var>usages</var> is not empty
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -1395,7 +1396,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurred while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -1405,7 +1406,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
                         not equal to the <code>id-X448</code>
                         object identifier defined in [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8410" title="Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure">RFC8410</a></cite>],
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -1413,7 +1414,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <code>parameters</code> field of the <code>algorithm</code>
                         AlgorithmIdentifier field of <var>spki</var> is present,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -1426,7 +1427,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents <var>publicKey</var>.
                       </p>
@@ -1463,7 +1464,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If <var>usages</var> contains an entry which is not
                         "<code>deriveKey</code>" or "<code>deriveBits</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -1477,7 +1478,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurs while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -1487,7 +1488,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
                         <var>privateKeyInfo</var> is not equal to the
                         <code>id-X448</code> object identifier defined in [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8410" title="Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure">RFC8410</a></cite>],
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -1496,7 +1497,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         If the <code>parameters</code> field of the
                         <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
                         of <var>privateKeyInfo</var> is present,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -1511,14 +1512,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurred while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents the X448 private key identified by <var>curvePrivateKey</var>.
                       </p>
@@ -1556,7 +1557,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <dt>If <var>keyData</var> is a <a data-link-type="idl" data-lt="JsonWebKey" data-type="dictionary" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
                         <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
                         <dt>Otherwise:</dt>
-                        <dd><p><a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
+                        <dd><p><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
                       </dl>
                     </li>
                     <li>
@@ -1564,7 +1565,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is present and if <var>usages</var>
                         contains an entry which is not
                         "<code>deriveKey</code>" or "<code>deriveBits</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -1572,7 +1573,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is not present and if <var>usages</var> is not
                         empty
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -1580,7 +1581,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
                         "<code>OKP</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -1588,14 +1589,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
                         "<code>X448</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
                         If <var>usages</var> is non-empty and the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present
-                        and is not equal to "<code>enc</code>" then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        and is not equal to "<code>enc</code>" then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -1605,7 +1606,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         is invalid according to the requirements of JSON Web
                         Key [<cite><a class="bibref" data-link-type="biblio" href="#bib-jwk" title="JSON Web Key (JWK)">JWK</a></cite>], or it does not contain all of the specified <var>usages</var>
                         values,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -1613,7 +1614,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
                         has the value false and <var>extractable</var> is true,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -1625,7 +1626,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 If <var>jwk</var> does not meet the requirements of Section 2
-                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                               </p>
                             </li>
                             <li>
@@ -1649,7 +1650,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 If <var>jwk</var> does not meet the requirements of Section 2
-                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                               </p>
                             </li>
                             <li>
@@ -1694,7 +1695,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If <var>usages</var> is not empty
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -1712,7 +1713,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         representing the key data provided in <var>keyData</var>.
                       </p>
@@ -1734,7 +1735,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                 <dt>Otherwise:</dt>
                 <dd>
                   <p>
-                    <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                     <a data-link-type="idl" data-lt="NotSupportedError" data-type="exception" href="https://webidl.spec.whatwg.org/#notsupportederror"><code>NotSupportedError</code></a>.
                   </p>
                 </dd>
@@ -1760,7 +1761,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the underlying cryptographic key material represented by the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-handle">[[handle]]</a> internal slot of <var>key</var>
-                cannot be accessed, then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
+                cannot be accessed, then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
               </p>
             </li>
             <li>
@@ -1771,7 +1772,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -1806,7 +1807,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -1819,7 +1820,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -1862,7 +1863,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -1935,7 +1936,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -1948,7 +1949,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -1958,7 +1959,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                 <dt>Otherwise:</dt>
                 <dd>
                   <p>
-                    <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                     <a data-link-type="idl" data-lt="NotSupportedError" data-type="exception" href="https://webidl.spec.whatwg.org/#notsupportederror"><code>NotSupportedError</code></a>.
                   </p>
                 </dd>
@@ -2039,7 +2040,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -2052,7 +2053,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Return a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing the
                 bytes of the signature resulting from performing
                 the Ed25519 signing process.
@@ -2067,7 +2068,20 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-public"><code>public</code></a>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-public"><code>public</code></a>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the key data of <var>key</var> represents an invalid point or a small-order element
+                on the Elliptic Curve of Ed25519, return <code>false</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the point R, encoded in the first half of <var>signature</var>,
+                represents an invalid point or a small-order element
+                on the Elliptic Curve of Ed25519, return <code>false</code>.
               </p>
             </li>
             <li>
@@ -2097,7 +2111,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
               <p>
                 If <var>usages</var> contains a value which is not
                 one of "<code>sign</code>" or "<code>verify</code>",
-                then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                 <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
               </p>
             </li>
@@ -2120,7 +2134,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Let <var>publicKey</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the public key of the generated key pair.
               </p>
@@ -2153,7 +2167,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Let <var>privateKey</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the private key of the generated key pair.
               </p>
@@ -2225,7 +2239,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If <var>usages</var> contains a value which is not
                         "<code>verify</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -2239,7 +2253,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurred while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2249,7 +2263,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
                         not equal to the <code>id-Ed25519</code>
                         object identifier defined in [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8410" title="Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure">RFC8410</a></cite>],
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2257,7 +2271,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <code>parameters</code> field of the <code>algorithm</code>
                         AlgorithmIdentifier field of <var>spki</var> is present,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2270,7 +2284,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents <var>publicKey</var>.
                       </p>
@@ -2307,7 +2321,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If <var>usages</var> contains a value which is not
                         "<code>sign</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -2321,7 +2335,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurs while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2331,7 +2345,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
                         <var>privateKeyInfo</var> is not equal to the
                         <code>id-Ed25519</code> object identifier defined in [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8410" title="Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure">RFC8410</a></cite>],
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2340,7 +2354,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         If the <code>parameters</code> field of the
                         <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
                         of <var>privateKeyInfo</var> is present,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2355,14 +2369,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurred while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents the Ed25519 private key identified by <var>curvePrivateKey</var>.
                       </p>
@@ -2400,7 +2414,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <dt>If <var>keyData</var> is a <a data-link-type="idl" data-lt="JsonWebKey" data-type="dictionary" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
                         <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
                         <dt>Otherwise:</dt>
-                        <dd><p><a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
+                        <dd><p><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
                       </dl>
                     </li>
                     <li>
@@ -2411,7 +2425,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         if the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is not present and <var>usages</var> contains
                         a value which is not
                         "<code>verify</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -2419,7 +2433,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
                         "<code>OKP</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2427,7 +2441,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
                         "<code>Ed25519</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2435,7 +2449,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-alg"><code>alg</code></a> field of <var>jwk</var> is present and is
                         not "<code>EdDSA</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2443,7 +2457,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If <var>usages</var> is non-empty and the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present and is
                         not "<code>sig</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2453,7 +2467,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         is invalid according to the requirements of JSON Web
                         Key [<cite><a class="bibref" data-link-type="biblio" href="#bib-jwk" title="JSON Web Key (JWK)">JWK</a></cite>], or it does not contain all of the specified <var>usages</var>
                         values,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2461,7 +2475,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
                         has the value false and <var>extractable</var> is true,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -2473,7 +2487,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 If <var>jwk</var> does not meet the requirements of Section 2
-                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                               </p>
                             </li>
                             <li>
@@ -2497,7 +2511,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 If <var>jwk</var> does not meet the requirements of Section 2
-                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                               </p>
                             </li>
                             <li>
@@ -2543,7 +2557,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If <var>usages</var> contains a value which is not
                         "<code>verify</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -2561,7 +2575,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         representing the key data provided in <var>keyData</var>.
                       </p>
@@ -2583,7 +2597,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                 <dt>Otherwise:</dt>
                 <dd>
                   <p>
-                    <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                     <a data-link-type="idl" data-lt="NotSupportedError" data-type="exception" href="https://webidl.spec.whatwg.org/#notsupportederror"><code>NotSupportedError</code></a>.
                   </p>
                 </dd>
@@ -2609,7 +2623,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the underlying cryptographic key material represented by the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-handle">[[handle]]</a> internal slot of <var>key</var>
-                cannot be accessed, then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
+                cannot be accessed, then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
               </p>
             </li>
             <li>
@@ -2620,7 +2634,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -2655,7 +2669,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -2668,7 +2682,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -2711,7 +2725,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -2790,7 +2804,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -2803,7 +2817,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -2813,7 +2827,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                 <dt>Otherwise:</dt>
                 <dd>
                   <p>
-                    <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                     <a data-link-type="idl" data-lt="NotSupportedError" data-type="exception" href="https://webidl.spec.whatwg.org/#notsupportederror"><code>NotSupportedError</code></a>.
                   </p>
                 </dd>
@@ -2901,7 +2915,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -2915,7 +2929,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If <var>context</var> has a length greater than 255 bytes,
-                then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
+                then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
               </p>
             </li>
             <li>
@@ -2929,7 +2943,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Return a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing the
                 bytes of the signature resulting from performing
                 the Ed448 signing process.
@@ -2944,7 +2958,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-public"><code>public</code></a>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-public"><code>public</code></a>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -2958,7 +2972,20 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If <var>context</var> has a length greater than 255 bytes,
-                then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
+                then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the key data of <var>key</var> represents an invalid point or a small-order element
+                on the Elliptic Curve of Ed448, return <code>false</code>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the point R, encoded in the first half of <var>signature</var>,
+                represents an invalid point or a small-order element
+                on the Elliptic Curve of Ed448, return <code>false</code>.
               </p>
             </li>
             <li>
@@ -2989,7 +3016,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
               <p>
                 If <var>usages</var> contains a value which is not
                 one of "<code>sign</code>" or "<code>verify</code>",
-                then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                 <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
               </p>
             </li>
@@ -3012,7 +3039,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Let <var>publicKey</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the public key of the generated key pair.
               </p>
@@ -3045,7 +3072,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Let <var>privateKey</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the private key of the generated key pair.
               </p>
@@ -3117,7 +3144,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If <var>usages</var> contains a value which is not
                         "<code>verify</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -3131,7 +3158,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurred while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3141,7 +3168,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <code>algorithm</code> AlgorithmIdentifier field of <var>spki</var> is
                         not equal to the <code>id-Ed448</code>
                         object identifier defined in [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8410" title="Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure">RFC8410</a></cite>],
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3149,7 +3176,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <code>parameters</code> field of the <code>algorithm</code>
                         AlgorithmIdentifier field of <var>spki</var> is present,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3162,7 +3189,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents <var>publicKey</var>.
                       </p>
@@ -3199,7 +3226,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If <var>usages</var> contains a value which is not
                         "<code>sign</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -3213,7 +3240,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurs while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3223,7 +3250,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <code>privateKeyAlgorithm</code> PrivateKeyAlgorithm field of
                         <var>privateKeyInfo</var> is not equal to the
                         <code>id-Ed448</code> object identifier defined in [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8410" title="Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure">RFC8410</a></cite>],
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3232,7 +3259,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         If the <code>parameters</code> field of the
                         <code>privateKeyAlgorithm</code> PrivateKeyAlgorithmIdentifier field
                         of <var>privateKeyInfo</var> is present,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3247,14 +3274,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If an error occurred while parsing,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents the Ed448 private key identified by <var>curvePrivateKey</var>.
                       </p>
@@ -3292,7 +3319,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <dt>If <var>keyData</var> is a <a data-link-type="idl" data-lt="JsonWebKey" data-type="dictionary" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
                         <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
                         <dt>Otherwise:</dt>
-                        <dd><p><a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
+                        <dd><p><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
                       </dl>
                     </li>
                     <li>
@@ -3303,7 +3330,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         if the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is not present and <var>usages</var> contains
                         a value which is not
                         "<code>verify</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -3311,7 +3338,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
                         "<code>OKP</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3319,7 +3346,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
                         "<code>Ed448</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3327,7 +3354,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-alg"><code>alg</code></a> field of <var>jwk</var> is present and is
                         not "<code>EdDSA</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3335,7 +3362,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If <var>usages</var> is non-empty and the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present and is
                         not "<code>sig</code>",
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3345,7 +3372,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         is invalid according to the requirements of JSON Web
                         Key [<cite><a class="bibref" data-link-type="biblio" href="#bib-jwk" title="JSON Web Key (JWK)">JWK</a></cite>], or it does not contain all of the specified <var>usages</var>
                         values,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3353,7 +3380,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If the <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
                         has the value false and <var>extractable</var> is true,
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
@@ -3365,7 +3392,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 If <var>jwk</var> does not meet the requirements of Section 2
-                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                               </p>
                             </li>
                             <li>
@@ -3389,7 +3416,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 If <var>jwk</var> does not meet the requirements of Section 2
-                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                                of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>], then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="idl" data-lt="DataError" data-type="exception" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                               </p>
                             </li>
                             <li>
@@ -3435,7 +3462,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <p>
                         If <var>usages</var> contains a value which is not
                         "<code>verify</code>"
-                        then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                        then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="idl" data-lt="SyntaxError" data-type="exception" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
@@ -3453,7 +3480,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>key</var> be a new <a data-link-type="idl" data-lt="CryptoKey" data-type="interface" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         representing the key data provided in <var>keyData</var>.
                       </p>
@@ -3475,7 +3502,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                 <dt>Otherwise:</dt>
                 <dd>
                   <p>
-                    <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                     <a data-link-type="idl" data-lt="NotSupportedError" data-type="exception" href="https://webidl.spec.whatwg.org/#notsupportederror"><code>NotSupportedError</code></a>.
                   </p>
                 </dd>
@@ -3501,7 +3528,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the underlying cryptographic key material represented by the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-handle">[[handle]]</a> internal slot of <var>key</var>
-                cannot be accessed, then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
+                cannot be accessed, then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="OperationError" data-type="exception" href="https://webidl.spec.whatwg.org/#operationerror"><code>OperationError</code></a>.
               </p>
             </li>
             <li>
@@ -3512,7 +3539,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -3547,7 +3574,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -3560,7 +3587,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<a data-link-type="idl" data-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -3603,7 +3630,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -3682,7 +3709,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<code>public</code>", then <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="idl" data-lt="InvalidAccessError" data-type="exception" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -3695,7 +3722,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Let <var>result</var> be a new <a data-link-type="idl" data-lt="ArrayBuffer" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-ArrayBuffer"><code>ArrayBuffer</code></a> associated with the
-                        <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
+                        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and containing
                         <var>data</var>.
                       </p>
@@ -3705,7 +3732,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                 <dt>Otherwise:</dt>
                 <dd>
                   <p>
-                    <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
+                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                     <a data-link-type="idl" data-lt="NotSupportedError" data-type="exception" href="https://webidl.spec.whatwg.org/#notsupportederror"><code>NotSupportedError</code></a>.
                   </p>
                 </dd>
