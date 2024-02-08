@@ -1883,7 +1883,8 @@
             <li>
               <p>
                 Perform the Ed25519 verification steps, as specified in [[RFC8032]],
-                Section 5.1.7, on the |signature|, with |message| as |M|,
+                Section 5.1.7, using the cofactorless (unbatched) equation,
+                `[S]B = R + [k]A'`, on the |signature|, with |message| as |M|,
                 using the Ed25519 public key associated with |key|.
               </p>
             </li>
@@ -2775,7 +2776,8 @@ dictionary Ed448Params : Algorithm {
             <li>
               <p>
                 Perform the Ed448 verification steps, as specified in [[RFC8032]],
-                Section 5.2.7, on the |signature|, with |message| as |M|
+                Section 5.2.7, using the cofactorless (unbatched) equation,
+                `[S]B = R + [k]A'`, on the |signature|, with |message| as |M|
                 and |context| as |C|,
                 using the Ed448 public key associated with |key|.
               </p>
