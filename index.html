@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 34.1.6">
+<meta name="generator" content="ReSpec 34.4.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -170,8 +170,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "safecurves"
     }
   },
-  "publishISODate": "2023-08-30T00:00:00.000Z",
-  "generatedSubtitle": "Draft Community Group Report 30 August 2023"
+  "publishISODate": "2024-02-19T00:00:00.000Z",
+  "generatedSubtitle": "Draft Community Group Report 19 February 2024"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/cg-draft"></head>
 
@@ -180,7 +180,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <h1 id="title" class="title">Secure Curves in the Web Cryptography API</h1> 
     <p id="w3c-state">
       <a href="https://www.w3.org/standards/types#reports">Draft Community Group Report</a>
-      <time class="dt-published" datetime="2023-08-30">30 August 2023</time>
+      <time class="dt-published" datetime="2024-02-19">19 February 2024</time>
     </p>
     <dl>
       
@@ -207,9 +207,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </dl>
     
     <p class="copyright">
-          <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+          <a href="https://www.w3.org/policies/#copyright">Copyright</a>
           ©
-          2023
+          2024
           
           the Contributors to the Secure Curves in the Web Cryptography API
           Specification, published by the
@@ -2087,7 +2087,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Perform the Ed25519 verification steps, as specified in [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8032" title="Edwards-Curve Digital Signature Algorithm (EdDSA)">RFC8032</a></cite>],
-                Section 5.1.7, on the <var>signature</var>, with <var>message</var> as <var>M</var>,
+                Section 5.1.7, using the cofactorless (unbatched) equation,
+                <code>[S]B = R + [k]A'</code>, on the <var>signature</var>, with <var>message</var> as <var>M</var>,
                 using the Ed25519 public key associated with <var>key</var>.
               </p>
             </li>
@@ -2977,7 +2978,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Perform the Ed448 verification steps, as specified in [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8032" title="Edwards-Curve Digital Signature Algorithm (EdDSA)">RFC8032</a></cite>],
-                Section 5.2.7, on the <var>signature</var>, with <var>message</var> as <var>M</var>
+                Section 5.2.7, using the cofactorless (unbatched) equation,
+                <code>[S]B = R + [k]A'</code>, on the <var>signature</var>, with <var>message</var> as <var>M</var>
                 and <var>context</var> as <var>C</var>,
                 using the Ed448 public key associated with <var>key</var>.
               </p>
