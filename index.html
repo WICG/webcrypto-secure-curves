@@ -1872,12 +1872,18 @@
                 If the key data of |key| represents an invalid point or a small-order element
                 on the Elliptic Curve of Ed25519, return `false`.
               </p>
+              <p class="issue" data-number="27">
+                Not all implementations perform this check.
+              </p>
             </li>
             <li>
               <p>
                 If the point R, encoded in the first half of |signature|,
                 represents an invalid point or a small-order element
                 on the Elliptic Curve of Ed25519, return `false`.
+              </p>
+              <p class="issue" data-number="27">
+                Not all implementations perform this check.
               </p>
             </li>
             <li>
@@ -2765,12 +2771,18 @@ dictionary Ed448Params : Algorithm {
                 If the key data of |key| represents an invalid point or a small-order element
                 on the Elliptic Curve of Ed448, return `false`.
               </p>
+              <p class="issue" data-number="27">
+                Not all implementations perform this check.
+              </p>
             </li>
             <li>
               <p>
                 If the point R, encoded in the first half of |signature|,
                 represents an invalid point or a small-order element
                 on the Elliptic Curve of Ed448, return `false`.
+              </p>
+              <p class="issue" data-number="27">
+                Not all implementations perform this check.
               </p>
             </li>
             <li>
