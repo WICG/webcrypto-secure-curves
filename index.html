@@ -1845,6 +1845,11 @@
                 Section 5.1.6, with |message| as |M|,
                 using the Ed25519 private key associated with |key|.
               </p>
+              <p class="issue" data-number="28">
+                Some implementations may (wish to) generate randomized signatures
+                as per <a href="https://datatracker.ietf.org/doc/draft-irtf-cfrg-det-sigs-with-noise/">draft-irtf-cfrg-det-sigs-with-noise</a>
+                instead of deterministic signatures as per [[RFC8032]].
+              </p>
             </li>
             <li>
               <p>
@@ -2723,6 +2728,11 @@ dictionary Ed448Params : Algorithm {
                 Section 5.2.6, with |message| as |M|
                 and |context| as |C|,
                 using the Ed448 private key associated with |key|.
+              </p>
+              <p class="issue" data-number="28">
+                Some implementations may (wish to) generate randomized signatures
+                as per <a href="https://datatracker.ietf.org/doc/draft-irtf-cfrg-det-sigs-with-noise/">draft-irtf-cfrg-det-sigs-with-noise</a>
+                instead of deterministic signatures as per [[RFC8032]].
               </p>
             </li>
             <li>
