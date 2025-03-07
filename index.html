@@ -152,6 +152,11 @@
             </li>
             <li>
               <p>
+                If |length| is not null, and not equal to 256, then [= exception/throw =] an {{OperationError}}.
+              </p>
+            </li>
+            <li>
+              <p>
                 Let |secret| be the result of performing the X25519 function specified in
                 [[RFC7748]] Section 5 with |key| as the X25519 private key |k|
                 and the X25519 public key represented by the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-handle">[[\handle]]</a>
@@ -166,27 +171,7 @@
               </p>
             </li>
             <li>
-              <dl class="switch">
-                <dt>If |length| is null:</dt>
-                <dd>Return |secret|</dd>
-                <dt>Otherwise:</dt>
-                <dd>
-                  <dl class="switch">
-                    <dt>
-                      If the length of |secret| in bits is less than
-                      |length|:
-                    </dt>
-                    <dd>
-                      [= exception/throw =] an
-                      {{OperationError}}.
-                    </dd>
-                    <dt>Otherwise:</dt>
-                    <dd>
-                      Return an <a data-cite="WebCryptoAPI#octet-string-containing">octet string containing</a> the first |length| bits of |secret|.
-                    </dd>
-                  </dl>
-                </dd>
-              </dl>
+                Return |secret|.
             </li>
           </ol>
         </dd>
@@ -1006,6 +991,11 @@
             </li>
             <li>
               <p>
+                If |length| is not null, and not equal to 448, then [= exception/throw =] an {{OperationError}}.
+              </p>
+            </li>
+            <li>
+              <p>
                 Let |secret| be the result of performing the X448 function specified in
                 [[RFC7748]] Section 5 with |key| as the X448 private key |k|
                 and the X448 public key represented by the <a data-cite="WebCryptoAPI#dfn-CryptoKey-slot-handle">[[\handle]]</a>
@@ -1020,27 +1010,7 @@
               </p>
             </li>
             <li>
-              <dl class="switch">
-                <dt>If |length| is null:</dt>
-                <dd>Return |secret|</dd>
-                <dt>Otherwise:</dt>
-                <dd>
-                  <dl class="switch">
-                    <dt>
-                      If the length of |secret| in bits is less than
-                      |length|:
-                    </dt>
-                    <dd>
-                      [= exception/throw =] an
-                      {{OperationError}}.
-                    </dd>
-                    <dt>Otherwise:</dt>
-                    <dd>
-                      Return an <a data-cite="WebCryptoAPI#octet-string-containing">octet string containing</a> the first |length| bits of |secret|.
-                    </dd>
-                  </dl>
-                </dd>
-              </dl>
+                Return |secret|.
             </li>
           </ol>
         </dd>
