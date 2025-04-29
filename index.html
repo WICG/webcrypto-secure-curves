@@ -647,6 +647,16 @@
                     </li>
                     <li>
                       <p>
+                        Let |data| be |keyData|.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the [= length in bits =] of |data| is not 256 then [= exception/throw =] a {{DataError}}.
+                      </p>
+                    </li>                    
+                    <li>
+                      <p>
                         Let |algorithm| be a new {{KeyAlgorithm}} object.
                       </p>
                     </li>
@@ -660,8 +670,7 @@
                       <p>
                         Let |key| be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of `this` [[HTML]], and
-                        representing the key data provided in |keyData|.
+                        of `this` [[HTML]], and that represents |data|.
                       </p>
                     </li>
                     <li>
@@ -1501,6 +1510,16 @@
                     </li>
                     <li>
                       <p>
+                        Let |data| be |keyData|.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the [= length in bits =] of |data| is not 448 then [= exception/throw =] a {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
                         Let |algorithm| be a new {{KeyAlgorithm}} object.
                       </p>
                     </li>
@@ -1514,8 +1533,7 @@
                       <p>
                         Let |key| be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of `this` [[HTML]], and
-                        representing the key data provided in |keyData|.
+                        of `this` [[HTML]], and that represents |data|.
                       </p>
                     </li>
                     <li>
@@ -2375,6 +2393,16 @@
                         {{SyntaxError}}.
                       </p>
                     </li>
+                     <li>
+                      <p>
+                        Let |data| be |keyData|.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the [= length in bits =] of |data| is not 256 then [= exception/throw =] a {{DataError}}.
+                      </p>
+                    </li>
                     <li>
                       <p>
                         Let |algorithm| be a new {{KeyAlgorithm}} object.
@@ -2390,8 +2418,7 @@
                       <p>
                         Let |key| be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of `this` [[HTML]], and
-                        representing the key data provided in |keyData|.
+                        of `this` [[HTML]], and that represents |data|.
                       </p>
                     </li>
                     <li>
@@ -3298,6 +3325,16 @@ dictionary Ed448Params : Algorithm {
                     </li>
                     <li>
                       <p>
+                        Let |data| be |keyData|.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the [= length in bits =] of |data| is not 448 then [= exception/throw =] a {{DataError}}.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
                         Let |algorithm| be a new {{KeyAlgorithm}} object.
                       </p>
                     </li>
@@ -3311,8 +3348,7 @@ dictionary Ed448Params : Algorithm {
                       <p>
                         Let |key| be a new {{CryptoKey}} associated with the
                         [= relevant global object =]
-                        of `this` [[HTML]], and
-                        representing the key data provided in |keyData|.
+                        of `this` [[HTML]], and that represents |data|.
                       </p>
                     </li>
                     <li>
