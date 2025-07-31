@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 35.2.2">
+<meta name="generator" content="ReSpec 35.4.3">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -90,7 +90,7 @@ a.bibref{text-decoration:none}
 .respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}
 }
 #references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
-cite .bibref{font-style:normal}
+cite .bibref{font-style:italic}
 a[href].orcid{padding-left:4px;padding-right:4px}
 a[href].orcid>svg{margin-bottom:-2px}
 ol.tof,ul.tof{list-style:none outside none}
@@ -142,6 +142,23 @@ dd{margin-left:0}
 .hljs-link{text-decoration:underline}
 </style>
 <style>
+var:hover{text-decoration:underline;cursor:pointer}
+var.respec-hl{color:var(--color,#000);background-color:var(--bg-color);box-shadow:0 0 0 2px var(--bg-color)}
+@media (prefers-color-scheme:dark){
+var.respec-hl{filter:saturate(.9) brightness(.9)}
+}
+var.respec-hl-c1{--bg-color:#f4d200}
+var.respec-hl-c2{--bg-color:#ff87a2}
+var.respec-hl-c3{--bg-color:#96e885}
+var.respec-hl-c4{--bg-color:#3eeed2}
+var.respec-hl-c5{--bg-color:#eacfb6}
+var.respec-hl-c6{--bg-color:#82ddff}
+var.respec-hl-c7{--bg-color:#ffbcf2}
+@media print{
+var.respec-hl{background:0 0;color:#000;box-shadow:unset}
+}
+</style>
+<style>
 var{position:relative;cursor:pointer}
 var[data-type]::after,var[data-type]::before{position:absolute;left:50%;top:-6px;opacity:0;transition:opacity .4s;pointer-events:none}
 var[data-type]::before{content:"";transform:translateX(-50%);border-width:4px 6px 0 6px;border-style:solid;border-color:transparent;border-top-color:#222}
@@ -163,7 +180,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "group": "wicg",
   "xref": [
     "WebIDL",
-    "WebCryptoAPI"
+    "webcrypto"
   ],
   "localBiblio": {
     "SafeCurves": {
@@ -172,17 +189,17 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "id": "safecurves"
     }
   },
-  "publishISODate": "2025-03-07T00:00:00.000Z",
-  "generatedSubtitle": "Draft Community Group Report 07 March 2025"
+  "publishISODate": "2025-07-31T00:00:00.000Z",
+  "generatedSubtitle": "Draft Community Group Report 31 July 2025"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/cg-draft"></head>
 
-<body class="h-entry" data-cite="WEBIDL WebIDL WebCryptoAPI"><div class="head">
+<body class="h-entry" data-cite="WEBIDL WebIDL webcrypto"><div class="head">
     
     <h1 id="title" class="title">Secure Curves in the Web Cryptography API</h1> 
     <p id="w3c-state">
       <a href="https://www.w3.org/standards/types#reports">Draft Community Group Report</a>
-      <time class="dt-published" datetime="2025-03-07">07 March 2025</time>
+      <time class="dt-published" datetime="2025-07-31">31 July 2025</time>
     </p>
     <dl>
       
@@ -225,7 +242,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   </div>
   <section id="abstract" class="introductory"><h2>Abstract</h2>
     <p>
-      This specification defines a number of algorithms for the <cite><a data-matched-text="[[[WebCryptoAPI]]]" href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite>,
+      This specification defines a number of algorithms for the <cite><a class="bibref" data-link-type="biblio" href="#bib-webcrypto" title="Web Cryptography Level 2">Web Cryptography API</a></cite>,
       namely X25519 and X448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7748" title="Elliptic Curves for Security">RFC7748</a></cite>], and Ed25519 and Ed448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8032" title="Edwards-Curve Digital Signature Algorithm (EdDSA)">RFC8032</a></cite>].
     </p>
   </section>
@@ -253,12 +270,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   <section id="introduction" class="informative"><div class="header-wrapper"><h2 id="x1-introduction"><bdi class="secno">1. </bdi>Introduction</h2><a class="self-link" href="#introduction" aria-label="Permalink for Section 1."></a></div><p><em>This section is non-normative.</em></p>
     
     <p>
-      The <cite><a data-matched-text="[[[WebCryptoAPI]]]" href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite> currently does not specify any "safe curves" [<cite><a class="bibref" data-link-type="biblio" href="#bib-safecurves" title="Daniel J. Bernstein and Tanja Lange. SafeCurves: choosing safe curves for elliptic-curve cryptography">SafeCurves</a></cite>].
+      The <cite><a class="bibref" data-link-type="biblio" href="#bib-webcrypto" title="Web Cryptography Level 2">Web Cryptography API</a></cite> currently does not specify any "safe curves" [<cite><a class="bibref" data-link-type="biblio" href="#bib-safecurves" title="Daniel J. Bernstein and Tanja Lange. SafeCurves: choosing safe curves for elliptic-curve cryptography">SafeCurves</a></cite>].
       Among the safe curves, Curve25519 and Curve448 have gained the most traction, and
       have been specified for use in TLS 1.3, among others. This specification aims to
       expose these algorithms to the web platform.
       To this end, this specification defines a number of algorithms and operations for
-      the <cite><a data-matched-text="[[[WebCryptoAPI]]]" href="https://www.w3.org/TR/WebCryptoAPI/">Web Cryptography API</a></cite>, namely key agreement using X25519 and X448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7748" title="Elliptic Curves for Security">RFC7748</a></cite>], and
+      the <cite><a class="bibref" data-link-type="biblio" href="#bib-webcrypto" title="Web Cryptography Level 2">Web Cryptography API</a></cite>, namely key agreement using X25519 and X448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc7748" title="Elliptic Curves for Security">RFC7748</a></cite>], and
       signing and verifying using Ed25519 and Ed448 [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8032" title="Edwards-Curve Digital Signature Algorithm (EdDSA)">RFC8032</a></cite>].
     </p>
   </section>
@@ -266,11 +283,11 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     
     <p>
       This specification follows the <a href="https://www.w3.org/TR/WebCryptoAPI/#algorithm-conventions">conventions</a>
-      laid out in Section 18.3 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-webcryptoapi" title="Web Cryptography API">WebCryptoAPI</a></cite>]. None of the algorithms defined here
+      laid out in Section 18.3 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-webcrypto" title="Web Cryptography Level 2">webcrypto</a></cite>]. None of the algorithms defined here
       are required to be implemented, but if a conforming User Agent implements an
       algorithm, it <em class="rfc2119">MUST</em> implement all of the supported operations specified in this
       document, and must perform the steps to <a href="https://www.w3.org/TR/WebCryptoAPI/#concept-define-an-algorithm">define an algorithm</a>
-      specified in section 18.4.3 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-webcryptoapi" title="Web Cryptography API">WebCryptoAPI</a></cite>] for each of the supported operations.
+      specified in section 18.4.3 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-webcrypto" title="Web Cryptography Level 2">webcrypto</a></cite>] for each of the supported operations.
     </p>
   </section>
 
@@ -301,18 +318,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <tbody>
           <tr>
             <td>deriveBits</td>
-            <td><a data-link-type="dictionary" data-lt="EcdhKeyDeriveParams" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-EcdhKeyDeriveParams"><code>EcdhKeyDeriveParams</code></a></td>
+            <td><a data-link-type="dictionary" data-lt="EcdhKeyDeriveParams" href="https://www.w3.org/TR/webcrypto-2/#dfn-EcdhKeyDeriveParams"><code>EcdhKeyDeriveParams</code></a></td>
             <td><a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-octet-string">octet string</a></td>
           </tr>
           <tr>
             <td>generateKey</td>
             <td>None</td>
-            <td><a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a></td>
+            <td><a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a></td>
           </tr>
           <tr>
             <td>importKey</td>
             <td>None</td>
-            <td><a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a></td>
+            <td><a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a></td>
           </tr>
           <tr>
             <td>exportKey</td>
@@ -332,13 +349,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
               <p>
                 Let <var>publicKey</var> be the
-                <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-EcdhKeyDeriveParams-public"><code>public</code></a> member of
+                <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dfn-EcdhKeyDeriveParams-public"><code>public</code></a> member of
                 <var>normalizedAlgorithm</var>.
               </p>
             </li>
@@ -350,9 +367,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                 the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-algorithm">[[algorithm]]</a> internal slot of
-                <var>publicKey</var> is not equal to the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> property of the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-algorithm">[[algorithm]]</a> internal slot of
+                <var>publicKey</var> is not equal to the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> property of the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-algorithm">[[algorithm]]</a> internal slot of
                 <var>key</var>, then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
@@ -416,18 +433,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                 <var>algorithm</var> to "<code>X25519</code>".
               </p>
             </li>
             <li>
               <p>
-                Let <var>publicKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                Let <var>publicKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the public key of the generated key pair.
@@ -459,7 +476,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>privateKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                Let <var>privateKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the private key of the generated key pair.
@@ -468,7 +485,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>privateKey</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                <var>privateKey</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
               </p>
             </li>
             <li>
@@ -493,19 +510,19 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>result</var> be a new <a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a>
+                Let <var>result</var> be a new <a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a>
                 dictionary.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair-publicKey"><code>publicKey</code></a> attribute
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair-publicKey"><code>publicKey</code></a> attribute
                 of <var>result</var> to be <var>publicKey</var>.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair-privateKey"><code>privateKey</code></a> attribute
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair-privateKey"><code>privateKey</code></a> attribute
                 of <var>result</var> to be <var>privateKey</var>.
               </p>
             </li>
@@ -526,7 +543,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <dl class="switch">
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-spki"><code>spki</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-spki"><code>spki</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -576,7 +593,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents <var>publicKey</var>.
@@ -590,12 +607,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>X25519</code>".
                       </p>
                     </li>
@@ -607,7 +624,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -668,7 +685,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents the X25519 private key identified by <var>curvePrivateKey</var>.
@@ -677,17 +694,17 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                        of <var>key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>X25519</code>".
                       </p>
                     </li>
@@ -699,12 +716,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <dl class="switch">
-                        <dt>If <var>keyData</var> is a <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
+                        <dt>If <var>keyData</var> is a <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
                         <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
                         <dt>Otherwise:</dt>
                         <dd><p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
@@ -712,7 +729,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is present and if <var>usages</var>
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is present and if <var>usages</var>
                         contains an entry which is not
                         "<code>deriveKey</code>" or "<code>deriveBits</code>"
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
@@ -721,7 +738,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is not present and if <var>usages</var> is not
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is not present and if <var>usages</var> is not
                         empty
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="SyntaxError" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
@@ -729,7 +746,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
                         "<code>OKP</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -737,7 +754,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
                         "<code>X25519</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -745,14 +762,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If <var>usages</var> is non-empty and the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present
+                        If <var>usages</var> is non-empty and the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present
                         and is not equal to "<code>enc</code>" then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-key_ops"><code>key_ops</code></a> field of <var>jwk</var> is present, and
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-key_ops"><code>key_ops</code></a> field of <var>jwk</var> is present, and
                         is invalid according to the requirements of JSON Web
                         Key [<cite><a class="bibref" data-link-type="biblio" href="#bib-jwk" title="JSON Web Key (JWK)">JWK</a></cite>], or it does not contain all of the specified <var>usages</var>
                         values,
@@ -762,7 +779,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
                         has the value false and <var>extractable</var> is true,
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -770,7 +787,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <dl class="switch">
-                        <dt>If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is present:</dt>
+                        <dt>If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is present:</dt>
                         <dd>
                           <ol>
                             <li>
@@ -782,7 +799,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             </li>
                             <li>
                               <p>
-                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
+                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
                                 X25519 private key identified by interpreting
                                 <var>jwk</var> according to Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                               </p>
@@ -790,7 +807,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a>
-                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>".
+                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>".
                               </p>
                             </li>
                           </ol>
@@ -807,7 +824,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             </li>
                             <li>
                               <p>
-                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
+                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
                                 X25519 public key identified by interpreting
                                 <var>jwk</var> according to Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                               </p>
@@ -815,7 +832,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a>
-                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-public"><code>public</code></a>".
+                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-public"><code>public</code></a>".
                               </p>
                             </li>
                           </ol>
@@ -824,12 +841,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new instance of a <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                        Let <var>algorithm</var> be a new instance of a <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>X25519</code>".
                       </p>
                     </li>
@@ -841,7 +858,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-raw"><code>raw</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-raw"><code>raw</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -853,21 +870,30 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                        Let <var>data</var> be <var>keyData</var>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        If the <a href="https://www.w3.org/TR/webcrypto-2/#dfn-length-in-bits">length in bits</a> of <var>data</var> is not 256 then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                      </p>
+                    </li>                    
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>X25519</code>".
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
-                        of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
-                        representing the key data provided in <var>keyData</var>.
+                        of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and that represents <var>data</var>.
                       </p>
                     </li>
                     <li>
@@ -906,7 +932,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           <ol>
             <li>
               <p>
-                Let <var>key</var> be the <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> to be
+                Let <var>key</var> be the <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> to be
                 exported.
               </p>
             </li>
@@ -918,7 +944,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <dl class="switch">
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-spki"><code>spki</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-spki"><code>spki</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -966,13 +992,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -1022,12 +1048,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <p>
-                        Let <var>jwk</var> be a new <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a>
+                        Let <var>jwk</var> be a new <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-JsonWebKey"><code>JsonWebKey</code></a>
                         dictionary.
                       </p>
                     </li>
@@ -1045,7 +1071,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-x"><code>x</code></a> attribute of <var>jwk</var> according to the
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-x"><code>x</code></a> attribute of <var>jwk</var> according to the
                         definition in Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                       </p>
                     </li>
@@ -1053,17 +1079,17 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <dl class="switch">
                         <dt>
                           If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                          of <var>key</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                          of <var>key</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
                         </dt>
                         <dd>
-                          Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> attribute of <var>jwk</var> according to the
+                          Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> attribute of <var>jwk</var> according to the
                           definition in Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                         </dd>
                       </dl>
                     </li>
                     <li>
                       <p>
-                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the <a data-link-type="attribute" href="https://www.w3.org/TR/WebCryptoAPI/#dom-cryptokey-usages"><code>usages</code></a> attribute of <var>key</var>.
+                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the <a data-link-type="attribute" href="https://www.w3.org/TR/webcrypto-2/#dom-cryptokey-usages"><code>usages</code></a> attribute of <var>key</var>.
                       </p>
                     </li>
                     <li>
@@ -1081,7 +1107,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                   </ol>
                 </dd>
                 <dt>
-                  If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-raw"><code>raw</code></a>":
+                  If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-raw"><code>raw</code></a>":
                 </dt>
                 <dd>
                   <ol>
@@ -1155,18 +1181,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <tbody>
           <tr>
             <td>deriveBits</td>
-            <td><a data-link-type="dictionary" data-lt="EcdhKeyDeriveParams" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-EcdhKeyDeriveParams"><code>EcdhKeyDeriveParams</code></a></td>
+            <td><a data-link-type="dictionary" data-lt="EcdhKeyDeriveParams" href="https://www.w3.org/TR/webcrypto-2/#dfn-EcdhKeyDeriveParams"><code>EcdhKeyDeriveParams</code></a></td>
             <td><a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-octet-string">octet string</a></td>
           </tr>
           <tr>
             <td>generateKey</td>
             <td>None</td>
-            <td><a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a></td>
+            <td><a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a></td>
           </tr>
           <tr>
             <td>importKey</td>
             <td>None</td>
-            <td><a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a></td>
+            <td><a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a></td>
           </tr>
           <tr>
             <td>exportKey</td>
@@ -1186,13 +1212,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
               <p>
                 Let <var>publicKey</var> be the
-                <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-EcdhKeyDeriveParams-public"><code>public</code></a> member of
+                <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dfn-EcdhKeyDeriveParams-public"><code>public</code></a> member of
                 <var>normalizedAlgorithm</var>.
               </p>
             </li>
@@ -1204,9 +1230,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                 the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-algorithm">[[algorithm]]</a> internal slot of
-                <var>publicKey</var> is not equal to the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> property of the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-algorithm">[[algorithm]]</a> internal slot of
+                <var>publicKey</var> is not equal to the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> property of the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-algorithm">[[algorithm]]</a> internal slot of
                 <var>key</var>, then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
@@ -1270,18 +1296,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                 <var>algorithm</var> to "<code>X448</code>".
               </p>
             </li>
             <li>
               <p>
-                Let <var>publicKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                Let <var>publicKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the public key of the generated key pair.
@@ -1313,7 +1339,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>privateKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                Let <var>privateKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the private key of the generated key pair.
@@ -1322,7 +1348,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>privateKey</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                <var>privateKey</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
               </p>
             </li>
             <li>
@@ -1347,19 +1373,19 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>result</var> be a new <a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a>
+                Let <var>result</var> be a new <a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a>
                 dictionary.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair-publicKey"><code>publicKey</code></a> attribute
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair-publicKey"><code>publicKey</code></a> attribute
                 of <var>result</var> to be <var>publicKey</var>.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair-privateKey"><code>privateKey</code></a> attribute
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair-privateKey"><code>privateKey</code></a> attribute
                 of <var>result</var> to be <var>privateKey</var>.
               </p>
             </li>
@@ -1380,7 +1406,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <dl class="switch">
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-spki"><code>spki</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-spki"><code>spki</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -1430,7 +1456,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents <var>publicKey</var>.
@@ -1444,12 +1470,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>X448</code>".
                       </p>
                     </li>
@@ -1461,7 +1487,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -1522,7 +1548,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents the X448 private key identified by <var>curvePrivateKey</var>.
@@ -1531,17 +1557,17 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                        of <var>key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>X448</code>".
                       </p>
                     </li>
@@ -1553,12 +1579,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <dl class="switch">
-                        <dt>If <var>keyData</var> is a <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
+                        <dt>If <var>keyData</var> is a <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
                         <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
                         <dt>Otherwise:</dt>
                         <dd><p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
@@ -1566,7 +1592,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is present and if <var>usages</var>
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is present and if <var>usages</var>
                         contains an entry which is not
                         "<code>deriveKey</code>" or "<code>deriveBits</code>"
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
@@ -1575,7 +1601,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is not present and if <var>usages</var> is not
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is not present and if <var>usages</var> is not
                         empty
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="SyntaxError" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
@@ -1583,7 +1609,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
                         "<code>OKP</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -1591,7 +1617,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
                         "<code>X448</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -1599,14 +1625,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If <var>usages</var> is non-empty and the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present
+                        If <var>usages</var> is non-empty and the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present
                         and is not equal to "<code>enc</code>" then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-key_ops"><code>key_ops</code></a> field of <var>jwk</var> is present, and
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-key_ops"><code>key_ops</code></a> field of <var>jwk</var> is present, and
                         is invalid according to the requirements of JSON Web
                         Key [<cite><a class="bibref" data-link-type="biblio" href="#bib-jwk" title="JSON Web Key (JWK)">JWK</a></cite>], or it does not contain all of the specified <var>usages</var>
                         values,
@@ -1616,7 +1642,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
                         has the value false and <var>extractable</var> is true,
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -1624,7 +1650,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <dl class="switch">
-                        <dt>If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is present:</dt>
+                        <dt>If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is present:</dt>
                         <dd>
                           <ol>
                             <li>
@@ -1636,7 +1662,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             </li>
                             <li>
                               <p>
-                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
+                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
                                 X448 private key identified by interpreting
                                 <var>jwk</var> according to Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                               </p>
@@ -1644,7 +1670,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a>
-                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>".
+                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>".
                               </p>
                             </li>
                           </ol>
@@ -1661,7 +1687,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             </li>
                             <li>
                               <p>
-                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
+                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
                                 X448 public key identified by interpreting
                                 <var>jwk</var> according to Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                               </p>
@@ -1669,7 +1695,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a>
-                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-public"><code>public</code></a>".
+                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-public"><code>public</code></a>".
                               </p>
                             </li>
                           </ol>
@@ -1678,12 +1704,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new instance of a <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                        Let <var>algorithm</var> be a new instance of a <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>X448</code>".
                       </p>
                     </li>
@@ -1695,7 +1721,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-raw"><code>raw</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-raw"><code>raw</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -1707,21 +1733,30 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                        Let <var>data</var> be <var>keyData</var>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        If the <a href="https://www.w3.org/TR/webcrypto-2/#dfn-length-in-bits">length in bits</a> of <var>data</var> is not 448 then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>X448</code>".
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
-                        of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
-                        representing the key data provided in <var>keyData</var>.
+                        of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and that represents <var>data</var>.
                       </p>
                     </li>
                     <li>
@@ -1760,7 +1795,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           <ol>
             <li>
               <p>
-                Let <var>key</var> be the <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> to be
+                Let <var>key</var> be the <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> to be
                 exported.
               </p>
             </li>
@@ -1772,7 +1807,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <dl class="switch">
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-spki"><code>spki</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-spki"><code>spki</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -1820,13 +1855,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -1876,12 +1911,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <p>
-                        Let <var>jwk</var> be a new <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a>
+                        Let <var>jwk</var> be a new <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-JsonWebKey"><code>JsonWebKey</code></a>
                         dictionary.
                       </p>
                     </li>
@@ -1899,7 +1934,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-x"><code>x</code></a> attribute of <var>jwk</var> according to the
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-x"><code>x</code></a> attribute of <var>jwk</var> according to the
                         definition in Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                       </p>
                     </li>
@@ -1907,17 +1942,17 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <dl class="switch">
                         <dt>
                           If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                          of <var>key</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                          of <var>key</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
                         </dt>
                         <dd>
-                          Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> attribute of <var>jwk</var> according to the
+                          Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> attribute of <var>jwk</var> according to the
                           definition in Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                         </dd>
                       </dl>
                     </li>
                     <li>
                       <p>
-                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the <a data-link-type="attribute" href="https://www.w3.org/TR/WebCryptoAPI/#dom-cryptokey-usages"><code>usages</code></a> attribute of <var>key</var>.
+                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the <a data-link-type="attribute" href="https://www.w3.org/TR/webcrypto-2/#dom-cryptokey-usages"><code>usages</code></a> attribute of <var>key</var>.
                       </p>
                     </li>
                     <li>
@@ -1935,7 +1970,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                   </ol>
                 </dd>
                 <dt>
-                  If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-raw"><code>raw</code></a>":
+                  If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-raw"><code>raw</code></a>":
                 </dt>
                 <dd>
                   <ol>
@@ -2020,12 +2055,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           <tr>
             <td>generateKey</td>
             <td>None</td>
-            <td><a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a></td>
+            <td><a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a></td>
           </tr>
           <tr>
             <td>importKey</td>
             <td>None</td>
-            <td><a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a></td>
+            <td><a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a></td>
           </tr>
           <tr>
             <td>exportKey</td>
@@ -2046,7 +2081,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -2079,7 +2114,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-public"><code>public</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-public"><code>public</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -2140,18 +2175,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                 <var>algorithm</var> to "<code>Ed25519</code>".
               </p>
             </li>
             <li>
               <p>
-                Let <var>publicKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                Let <var>publicKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the public key of the generated key pair.
@@ -2184,7 +2219,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>privateKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                Let <var>privateKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the private key of the generated key pair.
@@ -2193,7 +2228,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>privateKey</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                <var>privateKey</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
               </p>
             </li>
             <li>
@@ -2217,19 +2252,19 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>result</var> be a new <a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a>
+                Let <var>result</var> be a new <a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a>
                 dictionary.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair-publicKey"><code>publicKey</code></a> attribute
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair-publicKey"><code>publicKey</code></a> attribute
                 of <var>result</var> to be <var>publicKey</var>.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair-privateKey"><code>privateKey</code></a> attribute
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair-privateKey"><code>privateKey</code></a> attribute
                 of <var>result</var> to be <var>privateKey</var>.
               </p>
             </li>
@@ -2250,7 +2285,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <dl class="switch">
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-spki"><code>spki</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-spki"><code>spki</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -2301,7 +2336,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents <var>publicKey</var>.
@@ -2315,12 +2350,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>Ed25519</code>".
                       </p>
                     </li>
@@ -2332,7 +2367,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -2393,7 +2428,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents the Ed25519 private key identified by <var>curvePrivateKey</var>.
@@ -2402,17 +2437,17 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                        of <var>key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>Ed25519</code>".
                       </p>
                     </li>
@@ -2424,12 +2459,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <dl class="switch">
-                        <dt>If <var>keyData</var> is a <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
+                        <dt>If <var>keyData</var> is a <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
                         <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
                         <dt>Otherwise:</dt>
                         <dd><p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
@@ -2437,10 +2472,10 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is present and <var>usages</var> contains
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is present and <var>usages</var> contains
                         a value which is not
                         "<code>sign</code>", or,
-                        if the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is not present and <var>usages</var> contains
+                        if the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is not present and <var>usages</var> contains
                         a value which is not
                         "<code>verify</code>"
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
@@ -2449,7 +2484,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
                         "<code>OKP</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -2457,7 +2492,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
                         "<code>Ed25519</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -2465,7 +2500,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-alg"><code>alg</code></a> field of <var>jwk</var> is present and is
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-alg"><code>alg</code></a> field of <var>jwk</var> is present and is
                         not "<code>Ed25519</code>" or "<code>EdDSA</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -2473,7 +2508,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If <var>usages</var> is non-empty and the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present and is
+                        If <var>usages</var> is non-empty and the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present and is
                         not "<code>sig</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -2481,7 +2516,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-key_ops"><code>key_ops</code></a> field of <var>jwk</var> is present, and
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-key_ops"><code>key_ops</code></a> field of <var>jwk</var> is present, and
                         is invalid according to the requirements of JSON Web
                         Key [<cite><a class="bibref" data-link-type="biblio" href="#bib-jwk" title="JSON Web Key (JWK)">JWK</a></cite>], or it does not contain all of the specified <var>usages</var>
                         values,
@@ -2491,7 +2526,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
                         has the value false and <var>extractable</var> is true,
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -2499,7 +2534,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <dl class="switch">
-                        <dt>If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is present:</dt>
+                        <dt>If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is present:</dt>
                         <dd>
                           <ol>
                             <li>
@@ -2511,7 +2546,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             </li>
                             <li>
                               <p>
-                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
+                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
                                 Ed25519 private key identified by interpreting
                                 <var>jwk</var> according to Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                               </p>
@@ -2519,7 +2554,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a>
-                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>".
+                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>".
                               </p>
                             </li>
                           </ol>
@@ -2536,7 +2571,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             </li>
                             <li>
                               <p>
-                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
+                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
                                 Ed25519 public key identified by interpreting
                                 <var>jwk</var> according to Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                               </p>
@@ -2544,7 +2579,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a>
-                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-public"><code>public</code></a>".
+                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-public"><code>public</code></a>".
                               </p>
                             </li>
                           </ol>
@@ -2553,12 +2588,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new instance of a <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                        Let <var>algorithm</var> be a new instance of a <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>Ed25519</code>".
                       </p>
                     </li>
@@ -2570,7 +2605,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-raw"><code>raw</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-raw"><code>raw</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -2581,23 +2616,32 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                         <a data-link-type="exception" data-lt="SyntaxError" href="https://webidl.spec.whatwg.org/#syntaxerror"><code>SyntaxError</code></a>.
                       </p>
                     </li>
-                    <li>
+                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                        Let <var>data</var> be <var>keyData</var>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        If the <a href="https://www.w3.org/TR/webcrypto-2/#dfn-length-in-bits">length in bits</a> of <var>data</var> is not 256 then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>Ed25519</code>".
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
-                        of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
-                        representing the key data provided in <var>keyData</var>.
+                        of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and that represents <var>data</var>.
                       </p>
                     </li>
                     <li>
@@ -2636,7 +2680,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           <ol>
             <li>
               <p>
-                Let <var>key</var> be the <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> to be
+                Let <var>key</var> be the <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> to be
                 exported.
               </p>
             </li>
@@ -2648,7 +2692,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <dl class="switch">
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-spki"><code>spki</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-spki"><code>spki</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -2696,13 +2740,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -2752,12 +2796,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <p>
-                        Let <var>jwk</var> be a new <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a>
+                        Let <var>jwk</var> be a new <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-JsonWebKey"><code>JsonWebKey</code></a>
                         dictionary.
                       </p>
                     </li>
@@ -2781,7 +2825,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-x"><code>x</code></a> attribute of <var>jwk</var> according to the
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-x"><code>x</code></a> attribute of <var>jwk</var> according to the
                         definition in Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                       </p>
                     </li>
@@ -2789,17 +2833,17 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <dl class="switch">
                         <dt>
                           If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                          of <var>key</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                          of <var>key</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
                         </dt>
                         <dd>
-                          Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> attribute of <var>jwk</var> according to the
+                          Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> attribute of <var>jwk</var> according to the
                           definition in Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                         </dd>
                       </dl>
                     </li>
                     <li>
                       <p>
-                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the <a data-link-type="attribute" href="https://www.w3.org/TR/WebCryptoAPI/#dom-cryptokey-usages"><code>usages</code></a> attribute of <var>key</var>.
+                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the <a data-link-type="attribute" href="https://www.w3.org/TR/webcrypto-2/#dom-cryptokey-usages"><code>usages</code></a> attribute of <var>key</var>.
                       </p>
                     </li>
                     <li>
@@ -2817,7 +2861,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                   </ol>
                 </dd>
                 <dt>
-                  If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-raw"><code>raw</code></a>":
+                  If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-raw"><code>raw</code></a>":
                 </dt>
                 <dd>
                   <ol>
@@ -2902,12 +2946,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           <tr>
             <td>generateKey</td>
             <td>None</td>
-            <td><a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a></td>
+            <td><a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a></td>
           </tr>
           <tr>
             <td>importKey</td>
             <td>None</td>
-            <td><a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a></td>
+            <td><a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a></td>
           </tr>
           <tr>
             <td>exportKey</td>
@@ -2920,7 +2964,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
 
     <section id="ed448-params"><div class="header-wrapper"><h3 id="x6-3-ed448params-dictionary"><bdi class="secno">6.3 </bdi><dfn data-idl="dictionary" id="dfn-Ed448Params" data-export="" data-dfn-type="dictionary" data-title="Ed448Params" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>Ed448Params</code></dfn> dictionary</h3><a class="self-link" href="#ed448-params" aria-label="Permalink for Section 6.3"></a></div>
       
-      <pre class="idl def" id="webidl-894840244"><span class="idlHeader"><a class="self-link" href="#webidl-894840244">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-ed448params" data-title="Ed448Params">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dfn-Ed448Params" id="ref-for-dfn-Ed448Params-3"><code>Ed448Params</code></a> : <span class="idlSuperclass"><a data-link-type="dictionary" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-Algorithm">Algorithm</a></span> {<span data-idl="" class="idlMember" id="idl-def-ed448params-context" data-title="context" data-dfn-for="Ed448Params"><span class="idlType">
+      <pre class="idl def" id="webidl-894840244"><span class="idlHeader"><a class="self-link" href="#webidl-894840244">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-ed448params" data-title="Ed448Params">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dfn-Ed448Params" id="ref-for-dfn-Ed448Params-3"><code>Ed448Params</code></a> : <span class="idlSuperclass"><a data-link-type="dictionary" href="https://www.w3.org/TR/webcrypto-2/#dfn-Algorithm">Algorithm</a></span> {<span data-idl="" class="idlMember" id="idl-def-ed448params-context" data-title="context" data-dfn-for="Ed448Params"><span class="idlType">
   <a data-link-type="typedef" href="https://webidl.spec.whatwg.org/#BufferSource">BufferSource</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dfn-Ed448Params-context" id="ref-for-dfn-Ed448Params-context-1"><code>context</code></a>;</span>
 };</span></code></pre>
       <p>The <dfn data-idl="field" data-dfn-for="Ed448Params" id="dfn-Ed448Params-context" data-export="" data-dfn-type="dict-member" data-title="context" data-type="BufferSource" tabindex="0" aria-haspopup="dialog"><code>context</code></dfn> member represents the optional context data to associate with the message.</p>
@@ -2935,7 +2979,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -2983,7 +3027,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-public"><code>public</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-public"><code>public</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
               </p>
             </li>
             <li>
@@ -3059,18 +3103,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                 <var>algorithm</var> to "<code>Ed448</code>".
               </p>
             </li>
             <li>
               <p>
-                Let <var>publicKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                Let <var>publicKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the public key of the generated key pair.
@@ -3103,7 +3147,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>privateKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                Let <var>privateKey</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                 <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                 of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                 representing the private key of the generated key pair.
@@ -3112,7 +3156,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             <li>
               <p>
                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot of
-                <var>privateKey</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                <var>privateKey</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
               </p>
             </li>
             <li>
@@ -3136,19 +3180,19 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <p>
-                Let <var>result</var> be a new <a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a>
+                Let <var>result</var> be a new <a data-link-type="dictionary" data-lt="CryptoKeyPair" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair"><code>CryptoKeyPair</code></a>
                 dictionary.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair-publicKey"><code>publicKey</code></a> attribute
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair-publicKey"><code>publicKey</code></a> attribute
                 of <var>result</var> to be <var>publicKey</var>.
               </p>
             </li>
             <li>
               <p>
-                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKeyPair-privateKey"><code>privateKey</code></a> attribute
+                Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKeyPair-privateKey"><code>privateKey</code></a> attribute
                 of <var>result</var> to be <var>privateKey</var>.
               </p>
             </li>
@@ -3169,7 +3213,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <dl class="switch">
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-spki"><code>spki</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-spki"><code>spki</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -3220,7 +3264,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents <var>publicKey</var>.
@@ -3234,12 +3278,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>Ed448</code>".
                       </p>
                     </li>
@@ -3251,7 +3295,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -3312,7 +3356,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
                         of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
                         that represents the Ed448 private key identified by <var>curvePrivateKey</var>.
@@ -3321,17 +3365,17 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     <li>
                       <p>
                         Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                        of <var>key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>Ed448</code>".
                       </p>
                     </li>
@@ -3343,12 +3387,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <dl class="switch">
-                        <dt>If <var>keyData</var> is a <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
+                        <dt>If <var>keyData</var> is a <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-JsonWebKey"><code>JsonWebKey</code></a> dictionary:</dt>
                         <dd><p>Let <var>jwk</var> equal <var>keyData</var>.</p></dd>
                         <dt>Otherwise:</dt>
                         <dd><p><a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">Throw</a> a <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.</p></dd>
@@ -3356,10 +3400,10 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is present and <var>usages</var> contains
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is present and <var>usages</var> contains
                         a value which is not
                         "<code>sign</code>", or,
-                        if the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is not present and <var>usages</var> contains
+                        if the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is not present and <var>usages</var> contains
                         a value which is not
                         "<code>verify</code>"
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
@@ -3368,7 +3412,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-kty"><code>kty</code></a> field of <var>jwk</var> is not
                         "<code>OKP</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -3376,7 +3420,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-crv"><code>crv</code></a> field of <var>jwk</var> is not
                         "<code>Ed448</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -3384,7 +3428,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-alg"><code>alg</code></a> field of <var>jwk</var> is present and is
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-alg"><code>alg</code></a> field of <var>jwk</var> is present and is
                         not "<code>Ed448</code>" or "<code>EdDSA</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -3392,7 +3436,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If <var>usages</var> is non-empty and the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present and is
+                        If <var>usages</var> is non-empty and the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-use"><code>use</code></a> field of <var>jwk</var> is present and is
                         not "<code>sig</code>",
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -3400,7 +3444,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-key_ops"><code>key_ops</code></a> field of <var>jwk</var> is present, and
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-key_ops"><code>key_ops</code></a> field of <var>jwk</var> is present, and
                         is invalid according to the requirements of JSON Web
                         Key [<cite><a class="bibref" data-link-type="biblio" href="#bib-jwk" title="JSON Web Key (JWK)">JWK</a></cite>], or it does not contain all of the specified <var>usages</var>
                         values,
@@ -3410,7 +3454,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
+                        If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-ext"><code>ext</code></a> field of <var>jwk</var> is present and
                         has the value false and <var>extractable</var> is true,
                         then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a
                         <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
@@ -3418,7 +3462,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <dl class="switch">
-                        <dt>If the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> field is present:</dt>
+                        <dt>If the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> field is present:</dt>
                         <dd>
                           <ol>
                             <li>
@@ -3430,7 +3474,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             </li>
                             <li>
                               <p>
-                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
+                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
                                 Ed448 private key identified by interpreting
                                 <var>jwk</var> according to Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                               </p>
@@ -3438,7 +3482,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a>
-                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>".
+                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>".
                               </p>
                             </li>
                           </ol>
@@ -3455,7 +3499,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             </li>
                             <li>
                               <p>
-                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
+                                Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> object that represents the
                                 Ed448 public key identified by interpreting
                                 <var>jwk</var> according to Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                               </p>
@@ -3463,7 +3507,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                             <li>
                               <p>
                                 Set the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a>
-                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-public"><code>public</code></a>".
+                                internal slot of <var>Key</var> to "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-public"><code>public</code></a>".
                               </p>
                             </li>
                           </ol>
@@ -3472,12 +3516,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new instance of a <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                        Let <var>algorithm</var> be a new instance of a <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>Ed448</code>".
                       </p>
                     </li>
@@ -3489,7 +3533,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-raw"><code>raw</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-raw"><code>raw</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -3502,21 +3546,30 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                        Let <var>data</var> be <var>keyData</var>.
                       </p>
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyalgorithm-name"><code>name</code></a> attribute of
+                        If the <a href="https://www.w3.org/TR/webcrypto-2/#dfn-length-in-bits">length in bits</a> of <var>data</var> is not 448 then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> a <a data-link-type="exception" data-lt="DataError" href="https://webidl.spec.whatwg.org/#dataerror"><code>DataError</code></a>.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Let <var>algorithm</var> be a new <a data-link-type="dictionary" data-lt="KeyAlgorithm" href="https://www.w3.org/TR/webcrypto-2/#dfn-KeyAlgorithm"><code>KeyAlgorithm</code></a> object.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-keyalgorithm-name"><code>name</code></a> attribute of
                         <var>algorithm</var> to "<code>Ed448</code>".
                       </p>
                     </li>
                     <li>
                       <p>
-                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
+                        Let <var>key</var> be a new <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> associated with the
                         <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global">relevant global object</a>
-                        of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and
-                        representing the key data provided in <var>keyData</var>.
+                        of <code>this</code> [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard">HTML</a></cite>], and that represents <var>data</var>.
                       </p>
                     </li>
                     <li>
@@ -3555,7 +3608,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           <ol>
             <li>
               <p>
-                Let <var>key</var> be the <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey"><code>CryptoKey</code></a> to be
+                Let <var>key</var> be the <a data-link-type="interface" data-lt="CryptoKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-CryptoKey"><code>CryptoKey</code></a> to be
                 exported.
               </p>
             </li>
@@ -3567,7 +3620,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
             </li>
             <li>
               <dl class="switch">
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-spki"><code>spki</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-spki"><code>spki</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
@@ -3615,13 +3668,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-pkcs8"><code>pkcs8</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <p>
                         If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                        of <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
+                        of <var>key</var> is not "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>", then <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#dfn-throw">throw</a> an <a data-link-type="exception" data-lt="InvalidAccessError" href="https://webidl.spec.whatwg.org/#invalidaccesserror"><code>InvalidAccessError</code></a>.
                       </p>
                     </li>
                     <li>
@@ -3671,12 +3724,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                   </ol>
                 </dd>
-                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
+                <dt>If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-jwk"><code>jwk</code></a>":</dt>
                 <dd>
                   <ol>
                     <li>
                       <p>
-                        Let <var>jwk</var> be a new <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/WebCryptoAPI/#dfn-JsonWebKey"><code>JsonWebKey</code></a>
+                        Let <var>jwk</var> be a new <a data-link-type="dictionary" data-lt="JsonWebKey" href="https://www.w3.org/TR/webcrypto-2/#dfn-JsonWebKey"><code>JsonWebKey</code></a>
                         dictionary.
                       </p>
                     </li>
@@ -3700,7 +3753,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                     </li>
                     <li>
                       <p>
-                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-x"><code>x</code></a> attribute of <var>jwk</var> according to the
+                        Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-x"><code>x</code></a> attribute of <var>jwk</var> according to the
                         definition in Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                       </p>
                     </li>
@@ -3708,17 +3761,17 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                       <dl class="switch">
                         <dt>
                           If the <a href="https://www.w3.org/TR/WebCryptoAPI/#dfn-CryptoKey-slot-type">[[type]]</a> internal slot
-                          of <var>key</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keytype-private"><code>private</code></a>"
+                          of <var>key</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keytype-private"><code>private</code></a>"
                         </dt>
                         <dd>
-                          Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/WebCryptoAPI/#dom-jsonwebkey-d"><code>d</code></a> attribute of <var>jwk</var> according to the
+                          Set the <a data-link-type="dict-member" href="https://www.w3.org/TR/webcrypto-2/#dom-jsonwebkey-d"><code>d</code></a> attribute of <var>jwk</var> according to the
                           definition in Section 2 of [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8037" title="CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)">RFC8037</a></cite>].
                         </dd>
                       </dl>
                     </li>
                     <li>
                       <p>
-                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the <a data-link-type="attribute" href="https://www.w3.org/TR/WebCryptoAPI/#dom-cryptokey-usages"><code>usages</code></a> attribute of <var>key</var>.
+                        Set the <code>key_ops</code> attribute of <var>jwk</var> to the <a data-link-type="attribute" href="https://www.w3.org/TR/webcrypto-2/#dom-cryptokey-usages"><code>usages</code></a> attribute of <var>key</var>.
                       </p>
                     </li>
                     <li>
@@ -3736,7 +3789,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                   </ol>
                 </dd>
                 <dt>
-                  If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/WebCryptoAPI/#dom-keyformat-raw"><code>raw</code></a>":
+                  If <var>format</var> is "<a data-link-type="enum-value" href="https://www.w3.org/TR/webcrypto-2/#dom-keyformat-raw"><code>raw</code></a>":
                 </dt>
                 <dd>
                   <ol>
@@ -4009,9 +4062,10 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   <section id="conformance"><div class="header-wrapper"><h2 id="d-conformance"><bdi class="secno">D. </bdi>Conformance</h2><a class="self-link" href="#conformance" aria-label="Permalink for Section D."></a></div><p>As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.</p><p>
         The key word <em class="rfc2119">MUST</em> in this document
         is to be interpreted as described in
-        <a href="https://datatracker.ietf.org/doc/html/bcp14">BCP 14</a>
+        <a href="https://www.rfc-editor.org/info/bcp14">BCP 14</a>
         [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">RFC2119</a></cite>] [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8174" title="Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words">RFC8174</a></cite>]
-        when, and only when, they appear in all capitals, as shown here.
+        when, and only when, it appears in all
+        capitals, as shown here.
       </p></section>
 
 
@@ -4038,6 +4092,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       <a href="https://www.rfc-editor.org/rfc/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>
     </dd><dt id="bib-rfc8410">[RFC8410]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc8410"><cite>Algorithm Identifiers for Ed25519, Ed448, X25519, and X448 for Use in the Internet X.509 Public Key Infrastructure</cite></a>. S. Josefsson; J. Schaad.  IETF. August 2018. Proposed Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8410">https://www.rfc-editor.org/rfc/rfc8410</a>
+    </dd><dt id="bib-webcrypto">[webcrypto]</dt><dd>
+      <a href="https://www.w3.org/TR/webcrypto-2/"><cite>Web Cryptography Level 2</cite></a>. Daniel Huigens.  W3C. 22 April 2025. FPWD. URL: <a href="https://www.w3.org/TR/webcrypto-2/">https://www.w3.org/TR/webcrypto-2/</a>
     </dd><dt id="bib-webcryptoapi">[WebCryptoAPI]</dt><dd>
       <a href="https://www.w3.org/TR/WebCryptoAPI/"><cite>Web Cryptography API</cite></a>. Mark Watson.  W3C. 26 January 2017. W3C Recommendation. URL: <a href="https://www.w3.org/TR/WebCryptoAPI/">https://www.w3.org/TR/WebCryptoAPI/</a>
     </dd><dt id="bib-webidl">[WebIDL]</dt><dd>
@@ -4078,7 +4134,104 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       <a href="#ref-for-dfn-Ed448Params-context-2" title="§ 6.4 Operations">§ 6.4 Operations</a> <a href="#ref-for-dfn-Ed448Params-context-3" title="Reference 2">(2)</a> <a href="#ref-for-dfn-Ed448Params-context-4" title="Reference 3">(3)</a> <a href="#ref-for-dfn-Ed448Params-context-5" title="Reference 4">(4)</a> 
     </li>
   </ul>
-    </div><script id="respec-dfn-panel">(() => {
+    </div><script id="respec-highlight-vars">(() => {
+// @ts-check
+
+if (document.respec) {
+  document.respec.ready.then(setupVarHighlighter);
+} else {
+  setupVarHighlighter();
+}
+
+function setupVarHighlighter() {
+  document
+    .querySelectorAll("var")
+    .forEach(varElem => varElem.addEventListener("click", highlightListener));
+}
+
+function highlightListener(ev) {
+  ev.stopPropagation();
+  const { target: varElem } = ev;
+  const hightligtedElems = highlightVars(varElem);
+  const resetListener = () => {
+    const hlColor = getHighlightColor(varElem);
+    hightligtedElems.forEach(el => removeHighlight(el, hlColor));
+    [...HL_COLORS.keys()].forEach(key => HL_COLORS.set(key, true));
+  };
+  if (hightligtedElems.length) {
+    document.body.addEventListener("click", resetListener, { once: true });
+  }
+}
+
+// availability of highlight colors. colors from var.css
+const HL_COLORS = new Map([
+  ["respec-hl-c1", true],
+  ["respec-hl-c2", true],
+  ["respec-hl-c3", true],
+  ["respec-hl-c4", true],
+  ["respec-hl-c5", true],
+  ["respec-hl-c6", true],
+  ["respec-hl-c7", true],
+]);
+
+function getHighlightColor(target) {
+  // return current colors if applicable
+  const { value } = target.classList;
+  const re = /respec-hl-\w+/;
+  const activeClass = re.test(value) && value.match(re);
+  if (activeClass) return activeClass[0];
+
+  // first color preference
+  if (HL_COLORS.get("respec-hl-c1") === true) return "respec-hl-c1";
+
+  // otherwise get some other available color
+  return [...HL_COLORS.keys()].find(c => HL_COLORS.get(c)) || "respec-hl-c1";
+}
+
+function highlightVars(varElem) {
+  const textContent = norm(varElem.textContent);
+  const parent = varElem.closest(".algorithm, section");
+  const highlightColor = getHighlightColor(varElem);
+
+  const varsToHighlight = [...parent.querySelectorAll("var")].filter(
+    el =>
+      norm(el.textContent) === textContent &&
+      el.closest(".algorithm, section") === parent
+  );
+
+  // update availability of highlight color
+  const colorStatus = varsToHighlight[0].classList.contains("respec-hl");
+  HL_COLORS.set(highlightColor, colorStatus);
+
+  // highlight vars
+  if (colorStatus) {
+    varsToHighlight.forEach(el => removeHighlight(el, highlightColor));
+    return [];
+  } else {
+    varsToHighlight.forEach(el => addHighlight(el, highlightColor));
+  }
+  return varsToHighlight;
+}
+
+function removeHighlight(el, highlightColor) {
+  el.classList.remove("respec-hl", highlightColor);
+  // clean up empty class attributes so they don't come in export
+  if (!el.classList.length) el.removeAttribute("class");
+}
+
+function addHighlight(elem, highlightColor) {
+  elem.classList.add("respec-hl", highlightColor);
+}
+
+/**
+ * Same as `norm` from src/core/utils, but our build process doesn't allow
+ * imports in runtime scripts, so duplicated here.
+ * @param {string} str
+ */
+function norm(str) {
+  return str.trim().replace(/\s+/g, " ");
+}
+})()</script><script id="respec-dfn-panel">(() => {
 // @ts-check
 if (document.respec) {
   document.respec.ready.then(setupPanel);
