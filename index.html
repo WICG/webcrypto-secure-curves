@@ -21,7 +21,7 @@
     "shortName": "webcrypto-secure-curves",
     "specStatus": "CG-DRAFT",
     "group": "wicg",
-    "xref": ["WebIDL", "WebCryptoAPI"],
+    "xref": ["WebIDL", "webcrypto"],
     "localBiblio": {
       "SafeCurves": {
         "title": "Daniel J. Bernstein and Tanja Lange. SafeCurves: choosing safe curves for elliptic-curve cryptography",
@@ -35,7 +35,7 @@
 <body>
   <section id="abstract">
     <p>
-      This specification defines a number of algorithms for the [[[WebCryptoAPI]]],
+      This specification defines a number of algorithms for the [[webcrypto | Web Cryptography API]],
       namely X25519 and X448 [[RFC7748]], and Ed25519 and Ed448 [[RFC8032]].
     </p>
   </section>
@@ -47,12 +47,12 @@
   <section id="introduction" class="informative">
     <h2>Introduction</h2>
     <p>
-      The [[[WebCryptoAPI]]] currently does not specify any "safe curves" [[SafeCurves]].
+      The [[webcrypto | Web Cryptography API]] currently does not specify any "safe curves" [[SafeCurves]].
       Among the safe curves, Curve25519 and Curve448 have gained the most traction, and
       have been specified for use in TLS 1.3, among others. This specification aims to
       expose these algorithms to the web platform.
       To this end, this specification defines a number of algorithms and operations for
-      the [[[WebCryptoAPI]]], namely key agreement using X25519 and X448 [[RFC7748]], and
+      the [[webcrypto | Web Cryptography API]], namely key agreement using X25519 and X448 [[RFC7748]], and
       signing and verifying using Ed25519 and Ed448 [[RFC8032]].
     </p>
   </section>
@@ -60,11 +60,11 @@
     <h2>Specification Conventions</h3>
     <p>
       This specification follows the <a data-cite="WebCryptoAPI#algorithm-conventions">conventions</a>
-      laid out in Section 18.3 of [[WebCryptoAPI]]. None of the algorithms defined here
+      laid out in Section 18.3 of [[webcrypto]]. None of the algorithms defined here
       are required to be implemented, but if a conforming User Agent implements an
       algorithm, it MUST implement all of the supported operations specified in this
       document, and must perform the steps to <a data-cite="WebCryptoAPI#concept-define-an-algorithm">define an algorithm</a>
-      specified in section 18.4.3 of [[WebCryptoAPI]] for each of the supported operations.
+      specified in section 18.4.3 of [[webcrypto]] for each of the supported operations.
     </p>
   </section>
 
