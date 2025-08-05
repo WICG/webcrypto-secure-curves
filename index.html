@@ -576,6 +576,30 @@
                             </li>
                             <li>
                               <p>
+                                Let |jwkPublic| be the {{JsonWebKey/x}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPublic| is not 256, then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let |jwkPrivate| be the {{JsonWebKey/d}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPrivate| is not 256, then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
                                 Let |key| be a new {{CryptoKey}} object that represents the
                                 X25519 private key identified by interpreting
                                 |jwk| according to Section 2 of [[RFC8037]].
@@ -597,6 +621,18 @@
                                 If |jwk| does not meet the requirements of
                                 the JWK public key format described in Section 2
                                 of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let |jwkPublic| be the {{JsonWebKey/x}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPublic| is not 256, then [= exception/throw =] a {{DataError}}.
                               </p>
                             </li>
                             <li>
@@ -1439,6 +1475,30 @@
                             </li>
                             <li>
                               <p>
+                                Let |jwkPublic| be the {{JsonWebKey/x}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPublic| is not 448, then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let |jwkPrivate| be the {{JsonWebKey/d}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPrivate| is not 448, then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
                                 Let |key| be a new {{CryptoKey}} object that represents the
                                 X448 private key identified by interpreting
                                 |jwk| according to Section 2 of [[RFC8037]].
@@ -1460,6 +1520,18 @@
                                 If |jwk| does not meet the requirements of
                                 the JWK public key format described in Section 2
                                 of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let |jwkPublic| be the {{JsonWebKey/x}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPublic| is not 448, then [= exception/throw =] a {{DataError}}.
                               </p>
                             </li>
                             <li>
@@ -2323,6 +2395,30 @@
                             </li>
                             <li>
                               <p>
+                                Let |jwkPublic| be the {{JsonWebKey/x}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPublic| is not 256, then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let |jwkPrivate| be the {{JsonWebKey/d}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPrivate| is not 256, then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
                                 Let |key| be a new {{CryptoKey}} object that represents the
                                 Ed25519 private key identified by interpreting
                                 |jwk| according to Section 2 of [[RFC8037]].
@@ -2344,6 +2440,18 @@
                                 If |jwk| does not meet the requirements of
                                 the JWK public key format described in Section 2
                                 of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let |jwkPublic| be the {{JsonWebKey/x}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPublic| is not 256, then [= exception/throw =] a {{DataError}}.
                               </p>
                             </li>
                             <li>
@@ -3253,6 +3361,30 @@ dictionary Ed448Params : Algorithm {
                             </li>
                             <li>
                               <p>
+                                Let |jwkPublic| be the {{JsonWebKey/x}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPublic| is not 448, then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let |jwkPrivate| be the {{JsonWebKey/d}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPrivate| is not 448, then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
                                 Let |key| be a new {{CryptoKey}} object that represents the
                                 Ed448 private key identified by interpreting
                                 |jwk| according to Section 2 of [[RFC8037]].
@@ -3274,6 +3406,18 @@ dictionary Ed448Params : Algorithm {
                                 If |jwk| does not meet the requirements of
                                 the JWK public key format described in Section 2
                                 of [[RFC8037]], then [= exception/throw =] a {{DataError}}.
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                Let |jwkPublic| be the {{JsonWebKey/x}} field of |jwk| interpreted
+                                according to Section 2 of [[RFC8037]].
+                              </p>
+                            </li>
+                            <li>
+                              <p>
+                                If the <a data-cite="webcrypto#dfn-length-in-bits">length in bits</a>
+                                of |jwkPublic| is not 448, then [= exception/throw =] a {{DataError}}.
                               </p>
                             </li>
                             <li>
