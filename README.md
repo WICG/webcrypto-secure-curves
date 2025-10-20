@@ -1,5 +1,7 @@
 # Secure Curves in the Web Cryptography API
 
+⚠️⚠️ **Status**: These features are now developed under https://github.com/w3c/webcrypto/ ⚠️⚠️
+
 This repository contains a proposal to add support for [Curve25519 and
 Curve448](https://tools.ietf.org/html/rfc7748) in the Web Cryptography API.
 
